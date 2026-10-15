@@ -1,0 +1,16 @@
+<%- include("_head", { pageTitle: "Log in" }) %>
+<div class="alogin">
+  <div class="alogin__brand"><%- icon("mark") %><span>XPITUDE</span></div>
+  <h1>Admin log in</h1>
+<% if (error) { %>  <p class="amsg amsg--err" role="alert"><%= error %></p>
+<% } else if (!ready) { %>  <p class="amsg amsg--err" role="alert">Admin login is disabled: set JWT_SECRET (32 characters or more) in .env and restart.</p>
+<% } %>  <form method="post" action="/admin/login" class="aform">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="username" value="<%= email %>" required autofocus>
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" autocomplete="current-password" required>
+    <button type="submit" class="abtn">Log in</button>
+  </form>
+  <p class="ahint"><a href="/">Back to the website</a></p>
+</div>
+<%- include("_foot") %>

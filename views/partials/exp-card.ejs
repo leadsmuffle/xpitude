@@ -1,0 +1,31 @@
+<%
+  /* The trip or program card on the four Our Services pages and in "More to explore" on every trip page.
+     Options: trip (required). The facts shown depend on the trip's category; a fact with no value is left out. */
+  const factOf = (label) => ((trip.facts || []).find((f) => f.label === label) || {}).value || "";
+  const firstPart = (v) => String(v || "").split(/[,.](?:\s|$)/)[0].trim();
+  // [label on the card, full value (tooltip), short value for the card]
+  const rows = {
+    trekking: [["Duration", factOf("Duration"), trip.durationLabel], ["Grade", factOf("Grade"), trip.grade], ["Best Season", factOf("Best Season"), trip.season]],
+    tours: [["Duration", factOf("Duration"), trip.durationLabel], ["Travel", trip.mode, trip.mode], ["Best Season", factOf("Best Season"), trip.season]],
+    spiritual: [["Duration", factOf("Duration"), trip.durationLabel], ["Level", factOf("Grade"), trip.grade], ["Best Season", factOf("Best Season"), trip.season]],
+    corporate: [["Format", factOf("Format"), firstPart(factOf("Format"))], ["Group Size", factOf("Group Size"), firstPart(factOf("Group Size"))], ["Duration", factOf("Duration"), trip.durationLabel]],
+  }[trip.category] || [];
+  const cardFacts = rows.map(([label, full, short]) => ({ label, full: full || short, value: short || firstPart(full) })).filter((f) => f.value);
+  const cta = trip.category === "corporate" ? "Request a proposal" : "Enquire";
+%>
+      <article class="card xcard">
+        <div class="card__media"><% if (trip.image) { %><img src="<%= trip.image %>" alt="<%= trip.imageAlt || trip.title %>" loading="lazy" decoding="async"<% if (trip.imagePosition) { %> style="object-position:<%= trip.imagePosition %>"<% } %>><% } else { %>
+          <div class="ph"><svg viewBox="0 0 99 99" aria-hidden="true"><polygon points="0,16.5 17.5,0 99,81.5 81.5,99"/><polygon points="0,82.5 17.5,99 58,58 41,41"/><polygon points="82.8,0 99,16.3 82.8,32.6 66.6,16.3"/></svg>
+            <span>Photograph needed<% if (trip.imageNote) { %><br><%= trip.imageNote %><% } %></span></div><% } %></div>
+        <div class="card__body">
+          <h3 class="d3" title="<%= trip.title %>"><%= trip.title %></h3>
+          <span class="xcard__tag"<% if (trip.tagline) { %> title="<%= trip.tagline %>"<% } %>><%= trip.tagline %></span>
+          <dl class="xcard__facts">
+<% cardFacts.forEach((f) => { %>            <div><dt><%= f.label %></dt><dd title="<%= f.full %>"><%= f.value %></dd></div>
+<% }) %>          </dl>
+          <div class="xcard__acts">
+            <a class="xcard__more" href="<%= trip.url %>" aria-label="View details: <%= trip.title %>">View details <span class="arw"></span></a>
+            <a class="xcard__enq" href="<%= trip.url %>#enquire" aria-label="<%= cta %>: <%= trip.title %>"><%= cta %></a>
+          </div>
+        </div>
+      </article>

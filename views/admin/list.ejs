@@ -1,0 +1,33 @@
+<%- include("_head", { pageTitle: resource.plural }) %>
+<%
+  const show = (item, col) => {
+    if (col === "status") return item.published ? "Published" : item.publishedAt ? "Scheduled" : "Draft";
+    const val = item[col];
+    if (typeof val === "boolean") return val ? "Yes" : "No";
+    return val == null || val === "" ? "" : String(val);
+  };
+%>
+<div class="ahead">
+  <h1><%= resource.plural %> <small><%= items.length %></small></h1>
+  <a class="abtn" href="/admin/<%= resourceKey %>/new">Add <%= resource.singular %></a>
+</div>
+<% if (saved) { %><p class="amsg amsg--ok" role="status">Saved.</p><% } %>
+<% if (deleted) { %><p class="amsg amsg--ok" role="status">Deleted.</p><% } %>
+
+<% if (items.length) { %>
+<div class="ascroll"><table class="atable">
+  <thead><tr><% resource.columns.forEach(([, label]) => { %><th><%= label %></th><% }) %><th><span class="sr">Actions</span></th></tr></thead>
+  <tbody>
+<% items.forEach((item) => { const url = resource.viewUrl(item); %>    <tr>
+<% resource.columns.forEach(([col], i) => { %>      <td><% if (i === (resource.columns[0][0] === "number" ? 1 : 0)) { %><a href="/admin/<%= resourceKey %>/<%= item._id %>/edit"><%= show(item, col) %></a><% } else { %><%= show(item, col) %><% } %></td>
+<% }) %>      <td class="nowrap aactions">
+        <a href="/admin/<%= resourceKey %>/<%= item._id %>/edit">Edit</a>
+<% if (url) { %>        <a href="<%= url %>" target="_blank" rel="noopener">View</a>
+<% } %>      </td>
+    </tr>
+<% }) %>  </tbody>
+</table></div>
+<% } else { %>
+<p class="aempty">Nothing here yet.</p>
+<% } %>
+<%- include("_foot") %>

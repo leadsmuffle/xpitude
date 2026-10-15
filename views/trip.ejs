@@ -1,0 +1,136 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<%
+  const catTitle = (page && page.title) || cat.label;
+  const cta = trip.ctaLabel || cat.enquire;
+  const paragraphs = [trip.shortDescription, ...String(trip.overview || "").split(/\n\s*\n/)].map((s) => s.trim()).filter(Boolean);
+  // Trips entered before the facts list existed still have their separate fields.
+  // A two or three sentence answer for search and AI tools, made only from this trip's own facts.
+  const fact = (name) => ((trip.facts || []).find((f) => f.label === name) || {}).value;
+  const summary = [
+    [trip.title + " is", [fact("Duration") || trip.duration, fact("Format")].filter(Boolean).join(", "), "with XPITUDE in Pakistan"].filter(Boolean).join(" ").replace(/ is with/, " is a trip with") + ".",
+    [fact("Grade") && "Grade: " + fact("Grade") + ".", (fact("Best Season") || trip.season) && "Best season: " + (fact("Best Season") || trip.season) + ".", fact("Max Altitude") && "Highest point: " + fact("Max Altitude") + "."].filter(Boolean).join(" "),
+    trip.tagline ? trip.tagline + "." : "",
+  ].filter(Boolean).join(" ").replace(/\.\./g, ".");
+  // Travel Guide pages that help plan this kind of trip
+  const guideLinks = { trekking: ["trekking-trip-difficulty-grades", "packing-equipment-checklist", "travel-insurance-guide"],
+    tours: ["best-time-to-visit-pakistan", "recommended-flights-airlines", "pakistan-visa-guide"],
+    spiritual: ["pakistan-at-a-glance", "best-time-to-visit-pakistan", "pakistan-visa-guide"],
+    corporate: ["is-pakistan-safe-to-travel", "travel-insurance-guide", "pakistan-at-a-glance"] }[trip.category] || [];
+  const facts = trip.facts.length ? trip.facts
+    : [["Duration", trip.duration], ["Season", trip.season], ["Altitude", trip.altitude], ["Travel", trip.mode], ["Grade", trip.grade], ["Region", trip.region]]
+        .filter((f) => f[1]).map(([label, value]) => ({ label, value }));
+%>
+<main>
+<section class="phero xhero">
+<% if (trip.image) { %>  <div class="phero__media"><img src="<%= trip.image %>" alt="<%= trip.imageAlt || trip.title %>" fetchpriority="high"></div>
+  <div class="phero__scrim"></div>
+<% } %>  <div class="wrap">
+    <p class="eyebrow"><%= catTitle %></p>
+    <h1><%= trip.title %></h1>
+<% if (trip.tagline) { %>    <p class="xhero__tag"><%= trip.tagline %></p>
+<% } %>    <div class="xhero__act"><a href="#enquire" class="btn btn--sd"><%= cta %> <span class="arw"></span></a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <article class="xp">
+<% if (paragraphs.length) { %>      <div class="note xp__sum"><b>In short.</b> <%= summary %></div>
+      <div class="xp__lead">
+<% paragraphs.forEach((text) => { %>        <p><%= text %></p>
+<% }) %>      </div>
+<% } %>
+<% if (facts.length) { %>      <section class="xp__sec">
+        <h2><%= trip.factsTitle || "At a Glance" %></h2>
+        <dl class="xfacts">
+<% facts.forEach((f) => { %>          <div><dt><%= f.label %></dt><dd><%= f.value %></dd></div>
+<% }) %>        </dl>
+<% if (trip.grade && trip.category === "trekking") { %>        <p class="xp__note"><a href="/travel-guide/trekking-trip-difficulty-grades">What the grades mean</a></p>
+<% } %>      </section>
+<% } %>
+<% if (trip.highlights.length) { %>      <section class="xp__sec">
+        <h2><%= trip.highlightsTitle || "Highlights" %></h2>
+        <ul class="xlist xlist--yes xlist--cols">
+<% trip.highlights.forEach((x) => { %>          <li><%= x %></li>
+<% }) %>        </ul>
+      </section>
+<% } %>
+      <section class="xp__sec">
+        <h2><%= trip.itineraryTitle || "Itinerary" %></h2>
+<% if (trip.fullItinerary.length) { %>        <ol class="xdays">
+<% trip.fullItinerary.forEach((d, i) => { %>          <li><span class="xdays__l"><%= d.label || "Day " + (d.day || i + 1) %></span><div><% if (d.title) { %><h3><%= d.title %></h3><% } %><% if (d.description) { %><p><%= d.description %></p><% } %></div></li>
+<% }) %>        </ol>
+<% } else { %>        <p>Every departure is planned around your group and your dates. Send an enquiry and a planner will come back within one working day with the full day by day itinerary.</p>
+<% } %>      </section>
+
+<% if (trip.includes.length || trip.excludes.length) { %>      <section class="xp__sec xinc">
+<% if (trip.includes.length) { %>        <div>
+          <h2>What's Included</h2>
+          <ul class="xlist xlist--yes">
+<% trip.includes.forEach((x) => { %>            <li><%= x %></li>
+<% }) %>          </ul>
+        </div>
+<% } if (trip.excludes.length) { %>        <div>
+          <h2>What's Not Included</h2>
+          <ul class="xlist xlist--no">
+<% trip.excludes.forEach((x) => { %>            <li><%= x %></li>
+<% }) %>          </ul>
+        </div>
+<% } %>      </section>
+<% } %>
+<% if (trip.services.length) { %>      <section class="xp__sec">
+        <h2>Services</h2>
+        <ul class="xlist xlist--yes xlist--cols">
+<% trip.services.forEach((x) => { %>          <li><%= x %></li>
+<% }) %>        </ul>
+      </section>
+<% } %>
+<% if (trip.info.length) { %>      <section class="xp__sec">
+        <h2><%= trip.infoTitle || "Good to Know" %></h2>
+        <ul class="xlist xlist--dot">
+<% trip.info.forEach((x) => { %>          <li><%= x %></li>
+<% }) %>        </ul>
+      </section>
+<% } %>
+<% const guidesToRead = guideLinks.map((s) => nav.guides.find((g) => g.slug === s)).filter(Boolean); if (guidesToRead.length) { %>      <section class="xp__sec">
+        <h2>Before you go</h2>
+        <ul class="xlist xlist--dot">
+<% guidesToRead.forEach((g) => { %>          <li><a href="<%= g.url %>"><%= g.title %></a></li>
+<% }) %>        </ul>
+      </section>
+<% } %>      <section class="xp__end">
+<% if (trip.says) { %>        <blockquote class="xsays"><span class="data">XPITUDE Says</span><p><%= trip.says %></p></blockquote>
+<% } %>        <div class="xp__cta">
+          <a href="#enquire" class="btn btn--primary"><%= cta %> <span class="arw"></span></a>
+<% if (trip.ctaNote) { %>          <p><%= trip.ctaNote %></p>
+<% } %>        </div>
+      </section>
+    </article>
+  </div>
+</section>
+
+<section class="section on-dark" id="enquire">
+  <div class="wrap contact">
+    <div>
+      <p class="eyebrow"><%= cta %></p>
+      <h2 class="d2"><%= trip.title %></h2>
+<% if (trip.ctaNote) { %>      <p class="lede" style="margin-top:16px"><%= trip.ctaNote %></p>
+<% } %><%- include("partials/contact-details") %>
+    </div>
+    <%- include("partials/enquiry-form", { p: "t", dark: true, preType: trip.category, preDest: trip.title }) %>
+  </div>
+</section>
+
+<% if (related.length) { %>
+<section class="section" style="background:var(--mist)">
+  <div class="wrap">
+    <div class="chead chead--tight"><p class="eyebrow"><%= catTitle %></p><h2 class="d2">More to explore</h2></div>
+    <div class="grid-3 xgrid">
+<% related.forEach((t) => { %><%- include("partials/exp-card", { trip: t }) %><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+</main>
+<%- include("partials/footer") %>

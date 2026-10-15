@@ -1,0 +1,54 @@
+<%- include("_head", { pageTitle: "Dashboard" }) %>
+<div class="ahead"><h1>Dashboard</h1></div>
+
+<div class="astats">
+  <a class="astat" href="/admin/enquiries?status=new"><span>New, not yet answered</span><b><%= stats.isNew %></b></a>
+  <div class="astat"><span>Enquiries, last 7 days</span><b><%= stats.week %></b></div>
+  <div class="astat"><span>Enquiries, this month</span><b><%= stats.month %></b></div>
+  <a class="astat" href="/admin/enquiries"><span>Enquiries, all time</span><b><%= stats.total %></b></a>
+</div>
+
+<div class="acols">
+  <section class="apanel">
+    <h2>Enquiries by travel type</h2>
+<% if (byType.length) { %>    <ul class="abars">
+<% byType.forEach((t) => { %>      <li><span><%= t.label %></span><i><b style="width:<%= Math.round((t.n / maxType) * 100) %>%"></b></i><em><%= t.n %></em></li>
+<% }) %>    </ul>
+<% } else { %>    <p class="aempty">No enquiries yet.</p>
+<% } %>  </section>
+
+  <section class="apanel">
+    <h2>Enquiries by status</h2>
+    <ul class="alist">
+<% byStatus.forEach((s) => { %>      <li><a href="/admin/enquiries?status=<%= s.status %>"><span class="atag atag--<%= s.status %>"><%= s.status %></span></a><em><%= s.n %></em></li>
+<% }) %>    </ul>
+  </section>
+</div>
+
+<section class="apanel">
+  <h2>Latest enquiries</h2>
+<% if (recent.length) { %>  <div class="ascroll"><table class="atable">
+    <thead><tr><th>Received</th><th>Name</th><th>Travel type</th><th>Destination</th><th>Status</th></tr></thead>
+    <tbody>
+<% recent.forEach((e) => { %>      <tr>
+        <td><%= e.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) %></td>
+        <td><a href="/admin/enquiries/<%= e._id %>"><%= e.name %></a></td>
+        <td><%= typeLabel(e.travelType) %></td>
+        <td><%= e.destination %></td>
+        <td><span class="atag atag--<%= e.status %>"><%= e.status %></span></td>
+      </tr>
+<% }) %>    </tbody>
+  </table></div>
+<% } else { %>  <p class="aempty">Nothing yet. Enquiries sent from the website will appear here.</p>
+<% } %></section>
+
+<section class="apanel">
+  <h2>Content</h2>
+  <ul class="alist alist--links">
+    <li><a href="/admin/trips">Trips</a><em><%= counts.trips %></em></li>
+    <li><a href="/admin/testimonials">Testimonials</a><em><%= counts.testimonials %></em></li>
+    <li><a href="/admin/blog">Blog posts</a><em><%= counts.blog %></em></li>
+    <li><a href="/admin/guide">Guide articles</a><em><%= counts.guide %></em></li>
+  </ul>
+</section>
+<%- include("_foot") %>

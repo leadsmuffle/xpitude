@@ -1,0 +1,85 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<%
+  // The small label on each post's photo. A post that is not listed here is tagged "Journal".
+  const tags = {
+    "twenty-one-days-to-concordia": "Expedition",
+    "a-full-moon-over-masherbrum": "Journal",
+    "kutwal-lake-out-of-season": "Field Notes",
+    "the-people-who-carry-the-expedition": "Crew",
+    "k2-base-camp-gondogoro-la-trek": "Trek",
+    "fairy-meadows-nanga-parbat-base-camp": "Trek",
+    "skardu-travel-guide": "Travel Guide",
+    "shogran-siri-paye-makra-peak": "Trek",
+    "musa-ka-musalla-trek": "Trek",
+    "neelum-valley-travel-guide": "Travel Guide",
+    "ganga-choti-trek": "Trek",
+    "paragliding-khanpur-lake": "Adventure",
+    "swaik-lake-kallar-kahar": "Day Trip",
+    "swat-kalam-travel-guide": "Travel Guide",
+    "nathia-gali-mukshpuri-hike": "Hike",
+    "ratti-gali-lake-in-winter": "Winter",
+    "chilam-joshi-festival-kalash": "Culture",
+  };
+  const tag = (post) => tags[post.slug] || "Journal";
+  // Newest post is featured, the next three sit beside it, the rest fill the grid. A search shows every match in the grid.
+  const lead = q ? null : posts[0];
+  const side = q ? [] : posts.slice(1, 4);
+  const more = q ? posts : posts.slice(4);
+  const subscribe = site.email ? "mailto:" + site.email + "?subject=" + encodeURIComponent("Subscribe to the XPITUDE journal") : "/contact";
+%>
+<main>
+<%- include("partials/phero", {
+  image: "/assets/arc-1.jpg", imageAlt: "K2 from the Godwin-Austen Glacier",
+  eyebrow: "Our Blog", h1: "Our Past Expeditions and Unforgettable Memories",
+}) %>
+<section class="section blog">
+  <div class="wrap">
+    <div class="bbar">
+      <p class="bbar__tag">Stories from the mountains</p>
+      <div class="bbar__acts">
+        <a class="bpill" href="<%= subscribe %>">Subscribe</a>
+        <details class="bsearch"<%= q ? " open" : "" %>>
+          <summary class="bpill">Search</summary>
+          <form action="/blog" method="get" role="search">
+            <input type="search" name="q" value="<%= q %>" placeholder="Search the journal" aria-label="Search the journal" maxlength="60">
+            <button type="submit">Search</button>
+          </form>
+        </details>
+      </div>
+    </div>
+
+<% if (q) { %>    <p class="bfound"><%= posts.length ? (posts.length === 1 ? "1 story" : posts.length + " stories") + " for" : "No stories match" %> &ldquo;<%= q %>&rdquo;. <a href="/blog">Show all stories</a></p>
+<% } if (lead) { %>    <div class="btop">
+      <a class="blead" href="<%= lead.url %>">
+        <span class="bimg"><img src="<%= lead.coverImage %>" alt="<%= lead.coverAlt || lead.title %>" fetchpriority="high"><span class="btag"><%= tag(lead) %></span></span>
+        <h2 class="blead__t"><%= lead.title %></h2>
+        <p class="blead__d"><%= lead.excerpt %></p>
+      </a>
+<% if (side.length) { %>      <div class="bside">
+<% side.forEach((post) => { %>        <a class="bside__i" href="<%= post.url %>">
+          <span class="bimg"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || post.title %>" decoding="async"><span class="btag"><%= tag(post) %></span></span>
+          <span class="bside__txt">
+            <h3 class="bside__t"><%= post.title %></h3>
+            <p class="bside__d"><%= post.excerpt %></p>
+          </span>
+        </a>
+<% }) %>      </div>
+<% } %>    </div>
+<% } if (more.length) { %>    <div class="bgrid<%= q ? " bgrid--top" : "" %>">
+<% more.forEach((post) => { %>      <a href="<%= post.url %>">
+        <span class="bimg"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || post.title %>" loading="lazy" decoding="async"><span class="btag"><%= tag(post) %></span></span>
+        <h3><%= post.title %></h3>
+        <p><%= post.excerpt %></p>
+      </a>
+<% }) %>    </div>
+<% } if (!posts.length && !q) { %>    <div class="chead">
+      <h2 class="d3">The journal is being written.</h2>
+      <p class="chead__sub">Stories from the trail will appear here soon. In the meantime, read what our guests say.</p>
+    </div>
+    <div class="center-cta"><a href="/testimonials" class="tlink">Client testimonials <span class="arw"></span></a></div>
+<% } %>  </div>
+</section>
+<%- include("partials/cta") %>
+</main>
+<%- include("partials/footer") %>

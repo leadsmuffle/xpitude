@@ -1,0 +1,58 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<%
+  const published = post.publishedAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  // A long title is shown as a main title and, after the colon, a subtitle line; both stay inside the one h1.
+  const cut = post.title.indexOf(":");
+  const mainTitle = cut > 0 ? post.title.slice(0, cut).trim() : post.title;
+  const subTitle = cut > 0 ? post.title.slice(cut + 1).trim() : "";
+%>
+<main>
+<section class="phero phero--post">
+<% if (post.coverImage) { %>  <div class="phero__media"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || "" %>" fetchpriority="high"></div>
+  <div class="phero__scrim"></div>
+<% } %>  <div class="wrap">
+    <p class="eyebrow"><%= published %></p>
+    <h1><span class="phero__title"><%= mainTitle %><% if (subTitle) { %><span class="sr">:</span><% } %></span><% if (subTitle) { %> <span class="phero__subtitle"><%= subTitle %></span><% } %></h1>
+<% if (post.excerpt) { %>    <p class="phero__sub"><%= post.excerpt %></p>
+<% } %>  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <article class="prose bpost">
+      <p class="bpost__date"><time datetime="<%= post.publishedAt.toISOString().slice(0, 10) %>"><%= published %></time></p>
+<%- post.body %>
+<% if (related) { %>      <aside class="brel" aria-label="Plan this trip">
+        <a class="brel__card" href="<%= related.url %>">
+<% /* posts with their own photo folder show only those photos, so the card has no photo there */ if (related.image && !["/assets/journal/", "/images/blog/"].some((p) => String(post.coverImage).startsWith(p))) { %>          <span class="brel__img"><img src="<%= related.image %>" alt="<%= related.imageAlt || related.title %>" loading="lazy" decoding="async"></span>
+<% } %>          <span class="brel__txt"><span class="data"><%= related.label %></span><b><%= related.title %></b><% if (related.tagline) { %><span class="brel__tag"><%= related.tagline %></span><% } %></span>
+        </a>
+        <a href="/contact" class="btn btn--primary">Plan your journey <span class="arw"></span></a>
+      </aside>
+<% } %>    </article>
+<% if (post.gallery && post.gallery.length) { %>    <section class="bgal" aria-labelledby="bgal-title">
+      <h2 id="bgal-title" class="d3">From the trail</h2>
+      <div class="bgal__grid" id="bgalGrid">
+<% post.gallery.forEach((p, i) => { %>        <a class="bgal__item" href="<%= p.src %>" data-alt="<%= p.alt %>" aria-label="Open photo <%= i + 1 %> of <%= post.gallery.length %>: <%= p.alt %>"><img src="<%= p.thumb || p.src %>" alt="<%= p.alt %>" loading="lazy" decoding="async"></a>
+<% }) %>      </div>
+    </section>
+    <div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+      <button class="lbox__close" type="button" aria-label="Close">×</button>
+      <button class="lbox__nav lbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
+      <figure class="lbox__fig"><img alt=""><figcaption></figcaption></figure>
+      <button class="lbox__nav lbox__nav--next" type="button" aria-label="Next photo">›</button>
+    </div>
+<% } %><% if (more && more.length) { %>    <div class="prose" style="margin:clamp(40px,5vw,64px) auto 0">
+      <h2>More from the journal</h2>
+      <ul>
+<% more.forEach((p) => { %>        <li><a href="<%= p.url %>"><%= p.title %></a></li>
+<% }) %>        <li><a href="/travel-guide">The Pakistan Travel Guide: visas, seasons, packing and insurance</a></li>
+      </ul>
+    </div>
+<% } %>    <div class="center-cta"><a href="/blog" class="tlink">Back to the journal <span class="arw"></span></a></div>
+  </div>
+</section>
+<%- include("partials/cta") %>
+</main>
+<%- include("partials/footer") %>

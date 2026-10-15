@@ -1,0 +1,44 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<main>
+<section class="ghero">
+<% if (guide.image) { %>  <div class="ghero__media"><img src="<%= guide.image %>" alt="<%= guide.imageAlt || guide.title %>" fetchpriority="high"></div>
+<% } %>  <div class="ghero__scrim"></div>
+  <div class="wrap ghero__in">
+    <p class="eyebrow">Travel Guide · <%= String(index + 1).padStart(2, "0") %> of <%= guides.length %></p>
+    <h1><%= guide.title %></h1>
+<% if (guide.summary) { %>    <p class="ghero__sub"><%= guide.summary %></p>
+<% } %>  </div>
+</section>
+
+<section class="section gpage">
+  <div class="wrap">
+    <div class="guide">
+      <article class="prose gprose">
+<% const answer = [guide.summary, guide.metaDescription].filter(Boolean).filter((s, i, a) => a.indexOf(s) === i).join(" "); if (answer) { %>        <div class="note"><b>In short.</b> <%= answer %></div>
+<% } %><%- guide.body %>
+        <p class="prose__foot">General guidance for planning. Rules, schedules and conditions change, so confirm the details that matter with official sources and with your XPITUDE planner before you book.</p>
+      </article>
+      <aside class="gside" aria-label="Travel Guide pages">
+        <h2>Travel Guide</h2>
+        <ol>
+<% guides.forEach((g) => { %>          <li><a<%- g.slug === guide.slug ? ' class="is-active" aria-current="page"' : "" %> href="<%= g.url %>"><span><%= String(g.number).padStart(2, "0") %></span><%= g.title %></a></li>
+<% }) %>        </ol>
+      </aside>
+    </div>
+
+    <nav class="gpager" aria-label="More from the Travel Guide">
+<% [["prev", prev, "Previous guide"], ["next", next, "Next guide"]].forEach(([cls, g, label]) => { if (!g) return; %>      <a class="gpager__i gpager__i--<%= cls %>" href="<%= g.url %>">
+<% if (g.image) { %>        <span class="gpager__img"><img src="<%= g.image %>" alt="<%= g.imageAlt || g.title %>" loading="lazy" decoding="async"></span>
+<% } %>        <span class="gpager__txt"><span class="data"><%= label %></span><b><%= g.title %></b></span>
+      </a>
+<% }) %>    </nav>
+
+    <div class="gcta">
+      <h2 class="d2">Tell us the month. We'll tell you what's possible.</h2>
+      <a href="/contact" class="btn btn--sd">Plan your journey <span class="arw"></span></a>
+    </div>
+  </div>
+</section>
+</main>
+<%- include("partials/footer") %>

@@ -1,0 +1,6 @@
+      <ul class="corp__list" style="margin-bottom:0">
+<% if (site.phone) { %>        <li><span class="data">Call</span> <a href="<%= site.phoneHref %>"><%= site.phone %></a></li>
+<% } if (site.whatsappChat) { %>        <li><span class="data">WhatsApp</span> <a href="<%= site.whatsappChat %>" target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.whatsappText %>"><%= site.whatsappText %></a></li>
+<% } if (site.email) { %>        <li><span class="data">Email</span> <a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+<% } %>        <li><span class="data">Office</span> <%= site.address.street %>, <%= site.address.city %></li>
+      </ul>

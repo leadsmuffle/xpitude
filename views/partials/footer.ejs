@@ -1,0 +1,42 @@
+<%
+  const fsoc = [["instagram", "Instagram"], ["tiktok", "TikTok"], ["youtube", "YouTube"], ["facebook", "Facebook"]].filter((s) => site.social[s[0]]);
+%>
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="brand">
+          <img class="brand__logo" src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324" loading="lazy">
+        </div>
+        <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
+<% if (fsoc.length) { %>        <div class="fsoc">
+<% fsoc.forEach(([key, label]) => { %>          <a class="ico" href="<%= site.social[key] %>" aria-label="<%= label %>" rel="noopener" target="_blank"><%- icon(key) %></a>
+<% }) %>        </div>
+<% } if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><span class="ffollow__label">Follow us</span><%- include("follow") %></div>
+<% } %>      </div>
+      <div class="fcol"><h4>Services</h4><ul>
+        <li><a href="/trekking">Trekking Expeditions</a></li><li><a href="/tours">Tours and Sightseeing</a></li>
+        <li><a href="/spiritual">Spiritual Trips and Yoga Retreats</a></li><li><a href="/corporate">Corporate Retreats</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul>
+        <li><a href="/about">About Us</a></li><li><a href="/blog">Our Blog</a></li>
+        <li><a href="/travel-guide">Travel Guide</a></li>
+        <li><a href="/testimonials">Client Testimonials</a></li><li><a href="/contact">Contact Us</a></li></ul></div>
+      <div class="fcol"><h4>Contact</h4><ul>
+        <li><span><%= site.address.street %></span></li>
+        <li><span><%= site.address.city %>, <%= site.address.country %></span></li>
+<% if (site.email) { %>        <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+<% } if (site.phone) { %>        <li><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></li>
+<% } %>      </ul></div>
+    </div>
+    <div class="footer__bottom">
+      <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>
+      <span class="data"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<% if (site.whatsappChat) { %><a class="wafloat" id="waFloat" href="<%= site.whatsappChat %>" aria-label="Chat with XPITUDE on WhatsApp" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %><span class="wafloat__tip" aria-hidden="true">Chat with us</span></a>
+<% } %><script src="/assets/site.js?v=<%= v %>"></script>
+</body>
+</html>

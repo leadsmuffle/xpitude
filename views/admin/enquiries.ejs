@@ -1,0 +1,44 @@
+<%- include("_head", { pageTitle: "Enquiries" }) %>
+<div class="ahead">
+  <h1>Enquiries <small><%= total %></small></h1>
+  <a class="abtn abtn--ghost" href="/admin/enquiries.csv<%= status ? "?status=" + status : "" %>">Export<%= status ? " " + status : "" %> to CSV</a>
+</div>
+<% if (saved) { %><p class="amsg amsg--ok" role="status">Saved.</p><% } %>
+
+<nav class="atabs" aria-label="Filter by status">
+  <a href="/admin/enquiries"<%- !status ? ' class="is-active"' : "" %>>All</a>
+<% statuses.forEach((s) => { %>  <a href="/admin/enquiries?status=<%= s %>"<%- status === s ? ' class="is-active"' : "" %>><%= s %></a>
+<% }) %></nav>
+
+<% if (items.length) { %>
+<div class="ascroll"><table class="atable">
+  <thead><tr><th>Received</th><th>Name</th><th>Country</th><th>Group</th><th>Travel type</th><th>Destination</th><th>Contact</th><th>Status</th></tr></thead>
+  <tbody>
+<% items.forEach((e) => { %>    <tr>
+      <td class="nowrap"><%= e.createdAt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) %></td>
+      <td><a href="/admin/enquiries/<%= e._id %>"><%= e.name %></a><% if (e.notes) { %> <span class="anote" title="Has notes">notes</span><% } %></td>
+      <td><%= e.country %></td>
+      <td class="nowrap"><%= e.groupSize %></td>
+      <td><%= typeLabel(e.travelType) %></td>
+      <td><%= e.destination %></td>
+      <td><a href="mailto:<%= e.email %>"><%= e.email %></a><br><%= e.phone %></td>
+      <td>
+        <form method="post" action="/admin/enquiries/<%= e._id %>" class="ainline">
+          <input type="hidden" name="back" value="list"><input type="hidden" name="filter" value="<%= status %>">
+          <label class="sr" for="s-<%= e._id %>">Status for <%= e.name %></label>
+          <select id="s-<%= e._id %>" name="status" class="atag atag--<%= e.status %> js-autosubmit">
+<% statuses.forEach((s) => { %>            <option value="<%= s %>"<%= s === e.status ? " selected" : "" %>><%= s %></option>
+<% }) %>          </select>
+          <noscript><button type="submit" class="alink">Save</button></noscript>
+        </form>
+      </td>
+    </tr>
+<% }) %>  </tbody>
+</table></div>
+<% if (pages > 1) { %><nav class="apager" aria-label="Pages">
+<% for (let p = 1; p <= pages; p++) { %>  <a href="/admin/enquiries?page=<%= p %><%= status ? "&status=" + status : "" %>"<%- p === page ? ' class="is-active"' : "" %>><%= p %></a>
+<% } %></nav><% } %>
+<% } else { %>
+<p class="aempty">No <%= status %> enquiries.</p>
+<% } %>
+<%- include("_foot") %>

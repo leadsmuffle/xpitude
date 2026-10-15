@@ -1,0 +1,42 @@
+<%- include("_head", { pageTitle: item.name }) %>
+<div class="ahead">
+  <h1><%= item.name %> <span class="atag atag--<%= item.status %>"><%= item.status %></span></h1>
+  <a class="abtn abtn--ghost" href="/admin/enquiries">All enquiries</a>
+</div>
+<% if (saved) { %><p class="amsg amsg--ok" role="status">Saved.</p><% } %>
+
+<div class="acols">
+  <section class="apanel">
+    <h2>Enquiry</h2>
+    <dl class="adl">
+      <div><dt>Received</dt><dd><%= item.createdAt.toLocaleString("en-GB", { dateStyle: "long", timeStyle: "short" }) %></dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:<%= item.email %>"><%= item.email %></a></dd></div>
+      <div><dt>Phone</dt><dd><a href="tel:<%= item.phone.replace(/[^\d+]/g, "") %>"><%= item.phone %></a></dd></div>
+      <div><dt>Country</dt><dd><%= item.country || "Not given" %></dd></div>
+      <div><dt>Group size</dt><dd><%= item.groupSize || "Not given" %></dd></div>
+      <div><dt>Travel type</dt><dd><%= typeLabel(item.travelType) || "Not given" %></dd></div>
+      <div><dt>Destination</dt><dd><%= item.destination || "Not given" %></dd></div>
+      <div><dt>Sent from</dt><dd><%= item.source || "Not recorded" %></dd></div>
+    </dl>
+    <h2>Message</h2>
+    <p class="apre"><%= item.message || "No message." %></p>
+  </section>
+
+  <section class="apanel">
+    <h2>Follow up</h2>
+    <form method="post" action="/admin/enquiries/<%= item._id %>" class="aform">
+      <label for="status">Status</label>
+      <select id="status" name="status">
+<% statuses.forEach((s) => { %>        <option value="<%= s %>"<%= s === item.status ? " selected" : "" %>><%= s %></option>
+<% }) %>      </select>
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" rows="9" maxlength="5000"><%= item.notes %></textarea>
+      <p class="ahelp">Only visible here. The customer never sees these.</p>
+      <button type="submit" class="abtn">Save</button>
+    </form>
+    <form method="post" action="/admin/enquiries/<%= item._id %>/delete" class="adanger" data-confirm="Delete this enquiry permanently? This cannot be undone.">
+      <button type="submit" class="alink alink--danger">Delete this enquiry</button>
+    </form>
+  </section>
+</div>
+<%- include("_foot") %>

@@ -1,0 +1,43 @@
+<%- include("_head", { pageTitle: (item ? "Edit " : "Add ") + resource.singular }) %>
+<div class="ahead">
+  <h1><%= item ? "Edit" : "Add" %> <%= resource.singular %></h1>
+  <a class="abtn abtn--ghost" href="/admin/<%= resourceKey %>">Back to <%= resource.plural.toLowerCase() %></a>
+</div>
+<% if (error) { %><p class="amsg amsg--err" role="alert"><%= error %></p><% } %>
+
+<form method="post" action="/admin/<%= resourceKey %><%= item ? "/" + item._id : "" %>" enctype="multipart/form-data" class="aform aform--wide apanel">
+<% resource.fields.forEach((f) => { const id = "f-" + f.name; const val = values[f.name]; %>
+<% if (f.type === "checkbox") { %>
+  <div class="acheck"><input id="<%= id %>" name="<%= f.name %>" type="checkbox"<%= val ? " checked" : "" %>><label for="<%= id %>"><%= f.label %></label></div>
+<% } else { %>
+  <label for="<%= id %>"><%= f.label %><% if (f.required) { %> <span class="areq">required</span><% } %></label>
+<% if (f.type === "select") { %>
+  <select id="<%= id %>" name="<%= f.name %>"<%= f.required ? " required" : "" %>>
+<% f.options.forEach(([value, label]) => { %>    <option value="<%= value %>"<%= value === val ? " selected" : "" %>><%= label %></option>
+<% }) %>  </select>
+<% } else if (["textarea", "html", "lines", "itinerary", "images", "pairs", "steps", "gallery"].includes(f.type)) { %>
+  <textarea id="<%= id %>" name="<%= f.name %>" rows="<%= f.rows || 4 %>"<%= f.type === "html" ? ' class="amono" spellcheck="false"' : "" %><%= f.required ? " required" : "" %>><%= val %></textarea>
+<% } else { %>
+  <input id="<%= id %>" name="<%= f.name %>" type="<%= f.type === "number" ? "number" : f.type === "date" ? "date" : "text" %>"<%= f.type === "number" ? ' step="any" min="0"' : "" %> value="<%= val %>"<%= f.required ? " required" : "" %>>
+<% } %>
+<% if (f.type === "image" || f.type === "images") { %>
+<% const first = f.type === "image" ? val : String(val || "").split("\n")[0]; if (first) { %>  <img class="athumb" src="<%= first %>" alt="Current image">
+<% } %>  <label for="f-upload" class="aupload">Upload a new image (JPG, PNG, WebP or AVIF, 5 MB at most)</label>
+  <input id="f-upload" name="upload" type="file" accept="image/jpeg,image/png,image/webp,image/avif">
+<% } %>
+<% } %>
+<% if (f.help) { %>  <p class="ahelp"><%= f.help %></p>
+<% } %>
+<% }) %>
+  <div class="aform__end">
+    <button type="submit" class="abtn">Save</button>
+    <a class="alink" href="/admin/<%= resourceKey %>">Cancel</a>
+  </div>
+</form>
+
+<% if (item) { %>
+<form method="post" action="/admin/<%= resourceKey %>/<%= item._id %>/delete" class="adanger" data-confirm="Delete this <%= resource.singular %> permanently? This cannot be undone.">
+  <button type="submit" class="alink alink--danger">Delete this <%= resource.singular %></button>
+</form>
+<% } %>
+<%- include("_foot") %>

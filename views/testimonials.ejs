@@ -1,0 +1,23 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<main>
+<%- include("partials/phero", {
+  image: "/assets/arc-2.jpg", imageAlt: "Camp under the stars at Goro II on the Baltoro", crumbs: [["Home", "/"], ["Client Testimonials"]],
+  eyebrow: "Client Testimonials", h1: "Client Testimonials",
+}) %>
+
+<section class="section" style="background:var(--mist)">
+  <div class="wrap">
+<% if (testimonials.length) { %>    <div class="tq">
+<% testimonials.forEach((t) => { %>      <figure class="tq__i">
+        <div class="avatar"><% if (t.image) { %><img src="<%= t.image %>" alt="<%= t.name %>" loading="lazy"><% } else { %><svg viewBox="0 0 76 76" aria-hidden="true"><rect width="76" height="76" fill="#E4E4E4"/><circle cx="38" cy="30" r="13" fill="#B9B9B9"/><path d="M12 76c0-14.4 11.6-24 26-24s26 9.6 26 24z" fill="#B9B9B9"/></svg><% } %></div>
+        <blockquote><%= t.quote %></blockquote>
+        <figcaption><b><%= t.name %></b><%= t.cite %></figcaption>
+      </figure>
+<% }) %>    </div>
+<% } else { %>    <div class="chead"><p class="chead__sub">Testimonials will appear here soon.</p></div>
+<% } %>  </div>
+</section>
+<%- include("partials/cta") %>
+</main>
+<%- include("partials/footer") %>

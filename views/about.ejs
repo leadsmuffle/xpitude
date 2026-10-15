@@ -1,0 +1,42 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<main>
+<%- include("partials/phero", {
+  image: "/assets/camp.jpg", imageAlt: "Expedition camp under the stars at Goro II, Masherbrum behind", crumbs: [["Home", "/"], ["About Us"]],
+  eyebrow: "About Us", h1: "Experience Altitude",
+  sub: "Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.",
+}) %>
+
+<section class="section">
+  <div class="wrap">
+    <div class="chead">
+      <p class="eyebrow">Who we are</p>
+      <h2 class="d2">A licensed tour operator in Gilgit-Baltistan.</h2>
+      <p class="chead__sub">Every experience is privately run, fully supported and built around your group.</p>
+    </div>
+    <div class="cats">
+<% ["trekking", "tours", "spiritual"].forEach((key, i) => { const c = categories[key]; %>      <a href="<%= c.path %>" class="cat">
+        <img src="/assets/<%= c.image %>" alt="<%= c.imageAlt %>" loading="lazy" decoding="async">
+        <div class="cat__c"><span class="cat__n">0<%= i + 1 %></span><h3 class="d3"><%= c.menuLabel || c.label %></h3>
+          <p><%= c.blurb %></p></div>
+      </a>
+<% }) %>    </div>
+  </div>
+</section>
+
+<%- include("partials/promise") %>
+
+<section class="section on-dark">
+  <div class="wrap corp">
+    <div class="corp__media"><img src="/assets/arc-4.jpg" alt="A porter and pack horse on the Baltoro trail" loading="lazy" decoding="async"></div>
+    <div>
+      <p class="eyebrow">Based in Lahore</p>
+      <h2 class="d2">Tell us the month. We'll tell you what's possible.</h2>
+      <p class="lede" style="margin-top:16px">Send a rough idea and a rough date. A planner comes back within one working day with two or three routes that fit your group, and an honest word about the one that does not.</p>
+<%- include("partials/contact-details") %>
+      <p style="margin-top:24px"><a href="/contact" class="btn btn--sd">Plan your journey <span class="arw"></span></a></p>
+    </div>
+  </div>
+</section>
+</main>
+<%- include("partials/footer") %>

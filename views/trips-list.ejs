@@ -1,0 +1,53 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<%
+  // The page copy comes from the Service pages section of the admin; the site settings are the fallback.
+  const pageTitle = (page && page.title) || cat.label;
+  const heroImage = (page && page.image) || "/assets/" + cat.image;
+  const heroAlt = (page && page.imageAlt) || cat.imageAlt;
+%>
+<main>
+<section class="phero xhero">
+  <div class="phero__media"><img src="<%= heroImage %>" alt="<%= heroAlt %>" fetchpriority="high"></div>
+  <div class="phero__scrim"></div>
+  <div class="wrap">
+    <p class="eyebrow">Our Services</p>
+    <h1><%= pageTitle %></h1>
+<% if (page && page.tagline) { %>    <p class="xhero__tag"><%= page.tagline %></p>
+<% } %>    <p class="phero__sub"><%= (page && page.intro) || cat.sub %></p>
+    <div class="xhero__act"><a href="/contact" class="btn btn--sd">Plan your journey <span class="arw"></span></a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+<% if (trips.length) { %>    <div class="grid-3 xgrid">
+<% trips.forEach((trip) => { %><%- include("partials/exp-card", { trip }) %><% }) %>
+    </div>
+<% } else { %>    <div class="chead"><p class="chead__sub">New departures are being planned. Tell us what you have in mind and we will build it around your group.</p></div>
+    <div class="center-cta"><a href="/contact" class="tlink"><%= cat.enquire %> <span class="arw"></span></a></div>
+<% } %>  </div>
+</section>
+
+<% if (info.length) { %>
+<section class="section xinfo">
+  <div class="wrap">
+<% if (page && page.infoTitle) { %>    <div class="chead chead--tight"><h2 class="d2"><%= page.infoTitle %></h2></div>
+<% } %>    <div class="xinfo__grid">
+<% info.forEach((item) => { %>      <div class="xinfo__i"><h3><%= item.title %></h3><p><%= item.body %></p></div>
+<% }) %>    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (page && page.closingTitle) { %>
+<section class="section on-red cta">
+  <div class="wrap">
+    <h2 class="d2"><%= page.closingTitle %></h2>
+<% if (page.closingText) { %>    <p class="xclose"><%= page.closingText %></p>
+<% } %>    <a href="/contact" class="btn btn--sd"><%= page.closingButton || "Plan your journey" %> <span class="arw"></span></a>
+  </div>
+</section>
+<% } else { %><%- include("partials/cta") %><% } %>
+</main>
+<%- include("partials/footer") %>

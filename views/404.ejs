@@ -1,0 +1,18 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<main>
+<section class="section nf">
+  <div class="wrap">
+    <div class="chead">
+      <p class="eyebrow"><%= locals.errorPage ? "Error" : "404" %></p>
+      <h1 class="d2"><%= locals.errorPage ? "Something went wrong on our side." : "This trail does not lead anywhere." %></h1>
+      <p class="chead__sub"><%= locals.errorPage ? "Please try again in a moment." : "The page you were looking for has moved or never existed." %></p>
+    </div>
+    <div class="nf__links">
+      <a href="/" class="btn btn--primary">Back to the homepage <span class="arw"></span></a>
+      <a href="/contact" class="tlink">Contact us <span class="arw"></span></a>
+    </div>
+  </div>
+</section>
+</main>
+<%- include("partials/footer") %>

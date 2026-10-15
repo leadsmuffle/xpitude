@@ -1,0 +1,35 @@
+<%
+  /* Options: p (id prefix, required), dark, heading, preType, preDest, reveal */
+  const dark = locals.dark === true;
+  const preType = locals.preType || "";
+  const preDest = locals.preDest || "";
+%>
+<form class="eform<%= dark ? " eform--dark" : "" %> js-eform<%= locals.reveal ? " rv" : "" %>" action="/api/enquiries" method="post" novalidate>
+<% if (!dark) { %>  <div class="eform__head"><h2 class="d3 eform__title"><%= locals.heading || "Plan My Trip" %></h2><% if (site.whatsappChat) { %><a class="eform__wa" href="<%= site.whatsappChat %>" aria-label="Plan your trip with XPITUDE on WhatsApp" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %></a><% } %></div>
+  <span class="eform__note">A planner replies within one working day</span>
+<% } %>  <div class="fgrid">
+    <div class="fld"><label for="<%= p %>-name">Name</label><input id="<%= p %>-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+    <div class="fld"><label for="<%= p %>-country">Country</label>
+      <select id="<%= p %>-country" name="country" class="js-country" autocomplete="country-name" required><option value="">Select</option></select></div>
+    <div class="fld"><label for="<%= p %>-size">Group size</label>
+      <select id="<%= p %>-size" name="groupSize" required><option value="">Select</option><% groupSizes.forEach((g) => { %><option><%= g %></option><% }) %></select></div>
+    <div class="fld"><label for="<%= p %>-type">Travel type</label>
+      <select id="<%= p %>-type" name="travelType" class="js-type" required><option value="">Select</option>
+<% travelTypes.forEach((t) => { %>        <option value="<%= t.value %>"<%= t.value === preType ? " selected" : "" %>><%= t.label %></option>
+<% }) %>      </select></div>
+    <div class="fld span2"><label for="<%= p %>-dest">Travel destination</label>
+      <select id="<%= p %>-dest" name="destination" class="js-dest" data-selected="<%= preDest %>" required disabled><option value="">Select travel type first</option></select></div>
+    <div class="fld"><label for="<%= p %>-mail">Email</label><input id="<%= p %>-mail" name="email" type="email" autocomplete="email" maxlength="160" required></div>
+    <div class="fld"><label for="<%= p %>-tel">Contact number</label><input id="<%= p %>-tel" name="phone" type="tel" autocomplete="tel" maxlength="40" required></div>
+<% if (dark) { %>    <div class="fld span2"><label for="<%= p %>-msg">Message (optional)</label><textarea id="<%= p %>-msg" name="message" rows="3" maxlength="2000"></textarea></div>
+<% } %>    <div class="hp" aria-hidden="true"><label for="<%= p %>-website">Leave this field empty</label><input id="<%= p %>-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+<% if (dark) { %>    <div class="fld span2" style="align-items:flex-start">
+      <button type="submit" class="btn btn--pd">Submit enquiry <span class="arw"></span></button>
+      <p class="eform__ok" role="status">Thank you. We have your enquiry and will be in touch within one working day.</p>
+      <p class="eform__err" role="alert" hidden></p>
+    </div>
+<% } %>  </div>
+<% if (!dark) { %>  <button type="submit" class="btn btn--primary">Submit enquiry <span class="arw"></span></button>
+  <p class="eform__ok" role="status">Thank you. We have your enquiry and will be in touch within one working day.</p>
+  <p class="eform__err" role="alert" hidden></p>
+<% } %></form>

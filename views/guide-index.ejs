@@ -1,0 +1,26 @@
+<%- include("partials/head") %>
+<%- include("partials/header") %>
+<main>
+<section class="ghero">
+  <div class="ghero__media"><img src="/assets/guide-index-hero.webp" alt="Trekkers below the Trango Towers on the way to the Baltoro" fetchpriority="high"></div>
+  <div class="ghero__scrim"></div>
+  <div class="wrap ghero__in">
+    <p class="eyebrow">Travel Guide</p>
+    <h1>Pakistan Travel Guide</h1>
+    <p class="ghero__sub">Everything worth knowing before you go, from visas and seasons to what belongs in your duffel.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="gcards">
+<% guides.forEach((g) => { %>      <a class="gcard" href="<%= g.url %>">
+        <span class="gcard__img"><% if (g.image) { %><img src="<%= g.image %>" alt="<%= g.imageAlt || g.title %>" loading="lazy" decoding="async"><% } %><span class="gcard__n"><%= String(g.number).padStart(2, "0") %></span></span>
+        <span class="gcard__body"><h2><%= g.title %></h2><p><%= g.summary %></p><span class="gcard__more">Read the guide <span class="arw"></span></span></span>
+      </a>
+<% }) %>    </div>
+  </div>
+</section>
+<%- include("partials/cta") %>
+</main>
+<%- include("partials/footer") %>

@@ -1,0 +1,95 @@
+<%
+  // Travel Guide dropdown: the guides shown, in this order, each with its Google icon name, short label and description.
+  // The label is only what the dropdown shows; the link keeps the guide's full title in its title and aria-label.
+  const guideMenu = [
+    ["pakistan-at-a-glance", "public", "Pakistan at a Glance", "Key facts for a first visit, from regions to local currency."],
+    ["is-pakistan-safe-to-travel", "verified_user", "Safety in Pakistan", "An honest answer on safety, region by region, before you go."],
+    ["pakistan-visa-guide", "id_card", "Pakistan Visa Guide", "How the online visa works and when trekking permits apply."],
+    ["best-time-to-visit-pakistan", "calendar_month", "Best Time to Visit", "Choose your region first, and the right month will follow."],
+    ["trekking-trip-difficulty-grades", "landscape", "Trek Difficulty Grades", "What each grade means and which trek suits your fitness."],
+    ["packing-equipment-checklist", "backpack", "Packing Checklist", "What to pack, and the gear that matters above the snow line."],
+    ["recommended-flights-airlines", "flight", "Flights & Airlines", "Reaching Islamabad, then onward flights to the mountains."],
+    ["flight-cancellations-travel-disruptions", "thunderstorm", "Flight Disruptions", "Plan for mountain weather so a delay never ruins the trip."],
+    ["travel-insurance-guide", "health_and_safety", "Travel Insurance", "What your policy must cover for treks in the Karakoram."],
+  ].map(([slug, symbol, label, text]) => ({ g: nav.guides.find((x) => x.slug === slug), symbol, label, text })).filter((i) => i.g);
+  // Our Services dropdown: the four categories, each with its photo, tagline and a two line description.
+  const serviceMenu = [
+    ["/trekking", "/assets/cat-trek.jpg", "Trekking Expeditions", "Base camps and high passes", "Supported routes to K2 Base Camp, Nanga Parbat, Rush Lake and Nangma Valley."],
+    ["/tours", "/assets/cat-tours.jpg", "Tours & Sightseeing", "Air safaris and road journeys", "Guided journeys by air and road through Hunza, Skardu, Chitral and Kalash."],
+    ["/spiritual", "/assets/cat-spirit.jpg", "Spiritual & Cultural Retreats", "Shrines, heritage and silence", "Sufi shrines of the south, the Gandhara trail and a yoga retreat in Hunza."],
+    ["/corporate", "/assets/camp.jpg", "Corporate & Enterprise Solutions", "Retreats for leadership teams", "Leadership retreats and team programmes in Hunza, Deosai and Fairy Meadows."],
+  ].map(([url, image, title, sub, text]) => ({ url, image, title, sub, text }));
+  const socials = [["instagram", "Instagram"], ["tiktok", "TikTok"], ["youtube", "YouTube"], ["facebook", "Facebook"]].filter((s) => site.social[s[0]]);
+  const is = (key) => (active === key ? ' class="is-active"' : "");
+
+  // ====== INFO STRIP: the three lines come from `facts` in config/site.js; the photo is set here ======
+  const stripImage = "/assets/exp-k2.jpg"; // falls back to /assets/hero.jpg if this file is missing
+%>
+<!-- ====== INFO STRIP, HEADER AND MENUS ====== -->
+<div class="topbar" style="--promo-img:url('<%= stripImage %>')">
+  <div class="wrap topbar__in">
+    <ul class="topbar__facts">
+<% site.facts.forEach((f) => { %>      <li><%= f %></li>
+<% }) %>    </ul>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a href="/" class="brand" aria-label="XPITUDE, experience altitude. Home">
+      <img class="brand__logo" src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324">
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <span><a<%- is("about") %> href="/about">About Us</a></span>
+      <span id="megaTrigger"><a<%- is("services") %> href="/#services" aria-haspopup="true" aria-expanded="false" aria-controls="mega">Our Services</a></span>
+      <span class="has-dd" id="guideTrigger"><a<%- is("guide") %> href="/travel-guide" aria-haspopup="true" aria-expanded="false" aria-controls="guideMenu">Travel Guide</a>
+        <div class="dd" id="guideMenu">
+          <div class="wrap dd__in">
+            <ul>
+<% guideMenu.forEach(({ g, symbol, label, text }) => { %>              <li><a<%- path === g.url ? ' class="is-active"' : "" %> href="<%= g.url %>" title="<%= g.title %>" aria-label="<%= g.title %>"><span class="material-symbols-outlined" aria-hidden="true"><%= symbol %></span><span class="dd__txt"><span class="dd__t"><%= label %></span><span class="dd__d"><%= text %></span></span></a></li>
+<% }) %>            </ul>
+            <div class="mfoot"><a class="mpill" href="/travel-guide">View all guides</a><div class="dd__note"><b>Planning your first trip to Pakistan?</b><br>Start with the guide that fits your question.</div></div>
+          </div>
+        </div>
+      </span>
+      <span><a<%- is("blog") %> href="/blog">Our Blog</a></span>
+      <span><a<%- is("contact") %> href="/contact">Contact Us</a></span>
+    </nav>
+
+    <div class="hutils">
+<%- include("follow", { cls: "follow--head" }) %>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><i></i><i></i></button>
+    </div>
+  </div>
+
+  <div class="mega" id="mega">
+    <div class="wrap mega__in">
+      <ul class="mega__grid">
+<% serviceMenu.forEach((s) => { %>        <li><a class="mcard" href="<%= s.url %>"><img class="mcard__img" src="<%= s.image %>" alt="" width="112" height="112"><span class="mcard__txt"><span class="mcard__t"><%= s.title %></span><span class="mcard__s"><%= s.sub %></span><span class="mcard__d"><%= s.text %></span></span></a></li>
+<% }) %>      </ul>
+      <div class="mfoot"><a class="mpill" href="/contact">Plan your journey</a><div class="mega__note">Ready to plan your Pakistan journey?<br>Tell us the month. We'll tell you what's possible.</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <button class="drawer__close" id="drawerClose">Close</button>
+  <a href="/">Home</a><a href="/about">About Us</a>
+  <details class="drawer__grp">
+    <summary>Our Services</summary>
+<% serviceMenu.forEach((s) => { %>    <a href="<%= s.url %>"><%= s.title %></a>
+<% }) %>  </details>
+  <details class="drawer__grp">
+    <summary>Travel Guide</summary>
+<% nav.guides.filter((g) => g.slug !== "recommended-medical-kit").forEach((g) => { %>    <a href="<%= g.url %>"><%= g.title %></a>
+<% }) %>  </details>
+  <a href="/blog">Our Blog</a><a href="/contact">Contact Us</a><a href="/#contact">Plan your journey</a>
+  <div class="drawer__foot">
+<% if (site.phone) { %>    <a class="hphone" href="<%= site.phoneHref %>" aria-label="Call XPITUDE on <%= site.phone %>"><%- icon("phone") %><span><%= site.phone %></span></a>
+<% } if (socials.length) { %>    <div class="topbar__soc">
+<% socials.forEach(([key, label]) => { %>      <a class="tsoc" href="<%= site.social[key] %>" aria-label="<%= label %>" rel="noopener" target="_blank"><%- icon(key) %></a>
+<% }) %>    </div>
+<% } %><%- include("follow") %>
+  </div>
+</div>
