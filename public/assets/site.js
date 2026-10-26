@@ -330,3 +330,39 @@
     var w=document.createElement("div");w.className="tscroll";t.parentNode.insertBefore(w,t);w.appendChild(t);
   });
 })();
+
+/* Cookie consent: banner on the first visit, Cookie Settings panel (footer button), choice kept in the xp_consent cookie for a year.
+   Analytics or marketing scripts are added as <script type="text/plain" data-consent="analytics|marketing" data-src="...">
+   and only run after that kind is allowed. */
+(function(){
+  var banner=document.getElementById("ckBanner"),panel=document.getElementById("ckPanel");if(!banner||!panel)return;
+  var an=document.getElementById("ckAnalytics"),mk=document.getElementById("ckMarketing"),last=null;
+  function read(){var m=document.cookie.match(/(?:^|; )xp_consent=([^;]*)/);if(!m)return null;try{return JSON.parse(decodeURIComponent(m[1]))}catch(e){return null}}
+  function run(c){
+    document.querySelectorAll('script[type="text/plain"][data-consent]').forEach(function(s){
+      if(!c[s.getAttribute("data-consent")])return;
+      if(!s.dataset.src)return; // inline scripts are blocked by the Content Security Policy; load the file instead
+      var n=document.createElement("script");n.src=s.dataset.src;n.async=true;s.replaceWith(n);
+    });
+    document.dispatchEvent(new CustomEvent("xp:consent",{detail:c}));
+  }
+  function save(c){
+    c.necessary=true;c.date=new Date().toISOString().slice(0,10);
+    document.cookie="xp_consent="+encodeURIComponent(JSON.stringify(c))+";max-age=31536000;path=/;SameSite=Lax"+(location.protocol==="https:"?";Secure":"");
+    banner.hidden=true;close();run(c);
+  }
+  function open(){var c=read()||{};an.checked=!!c.analytics;mk.checked=!!c.marketing;last=document.activeElement;panel.hidden=false;panel.querySelector(".ckp__h").setAttribute("tabindex","-1");panel.querySelector(".ckp__h").focus()}
+  function close(){if(panel.hidden)return;panel.hidden=true;if(last&&last.focus)last.focus()}
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-ck],[data-cookie-settings]");if(!b)return;
+    if(b.hasAttribute("data-cookie-settings"))return open();
+    var k=b.getAttribute("data-ck");
+    if(k==="open")open();
+    else if(k==="all")save({analytics:true,marketing:true});
+    else if(k==="none")save({analytics:false,marketing:false});
+    else if(k==="save")save({analytics:an.checked,marketing:mk.checked});
+  });
+  panel.addEventListener("click",function(e){if(e.target===panel)close()});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+  var c=read();if(c)run(c);else banner.hidden=false;
+})();

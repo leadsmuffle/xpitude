@@ -252,11 +252,11 @@ exports.contact = wrap(async (req, res) => {
 exports.legal = (which) => (req, res) => {
   const privacy = which === "privacy";
   res.render("legal", {
-    canonical: "/" + which,
-    title: privacy ? "Privacy Policy | XPITUDE Licensed Tour Operator, Pakistan" : "Terms and Conditions | XPITUDE Tour Operator, Pakistan",
+    canonical: privacy ? "/privacy-policy" : "/terms-of-service",
+    title: privacy ? "Privacy Policy | XPITUDE Licensed Tour Operator, Pakistan" : "Terms of Service | XPITUDE Tour Operator, Pakistan",
     description: privacy
       ? "How XPITUDE collects, uses and protects the information you send through this website."
-      : "The terms that apply to using the XPITUDE website and to enquiries made through it.",
+      : "The terms that apply to using the XPITUDE website, enquiries, bookings and travel with XPITUDE.",
     which,
   });
 };
@@ -271,7 +271,7 @@ exports.sitemap = wrap(async (req, res) => {
   const urls = [
     ["/", null, "1.0"], ["/trekking", null, "0.9"], ["/tours", null, "0.9"], ["/spiritual", null, "0.9"], ["/corporate", null, "0.8"],
     ["/travel-guide", null, "0.8"], ["/about", null, "0.6"], ["/blog", null, "0.6"], ["/testimonials", null, "0.6"],
-    ["/contact", null, "0.7"], ["/privacy", null, "0.2"], ["/terms", null, "0.2"],
+    ["/contact", null, "0.7"], ["/privacy-policy", null, "0.2"], ["/terms-of-service", null, "0.2"],
     ...trips.map((t) => [t.url, t.updatedAt, "0.8"]),
     ...guides.map((g) => ["/travel-guide/" + g.slug, g.updatedAt, "0.7"]),
     ...posts.map((p) => ["/blog/" + p.slug, p.updatedAt, "0.5"]),

@@ -34,10 +34,11 @@
     </div>
     <div class="footer__bottom">
       <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>
-      <span class="data"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+      <span class="data fbl"><a href="/privacy-policy">Privacy Policy</a><span class="fbl__sep" aria-hidden="true"> · </span><a href="/terms-of-service">Terms of Service</a><span class="fbl__sep" aria-hidden="true"> · </span><button class="fbl__ck" type="button" data-cookie-settings>Cookie Settings</button></span>
     </div>
   </div>
 </footer>
+<%- include("cookie-consent") %>
 
 <% if (site.whatsappChat) { %><a class="wafloat" id="waFloat" href="<%= site.whatsappChat %>" aria-label="Chat with XPITUDE on WhatsApp" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %><span class="wafloat__tip" aria-hidden="true">Chat with us</span></a>
 <% } %><script src="/assets/site.js?v=<%= v %>"></script>

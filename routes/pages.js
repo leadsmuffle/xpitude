@@ -25,8 +25,11 @@ router.get("/blog", pages.blogIndex);
 router.get("/blog/:slug", pages.blogPost);
 router.get("/testimonials", pages.testimonials);
 router.get("/contact", pages.contact);
-router.get("/privacy", pages.legal("privacy"));
-router.get("/terms", pages.legal("terms"));
+router.get("/privacy-policy", pages.legal("privacy"));
+router.get("/terms-of-service", pages.legal("terms"));
+// The old addresses of the two pages
+router.get("/privacy", (req, res) => res.redirect(301, "/privacy-policy"));
+router.get("/terms", (req, res) => res.redirect(301, "/terms-of-service"));
 
 router.get("/sitemap.xml", pages.sitemap);
 router.get("/robots.txt", pages.robots);
