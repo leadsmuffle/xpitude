@@ -20,49 +20,67 @@
   const facts = trip.facts.length ? trip.facts
     : [["Duration", trip.duration], ["Season", trip.season], ["Altitude", trip.altitude], ["Travel", trip.mode], ["Grade", trip.grade], ["Region", trip.region]]
         .filter((f) => f[1]).map(([label, value]) => ({ label, value }));
+  // Two photos from this trip's own folder, the first two in the order saved in admin ("Trip page photos"), both at the
+  // width of the text: one after the opening text and one after the full itinerary.
+  const pics = (trip.photos || []).filter((p) => p.src && p.src !== trip.image);
+  const caption = (alt) => { const c = String(alt).includes(": ") ? alt.slice(alt.indexOf(": ") + 2) : alt; return c.charAt(0).toUpperCase() + c.slice(1) + "."; };
+  const firstPic = pics[0] || null, secondPic = pics[1] || null;
+  // a photo that opens the lightbox, with srcset copies (lib/blog-layout.js)
+  const zoomPic = (p, sizes) => `<a class="xs-zoom" href="${photoEsc(p.src)}" data-lb data-alt="${photoEsc(caption(p.alt))}">${photoImg(p.src, p.alt, { sizes, pos: "center 45%" })}</a>`;
+  const leadText = paragraphs[0], moreText = paragraphs.slice(1);
+  const icons = { Duration: "schedule", Grade: "landscape", "Max Altitude": "terrain", "Best Season": "calendar_month", Stay: "hotel", Departure: "flight_takeoff",
+    Destinations: "location_on", Format: "event", "Group Size": "groups" };
+  const iconFor = (label) => icons[label] || "star";
+  const short = (v) => String(v || "").split(/[,.](?:\s|$)/)[0].trim();
+  const sideFacts = (trip.category === "corporate"
+      ? [["Format", fact("Format")], ["Group size", fact("Group Size")]]
+      : [["Duration", fact("Duration"), trip.durationLabel], [trip.category === "spiritual" ? "Level" : "Grade", fact("Grade"), trip.grade], ["Best season", fact("Best Season"), trip.season]])
+    .filter((r) => r[1]).map(([k, full, s]) => [k, s || short(full), full]);
+  const waLink = site.whatsappUrl ? site.whatsappUrl.split("?")[0] + "?text=" + encodeURIComponent("Hi XPITUDE, I'd like to plan the " + trip.title + ".") : "";
 %>
 <main>
-<section class="phero xhero">
-<% if (trip.image) { %>  <div class="phero__media"><img src="<%= trip.image %>" alt="<%= trip.imageAlt || trip.title %>" fetchpriority="high"></div>
-  <div class="phero__scrim"></div>
-<% } %>  <div class="wrap">
-    <p class="eyebrow"><%= catTitle %></p>
-    <h1><%= trip.title %></h1>
-<% if (trip.tagline) { %>    <p class="xhero__tag"><%= trip.tagline %></p>
-<% } %>    <div class="xhero__act"><a href="#enquire" class="btn btn--sd"><%= cta %> <span class="arw"></span></a></div>
-  </div>
-</section>
+<%- include("partials/blog-banner", {
+  photo: trip.image, photoHtml: trip.image ? photoImg(trip.image, trip.imageAlt || trip.title, { sizes: "(max-width: 767px) 100vw, 50vw", eager: true }) : "",
+  fit: bannerFit(trip.image), name: "trip-" + trip.slug,
+  label: catTitle, title: trip.title, bannerIntro: trip.tagline,
+}) %>
 
-<section class="section">
-  <div class="wrap">
+<section class="section xdetail">
+  <div class="wrap xpwrap">
     <article class="xp">
 <% if (paragraphs.length) { %>      <div class="note xp__sum"><b>In short.</b> <%= summary %></div>
-      <div class="xp__lead">
-<% paragraphs.forEach((text) => { %>        <p><%= text %></p>
+      <div class="xp__lead xs-part"><p class="xs-lead"><%= leadText %></p></div>
+<% } if (firstPic) { %>      <figure class="xs-fig xs-fig--text"><%- zoomPic(firstPic, "(max-width: 760px) 100vw, 720px") %><figcaption><%= caption(firstPic.alt) %></figcaption></figure>
+<% } if (moreText.length) { %>      <div class="xp__lead xs-part">
+<% moreText.forEach((text) => { %>        <p><%= text %></p>
 <% }) %>      </div>
 <% } %>
 <% if (facts.length) { %>      <section class="xp__sec">
         <h2><%= trip.factsTitle || "At a Glance" %></h2>
         <dl class="xfacts">
-<% facts.forEach((f) => { %>          <div><dt><%= f.label %></dt><dd><%= f.value %></dd></div>
+<% facts.forEach((f) => { %>          <div><span class="material-symbols-outlined" aria-hidden="true"><%= iconFor(f.label) %></span><dt><%= f.label %></dt><dd><%= f.value %></dd></div>
 <% }) %>        </dl>
 <% if (trip.grade && trip.category === "trekking") { %>        <p class="xp__note"><a href="/travel-guide/trekking-trip-difficulty-grades">What the grades mean</a></p>
 <% } %>      </section>
 <% } %>
 <% if (trip.highlights.length) { %>      <section class="xp__sec">
-        <h2><%= trip.highlightsTitle || "Highlights" %></h2>
-        <ul class="xlist xlist--yes xlist--cols">
-<% trip.highlights.forEach((x) => { %>          <li><%= x %></li>
-<% }) %>        </ul>
+        <div>
+          <h2><%= trip.highlightsTitle || "Highlights" %></h2>
+          <ul class="xlist xlist--yes xlist--cols">
+<% trip.highlights.forEach((x) => { %>            <li><%= x %></li>
+<% }) %>          </ul>
+        </div>
       </section>
 <% } %>
       <section class="xp__sec">
         <h2><%= trip.itineraryTitle || "Itinerary" %></h2>
-<% if (trip.fullItinerary.length) { %>        <ol class="xdays">
-<% trip.fullItinerary.forEach((d, i) => { %>          <li><span class="xdays__l"><%= d.label || "Day " + (d.day || i + 1) %></span><div><% if (d.title) { %><h3><%= d.title %></h3><% } %><% if (d.description) { %><p><%= d.description %></p><% } %></div></li>
+<% if (trip.fullItinerary.length) { %>        <ol class="xtl">
+<% trip.fullItinerary.forEach((d, i) => { const label = d.label || "Day " + (d.day || i + 1); const n = (label.match(/Day (\d+)$/) || [])[1] || i + 1; %>          <li><span class="xtl__n" aria-hidden="true"><%= n %></span><div class="xtl__txt"><h3><%= label %><% if (d.title) { %>: <%= d.title %><% } %></h3><% if (d.description) { %><p><%= d.description %></p><% } %></div></li>
 <% }) %>        </ol>
 <% } else { %>        <p>Every departure is planned around your group and your dates. Send an enquiry and a planner will come back within one working day with the full day by day itinerary.</p>
 <% } %>      </section>
+<% if (secondPic) { %>      <figure class="xs-fig xs-fig--text"><%- zoomPic(secondPic, "(max-width: 760px) 100vw, 720px") %><figcaption><%= caption(secondPic.alt) %></figcaption></figure>
+<% } %>
 
 <% if (trip.includes.length || trip.excludes.length) { %>      <section class="xp__sec xinc">
 <% if (trip.includes.length) { %>        <div>
@@ -80,17 +98,21 @@
 <% } %>      </section>
 <% } %>
 <% if (trip.services.length) { %>      <section class="xp__sec">
-        <h2>Services</h2>
-        <ul class="xlist xlist--yes xlist--cols">
-<% trip.services.forEach((x) => { %>          <li><%= x %></li>
-<% }) %>        </ul>
+        <div>
+          <h2>Services</h2>
+          <ul class="xlist xlist--yes xlist--cols">
+<% trip.services.forEach((x) => { %>            <li><%= x %></li>
+<% }) %>          </ul>
+        </div>
       </section>
 <% } %>
 <% if (trip.info.length) { %>      <section class="xp__sec">
-        <h2><%= trip.infoTitle || "Good to Know" %></h2>
-        <ul class="xlist xlist--dot">
-<% trip.info.forEach((x) => { %>          <li><%= x %></li>
-<% }) %>        </ul>
+        <div class="xinfobox">
+          <h2><%= trip.infoTitle || "Good to Know" %></h2>
+          <ul class="xlist xlist--dot">
+<% trip.info.forEach((x) => { %>            <li><%= x %></li>
+<% }) %>          </ul>
+        </div>
       </section>
 <% } %>
 <% const guidesToRead = guideLinks.map((s) => nav.guides.find((g) => g.slug === s)).filter(Boolean); if (guidesToRead.length) { %>      <section class="xp__sec">
@@ -102,35 +124,34 @@
 <% } %>      <section class="xp__end">
 <% if (trip.says) { %>        <blockquote class="xsays"><span class="data">XPITUDE Says</span><p><%= trip.says %></p></blockquote>
 <% } %>        <div class="xp__cta">
-          <a href="#enquire" class="btn btn--primary"><%= cta %> <span class="arw"></span></a>
+          <div class="xp__btns">
+            <a href="/contact" class="btn btn--primary"><%= cta %> <span class="arw"></span></a>
+<% if (waLink) { %>            <a href="<%= waLink %>" class="btn xbtn-wa" target="_blank" rel="noopener noreferrer" aria-label="Ask about <%= trip.title %> on WhatsApp"><%- icon("whatsapp") %> WhatsApp</a>
+<% } %>          </div>
 <% if (trip.ctaNote) { %>          <p><%= trip.ctaNote %></p>
 <% } %>        </div>
       </section>
     </article>
-  </div>
-</section>
 
-<section class="section on-dark" id="enquire">
-  <div class="wrap contact">
-    <div>
-      <p class="eyebrow"><%= cta %></p>
-      <h2 class="d2"><%= trip.title %></h2>
-<% if (trip.ctaNote) { %>      <p class="lede" style="margin-top:16px"><%= trip.ctaNote %></p>
-<% } %><%- include("partials/contact-details") %>
-    </div>
-    <%- include("partials/enquiry-form", { p: "t", dark: true, preType: trip.category, preDest: trip.title }) %>
+    <aside class="xside" aria-label="Plan this trip">
+      <div class="xside__card">
+        <span class="data">Plan this trip</span>
+        <p class="xside__t"><%= trip.cardTitle || trip.title %></p>
+        <dl class="xside__facts">
+<% sideFacts.forEach(([k, v, full]) => { %>          <div><dt><%= k %></dt><dd title="<%= full %>"><%= v %></dd></div>
+<% }) %>        </dl>
+        <a href="/contact" class="btn btn--primary" title="<%= cta %>">Enquire <span class="arw"></span></a>
+<% if (waLink) { %>        <a href="<%= waLink %>" class="btn xbtn-wa" target="_blank" rel="noopener noreferrer" aria-label="Ask about <%= trip.title %> on WhatsApp"><%- icon("whatsapp") %> WhatsApp</a>
+<% } %>      </div>
+    </aside>
   </div>
 </section>
-
-<% if (related.length) { %>
-<section class="section" style="background:var(--mist)">
-  <div class="wrap">
-    <div class="chead chead--tight"><p class="eyebrow"><%= catTitle %></p><h2 class="d2">More to explore</h2></div>
-    <div class="grid-3 xgrid">
-<% related.forEach((t) => { %><%- include("partials/exp-card", { trip: t }) %><% }) %>
-    </div>
-  </div>
-</section>
+<% if (firstPic) { %><div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lbox__close" type="button" aria-label="Close">×</button>
+  <button class="lbox__nav lbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
+  <figure class="lbox__fig"><img alt=""><figcaption></figcaption></figure>
+  <button class="lbox__nav lbox__nav--next" type="button" aria-label="Next photo">›</button>
+</div>
 <% } %>
 </main>
 <%- include("partials/footer") %>

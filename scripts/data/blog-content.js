@@ -232,83 +232,7 @@ module.exports = {
     "relatedTrip": "naran-shogran-babusar-top",
     "coverImage": "/images/blog/shogran-makra-peak/01.webp",
     "coverAlt": "Siri Paye below Makra Peak: trekkers reflected in a meadow pond",
-    "gallery": [
-      {
-        "src": "/images/blog/shogran-makra-peak/05.webp",
-        "thumb": "/images/blog/shogran-makra-peak/05-600.webp",
-        "alt": "Masherbrum in the Karakoram, lit gold at sunset"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/06.webp",
-        "thumb": "/images/blog/shogran-makra-peak/06-600.webp",
-        "alt": "Trekkers crossing the Baltoro Glacier in the Karakoram"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/07.webp",
-        "thumb": "/images/blog/shogran-makra-peak/07-600.webp",
-        "alt": "A trekking group with the flag of Pakistan at Concordia"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/08.webp",
-        "thumb": "/images/blog/shogran-makra-peak/08-600.webp",
-        "alt": "A group in front of the tents at Fairy Meadows"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/09.webp",
-        "thumb": "/images/blog/shogran-makra-peak/09-600.webp",
-        "alt": "Trekkers jumping on the grass ridge below Ganga Choti"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/10.webp",
-        "thumb": "/images/blog/shogran-makra-peak/10-600.webp",
-        "alt": "A team running hand in hand across the hillside at Khanpur"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/11.webp",
-        "thumb": "/images/blog/shogran-makra-peak/11-600.webp",
-        "alt": "Skiers in the snow at Malam Jabba, Swat"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/12.webp",
-        "thumb": "/images/blog/shogran-makra-peak/12-600.webp",
-        "alt": "Hikers on the snowy trail to Mukshpuri"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/13.webp",
-        "thumb": "/images/blog/shogran-makra-peak/13-600.webp",
-        "alt": "A group with raised arms on the Musa ka Musalla trek"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/14.webp",
-        "thumb": "/images/blog/shogran-makra-peak/14-600.webp",
-        "alt": "Shangrila Lake and its red roofed cottages near Skardu"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/15.webp",
-        "thumb": "/images/blog/shogran-makra-peak/15-600.webp",
-        "alt": "Friends on a ridge above Sheosar Lake on the Deosai Plains"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/16.webp",
-        "thumb": "/images/blog/shogran-makra-peak/16-600.webp",
-        "alt": "A group beside the turquoise water of Swaik Lake, Kallar Kahar"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/17.webp",
-        "thumb": "/images/blog/shogran-makra-peak/17-600.webp",
-        "alt": "A group on a forest meadow at Taobat, Neelum Valley"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/18.webp",
-        "thumb": "/images/blog/shogran-makra-peak/18-600.webp",
-        "alt": "A trekker sitting above a small lake at Urdukus on the Baltoro"
-      },
-      {
-        "src": "/images/blog/shogran-makra-peak/19.webp",
-        "thumb": "/images/blog/shogran-makra-peak/19-600.webp",
-        "alt": "A walker on the snowy road through Ushu Forest, Kalam"
-      }
-    ]
+    "gallery": []
   },
   "musa-ka-musalla-trek": {
     "body": "<p>From a distance, Musa ka Musalla looks like a gentle green giant. Almost friendly. Like a mountain that would help you carry your groceries.</p>\n<p>Do not be fooled. This one makes you earn every meter.</p>\n<h2>A Shepherd's Prayer Mat</h2>\n<p>The name means 'Musa's prayer mat'. Local tradition says a shepherd named Musa used to climb to the summit to pray, and a small shrine on top is believed to mark his place. Locals still speak of him with respect.</p>\n<p>Standing up there, it is easy to understand why someone would choose this spot. The ground falls away on every side, ridges roll toward the Kaghan and Siran valleys, and the silence is so complete you can hear your own heartbeat. It feels less like a summit and more like a doorway.</p>\n<h2>Which Way Up?</h2>\n<p>Several routes lead to the top. The most popular starts from Shinkiari in the Siran Valley side and climbs via Munda Gucha, with pastures and summer settlements along the way. Another approach starts from the Balakot side, with jeep access to a higher trailhead and a long, steep day of more than 1,500 m of ascent.</p>\n<p>Whichever route you choose, expect forest, then open ridgeline, then a final push where the trees disappear and the world opens up.</p>\n<h2>Gujjar Shepherds and Summer Pastures</h2>\n<p>In summer, Gujjar herding families move their animals up to the high pastures around the mountain. Their stone and timber huts dot the slopes, and trekkers are often offered lassi or tea as they pass. It is hospitality without fuss, from people whose whole lives move with the seasons.</p>\n<p>Be a good guest in return: stay on paths through pastures, close gates and carry out every scrap of litter.</p>\n<h2>Plan Your Trip</h2>\n<ul>\n<li><b>How to get there:</b> Drive from Islamabad to Mansehra and Shinkiari (about 3 hours), or to Balakot for the alternative route</li>\n<li><b>Duration:</b> 3 to 5 days, depending on route</li>\n<li><b>Best season:</b> June to September</li>\n<li><b>Difficulty:</b> Challenging. Long days and steep ascent</li>\n<li><b>Max altitude:</b> About 4,060 m</li>\n<li><b>Stay:</b> Camping</li>\n</ul>\n<h2>Good to Know</h2>\n<ul>\n<li>Hire a local guide. Routes are not always obvious in mist.</li>\n<li>Start summit day before dawn.</li>\n<li>Afternoon thunderstorms are common in July and August.</li>\n<li>Carry enough water. Sources on the ridge are limited.</li>\n</ul>\n<h2>Frequently Asked Questions</h2>\n<h3>How high is Musa ka Musalla?</h3>\n<p>About 4,060 m, making it one of the highest peaks in the Siran and Kaghan region.</p>\n<h3>Where does the Musa ka Musalla trek start?</h3>\n<p>The most common route starts from Shinkiari via Munda Gucha. Another route begins from the Balakot side.</p>\n<h3>What does Musa ka Musalla mean?</h3>\n<p>It means Musa's prayer mat, after a shepherd named Musa who is said to have prayed on the summit.</p>\n<p><b>The XPITUDE Verdict:</b> No cable car. No shortcut. Just you, the mountain and a summit worth every step.</p>\n<p><a href=\"/contact\">Ask XPITUDE about a guided Musa ka Musalla trek</a></p>",
@@ -561,7 +485,7 @@ module.exports = {
   },
   "kutwal-lake-out-of-season": {
     "relatedTrip": "haramosh-base-camp-kutwal-lake",
-    "body": "<p>We ran Haramosh three weeks later than usual. Notes on what changed and why the late window may be better. Haramosh is for travelers who like their adventures wild and their trails quiet: no crowds, no tea stalls, no signal, just glacier fed streams, Wakhi and Shina villages and a lake that looks photoshopped in real life.</p>\n<h2>The route, day by day</h2>\n<figure class=\"bfig bfig--side\"><img src=\"/assets/blog-kutwal-2.webp\" alt=\"A snow slope and a ridge under a clear sky\" width=\"700\" height=\"438\" loading=\"lazy\" decoding=\"async\"><figcaption>Snow on the slopes late in the season, upper Neelum Valley.</figcaption></figure>\n<p>The Haramosh Base Camp and Kutwal Lake trek takes eight days from Islamabad and back:</p>\n<ul>\n  <li><b>Day 1.</b> Drive Islamabad to Chilas.</li>\n  <li><b>Day 2.</b> Continue to Sassi on the Karakoram Highway, jeep to Dassu and trek to Iskere village.</li>\n  <li><b>Day 3.</b> Trek through forest and farmland to Kutwal village and Kutwal Lake. Camp by the water.</li>\n  <li><b>Day 4.</b> Day hike toward Haramosh Base Camp and the Mani Glacier viewpoints, conditions permitting.</li>\n  <li><b>Day 5.</b> Free day at Kutwal: lake walks, photography and Laila Peak views.</li>\n  <li><b>Day 6.</b> Trek out to Dassu and drive to Gilgit.</li>\n  <li><b>Day 7.</b> Drive to Naran via Babusar Top in season, or to Chilas.</li>\n  <li><b>Day 8.</b> Return to Islamabad.</li>\n</ul>\n<h2>Choosing the window</h2>\n<p>The season for Haramosh runs from July to September, and a later departure sits at the end of that window. Across Hunza and Baltistan, autumn brings settled weather and sharp light, while the high treks are closing. A late Haramosh trip trades the first of summer for that clearer air.</p>\n<figure class=\"bfig bfig--wide\"><img src=\"/assets/blog-kutwal-1.webp\" alt=\"Trekkers on a snowy slope above a mountain lake\" width=\"1200\" height=\"800\" loading=\"lazy\" decoding=\"async\"><figcaption>Trekkers above a mountain lake in snow, upper Neelum Valley.</figcaption></figure>\n<h2>What the late window asks of you</h2>\n<p>Trailhead access depends on jeep road conditions after rain, and communication is very limited beyond Iskere. Plan for both: tell the people at home when you will be out of signal, and keep the days after the trek flexible.</p>\n<p>Pack for cold evenings by the lake. The maximum altitude is about 3,300 metres at Kutwal Lake, and the viewpoint hikes go higher. Layers, a warm jacket and a sleeping bag suited to the lowest night temperature on your route matter more than ever at the end of the season.</p>\n<h2>Getting there and back</h2>\n<p>The drive north follows the Karakoram Highway to Chilas and on to Sassi, where a jeep takes the group to Dassu and the trail begins. On the way home, the route crosses Babusar Top to Naran in season, or returns through Chilas.</p>\n<p>The Babusar route usually opens in June and closes with the first snow. Outside that window the drive goes via Besham, which adds travel time, so check the road plan with your planner if your dates fall late.</p>\n<p>Medical facilities in the north are basic. Hospitals are in Gilgit and Skardu, and serious cases go to Islamabad. Make sure your insurance covers trekking to the altitude of your route and emergency evacuation; the <a href=\"/travel-guide/travel-insurance-guide\">Travel Insurance Guide</a> explains what to check.</p>\n<h2>At the lake</h2>\n<p>The reasons to go do not change with the date: camping at Kutwal Lake, Haramosh and Laila Peak views, remote mountain villages, the glacier viewpoint hike, and genuine wilderness with very few trekkers.</p>\n<h2>Plan your Haramosh trip</h2>\n<ul>\n  <li><b>Duration.</b> 8 days, Islamabad to Islamabad.</li>\n  <li><b>Grade.</b> Moderate to Challenging.</li>\n  <li><b>Highest point.</b> About 3,300 m at Kutwal Lake; viewpoint hikes go higher.</li>\n  <li><b>Best season.</b> July to September.</li>\n  <li><b>Stay.</b> Hotels and camping.</li>\n  <li><b>Included.</b> Trekking guide, group transport and jeeps, camping arrangements and scheduled meals.</li>\n</ul>\n<p>No crowds. No shortcuts. Just pure adventure.</p>"
+    "body": "<p>We ran Haramosh three weeks later than usual. Notes on what changed and why the late window may be better. Haramosh is for travelers who like their adventures wild and their trails quiet: no crowds, no tea stalls, no signal, just glacier fed streams, Wakhi and Shina villages and a lake that looks photoshopped in real life.</p>\n<h2>The route, day by day</h2>\n<p>The Haramosh Base Camp and Kutwal Lake trek takes eight days from Islamabad and back:</p>\n<ul>\n  <li><b>Day 1.</b> Drive Islamabad to Chilas.</li>\n  <li><b>Day 2.</b> Continue to Sassi on the Karakoram Highway, jeep to Dassu and trek to Iskere village.</li>\n  <li><b>Day 3.</b> Trek through forest and farmland to Kutwal village and Kutwal Lake. Camp by the water.</li>\n  <li><b>Day 4.</b> Day hike toward Haramosh Base Camp and the Mani Glacier viewpoints, conditions permitting.</li>\n  <li><b>Day 5.</b> Free day at Kutwal: lake walks, photography and Laila Peak views.</li>\n  <li><b>Day 6.</b> Trek out to Dassu and drive to Gilgit.</li>\n  <li><b>Day 7.</b> Drive to Naran via Babusar Top in season, or to Chilas.</li>\n  <li><b>Day 8.</b> Return to Islamabad.</li>\n</ul>\n<h2>Choosing the window</h2>\n<p>The season for Haramosh runs from July to September, and a later departure sits at the end of that window. Across Hunza and Baltistan, autumn brings settled weather and sharp light, while the high treks are closing. A late Haramosh trip trades the first of summer for that clearer air.</p>\n<h2>What the late window asks of you</h2>\n<p>Trailhead access depends on jeep road conditions after rain, and communication is very limited beyond Iskere. Plan for both: tell the people at home when you will be out of signal, and keep the days after the trek flexible.</p>\n<p>Pack for cold evenings by the lake. The maximum altitude is about 3,300 metres at Kutwal Lake, and the viewpoint hikes go higher. Layers, a warm jacket and a sleeping bag suited to the lowest night temperature on your route matter more than ever at the end of the season.</p>\n<h2>Getting there and back</h2>\n<p>The drive north follows the Karakoram Highway to Chilas and on to Sassi, where a jeep takes the group to Dassu and the trail begins. On the way home, the route crosses Babusar Top to Naran in season, or returns through Chilas.</p>\n<p>The Babusar route usually opens in June and closes with the first snow. Outside that window the drive goes via Besham, which adds travel time, so check the road plan with your planner if your dates fall late.</p>\n<p>Medical facilities in the north are basic. Hospitals are in Gilgit and Skardu, and serious cases go to Islamabad. Make sure your insurance covers trekking to the altitude of your route and emergency evacuation; the <a href=\"/travel-guide/travel-insurance-guide\">Travel Insurance Guide</a> explains what to check.</p>\n<h2>At the lake</h2>\n<p>The reasons to go do not change with the date: camping at Kutwal Lake, Haramosh and Laila Peak views, remote mountain villages, the glacier viewpoint hike, and genuine wilderness with very few trekkers.</p>\n<h2>Plan your Haramosh trip</h2>\n<ul>\n  <li><b>Duration.</b> 8 days, Islamabad to Islamabad.</li>\n  <li><b>Grade.</b> Moderate to Challenging.</li>\n  <li><b>Highest point.</b> About 3,300 m at Kutwal Lake; viewpoint hikes go higher.</li>\n  <li><b>Best season.</b> July to September.</li>\n  <li><b>Stay.</b> Hotels and camping.</li>\n  <li><b>Included.</b> Trekking guide, group transport and jeeps, camping arrangements and scheduled meals.</li>\n</ul>\n<p>No crowds. No shortcuts. Just pure adventure.</p>"
   },
   "the-people-who-carry-the-expedition": {
     "relatedTrip": "k2-base-camp-gondogoro-la",

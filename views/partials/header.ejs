@@ -1,17 +1,7 @@
 <%
-  // Travel Guide dropdown: the guides shown, in this order, each with its Google icon name, short label and description.
-  // The label is only what the dropdown shows; the link keeps the guide's full title in its title and aria-label.
-  const guideMenu = [
-    ["pakistan-at-a-glance", "public", "Pakistan at a Glance", "Key facts for a first visit, from regions to local currency."],
-    ["is-pakistan-safe-to-travel", "verified_user", "Safety in Pakistan", "An honest answer on safety, region by region, before you go."],
-    ["pakistan-visa-guide", "id_card", "Pakistan Visa Guide", "How the online visa works and when trekking permits apply."],
-    ["best-time-to-visit-pakistan", "calendar_month", "Best Time to Visit", "Choose your region first, and the right month will follow."],
-    ["trekking-trip-difficulty-grades", "landscape", "Trek Difficulty Grades", "What each grade means and which trek suits your fitness."],
-    ["packing-equipment-checklist", "backpack", "Packing Checklist", "What to pack, and the gear that matters above the snow line."],
-    ["recommended-flights-airlines", "flight", "Flights & Airlines", "Reaching Islamabad, then onward flights to the mountains."],
-    ["flight-cancellations-travel-disruptions", "thunderstorm", "Flight Disruptions", "Plan for mountain weather so a delay never ruins the trip."],
-    ["travel-insurance-guide", "health_and_safety", "Travel Insurance", "What your policy must cover for treks in the Karakoram."],
-  ].map(([slug, symbol, label, text]) => ({ g: nav.guides.find((x) => x.slug === slug), symbol, label, text })).filter((i) => i.g);
+  // Travel Guide dropdown: the guides shown, in this order, each with its Google icon name, short label and description
+  // (middleware/nav.js, shared with the footer). The label is only what the dropdown shows; the link keeps the guide's full title.
+  const guideMenu = nav.guideMenu || [];
   // Our Services dropdown: the four categories, each with its photo, tagline and a two line description.
   const serviceMenu = [
     ["/trekking", "/assets/cat-trek.jpg", "Trekking Expeditions", "Base camps and high passes", "Supported routes to K2 Base Camp, Nanga Parbat, Rush Lake and Nangma Valley."],

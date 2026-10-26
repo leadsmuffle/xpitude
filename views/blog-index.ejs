@@ -22,6 +22,17 @@
     "chilam-joshi-festival-kalash": "Culture",
   };
   const tag = (post) => tags[post.slug] || "Journal";
+  // The card photo (the cover image when none is set). Photos in /assets/blog-cards/ come in 800, 1200 and 1600px widths
+  // (never wider than the original), named <slug>-<width>.webp, so the browser picks a sharp one for each screen.
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" })[c]);
+  const pic = (post, sizes, attrs) => {
+    const src = post.cardImage || post.coverImage;
+    const m = /^(\/assets\/blog-cards\/.+)-(\d+)\.webp$/.exec(src || "");
+    const set = m ? [800, 1200, 1600].filter((w) => w < +m[2]).concat(+m[2]).map((w) => `${m[1]}-${w}.webp ${w}w`).join(", ") : "";
+    const pos = post.cardImagePosition ? ` style="object-position:${esc(post.cardImagePosition)}"` : "";
+    return `<img src="${esc(src)}"${set ? ` srcset="${esc(set)}" sizes="${sizes}"` : ""} alt="${esc(post.coverAlt || post.title)}"${pos} ${attrs}>`;
+  };
+  const cardTitle = (post) => post.cardTitle || post.title;
   // Newest post is featured, the next three sit beside it, the rest fill the grid. A search shows every match in the grid.
   const lead = q ? null : posts[0];
   const side = q ? [] : posts.slice(1, 4);
@@ -29,9 +40,9 @@
   const subscribe = site.email ? "mailto:" + site.email + "?subject=" + encodeURIComponent("Subscribe to the XPITUDE journal") : "/contact";
 %>
 <main>
-<%- include("partials/phero", {
-  image: "/assets/arc-1.jpg", imageAlt: "K2 from the Godwin-Austen Glacier",
-  eyebrow: "Our Blog", h1: "Our Past Expeditions and Unforgettable Memories",
+<%- include("partials/blog-banner", {
+  photo: "/assets/arc-1.jpg", photoAlt: "K2 from the Godwin-Austen Glacier",
+  label: "Our Blog", title: "Our Past Expeditions and Unforgettable Memories", name: "blog",
 }) %>
 <section class="section blog">
   <div class="wrap">
@@ -52,15 +63,15 @@
 <% if (q) { %>    <p class="bfound"><%= posts.length ? (posts.length === 1 ? "1 story" : posts.length + " stories") + " for" : "No stories match" %> &ldquo;<%= q %>&rdquo;. <a href="/blog">Show all stories</a></p>
 <% } if (lead) { %>    <div class="btop">
       <a class="blead" href="<%= lead.url %>">
-        <span class="bimg"><img src="<%= lead.coverImage %>" alt="<%= lead.coverAlt || lead.title %>" fetchpriority="high"><span class="btag"><%= tag(lead) %></span></span>
+        <span class="bimg"><%- pic(lead, "(max-width: 1040px) 100vw, 58vw", `fetchpriority="high"`) %><span class="btag"><%= tag(lead) %></span></span>
         <h2 class="blead__t"><%= lead.title %></h2>
         <p class="blead__d"><%= lead.excerpt %></p>
       </a>
 <% if (side.length) { %>      <div class="bside">
 <% side.forEach((post) => { %>        <a class="bside__i" href="<%= post.url %>">
-          <span class="bimg"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || post.title %>" decoding="async"><span class="btag"><%= tag(post) %></span></span>
+          <span class="bimg"><%- pic(post, "(max-width: 560px) 100vw, (max-width: 1040px) 46vw, 18vw", `decoding="async"`) %><span class="btag"><%= tag(post) %></span></span>
           <span class="bside__txt">
-            <h3 class="bside__t"><%= post.title %></h3>
+            <h3 class="bside__t" title="<%= post.title %>"><%= cardTitle(post) %></h3>
             <p class="bside__d"><%= post.excerpt %></p>
           </span>
         </a>
@@ -68,8 +79,8 @@
 <% } %>    </div>
 <% } if (more.length) { %>    <div class="bgrid<%= q ? " bgrid--top" : "" %>">
 <% more.forEach((post) => { %>      <a href="<%= post.url %>">
-        <span class="bimg"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || post.title %>" loading="lazy" decoding="async"><span class="btag"><%= tag(post) %></span></span>
-        <h3><%= post.title %></h3>
+        <span class="bimg"><%- pic(post, "(max-width: 560px) 100vw, (max-width: 1040px) 50vw, 30vw", `loading="lazy" decoding="async"`) %><span class="btag"><%= tag(post) %></span></span>
+        <h3 title="<%= post.title %>"><%= cardTitle(post) %></h3>
         <p><%= post.excerpt %></p>
       </a>
 <% }) %>    </div>

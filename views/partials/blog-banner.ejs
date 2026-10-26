@@ -1,0 +1,24 @@
+<%
+  /* The banner at the top of /blog, every blog post, /travel-guide, every guide, the four Our Services pages and every trip page:
+     black text panel on the left, the photo on the right.
+     Options: photo (empty = the photo half stays black), photoAlt, photoHtml (an <img> with srcset, for posts), fit ("cover" or "contain"),
+     label, title, subtitle (inside the h1, after a hidden colon), bannerIntro (a line under the h1, styled like the subtitle, or a list of lines),
+     meta (the date line on posts),
+     name (data-banner, so a banner can have its own photo focus point in site.css). */
+  const fit = locals.fit === "contain" ? "contain" : "cover";
+%>
+<section class="bbn bbn--<%= fit %><%= locals.photo ? "" : " bbn--nophoto" %>"<% if (locals.name) { %> data-banner="<%= name %>"<% } %>>
+  <div class="bbn__txt">
+    <div class="bbn__in">
+<% if (locals.label) { %>      <span class="bbn__label"><%= label %></span>
+<% } %>      <h1 class="bbn__h"><span class="bbn__t"><%= title %><% if (locals.subtitle) { %><span class="sr">:</span><% } %></span><% if (locals.subtitle) { %> <span class="bbn__s"><%= subtitle %></span><% } %></h1>
+<% [].concat(locals.bannerIntro || []).filter(Boolean).forEach((line) => { %>      <p class="bbn__s bbn__d"><%= line %></p>
+<% }) %><% if (locals.meta) { %>      <p class="bbn__meta"><%- meta %></p>
+<% } %>    </div>
+  </div>
+  <div class="bbn__media">
+<% if (locals.photo && fit === "contain") { %>    <img class="bbn__bg" src="<%= photo %>" alt="" aria-hidden="true" decoding="async">
+<% } %><% if (locals.photoHtml) { %>    <%- photoHtml %>
+<% } else if (locals.photo) { %>    <img src="<%= photo %>" alt="<%= locals.photoAlt || "" %>" fetchpriority="high">
+<% } %>  </div>
+</section>

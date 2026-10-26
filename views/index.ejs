@@ -45,8 +45,8 @@
             <p><%= c.blurb %></p></div>
         </a>
         <ul class="strips">
-<% strips[key].forEach((t) => { %>          <li><a class="strip" href="<%= t.url %>"><span><%= t.title %></span><span class="arw"></span></a></li>
-<% }) %><% if (key === "spiritual") { %>          <li><a class="strip" href="/corporate"><span>Corporate and Team Retreats</span><span class="arw"></span></a></li>
+<% strips[key].forEach((t) => { %>          <li><a class="strip" href="<%= t.url %>" aria-label="<%= t.title %>"><span><%= t.title %></span><span class="arw"></span></a></li>
+<% }) %><% if (key === "spiritual") { %>          <li><a class="strip" href="/corporate" aria-label="Corporate and Team Retreats"><span>Corporate and Team Retreats</span><span class="arw"></span></a></li>
 <% } %>        </ul>
       </div>
 <% }) %>
@@ -109,8 +109,18 @@
       <p class="eyebrow">Signature Destinations</p>
       <h2 class="d2">Five places we return to, and never the same way twice.</h2>
     </div>
-    <div class="index rv">
-<% destinations.forEach((d) => { %>      <a href="<%= d.link %>" class="irow"><div class="irow__l"><h3 class="d3"><%= d.name %></h3><span class="data"><%= d.region %></span></div><div class="irow__r"><span class="data"><%= d.altitude %></span><span class="data"><%= d.season %></span></div></a>
+<%
+  // A photo of each place from its own trip or journal folder, keyed by the destination name.
+  const destPics = {
+    "Hunza Valley": { src: "/assets/tour-road-hunza.jpg", alt: "Travellers looking down the Hunza valley" },
+    "Skardu": { src: "/assets/journal/skardu-travel-guide/04-600.webp", alt: "A man photographing a turquoise lake near Skardu", pos: "center 60%" },
+    "Fairy Meadows": { src: "/assets/journal/fairy-meadows-nanga-parbat-base-camp/01-600.webp", alt: "Looking up the valley toward Nanga Parbat from Fairy Meadows", pos: "center 40%" },
+    "Kalash Valleys": { src: "/assets/journal/chilam-joshi-festival-kalash/02-600.webp", alt: "A line of Kalash women in festival dress", pos: "center 30%" },
+    "Deosai Plains": { src: "/assets/journal/skardu-travel-guide/02-600.webp", alt: "Friends on a ridge above Sheosar Lake on the Deosai Plains", pos: "center 35%" },
+  };
+%>    <div class="dgrid rv">
+<% destinations.forEach((d) => { const pic = destPics[d.name]; %>      <a href="<%= d.link %>" class="dtile"><% if (pic) { %><img src="<%= pic.src %>" alt="<%= pic.alt %>" loading="lazy" decoding="async"<% if (pic.pos) { %> style="object-position:<%= pic.pos %>"<% } %>><% } %>
+        <div class="dtile__c"><h3 class="dtile__t"><%= d.name %></h3><span class="dtile__r"><%= d.region %></span><span class="dtile__m"><span><%= d.altitude %></span><span><%= d.season %></span></span></div></a>
 <% }) %>    </div>
   </div>
 </section>
@@ -135,7 +145,7 @@
 <!-- ====== PAST EXPEDITIONS AND MEMORIES ====== -->
 <section class="section" id="memories">
   <div class="wrap">
-    <div class="chead chead--tight rv" style="max-width:820px">
+    <div class="chead chead--tight rv" style="max-width:calc(820 * var(--px))">
       <h2 class="d2">Our Past Expeditions and Unforgettable Memories</h2>
     </div>
     <div class="mem rv">
@@ -188,7 +198,7 @@
     <div class="rv">
       <p class="eyebrow">Start planning</p>
       <h2 class="d2">Tell us the month. We'll tell you what's possible.</h2>
-      <p class="lede" style="margin-top:16px">Send a rough idea and a rough date. A planner comes back within one working day with two or three routes that fit your group, and an honest word about the one that does not.</p>
+      <p class="lede" style="margin-top:calc(12 * var(--px))">Send a rough idea and a rough date. A planner comes back within one working day with two or three routes that fit your group, and an honest word about the one that does not.</p>
 <%- include("partials/contact-details") %>
     </div>
 

@@ -4,6 +4,7 @@
 export const GUIDES = [
   {
     slug: "pakistan-at-a-glance",
+    cardTitle: "Pakistan at a Glance",
     title: "Pakistan at a Glance",
     image: "hero.jpg",
     description: "Key facts for first time visitors to Pakistan: geography, language, money, connectivity, culture and what to expect on arrival.",
@@ -54,6 +55,7 @@ export const GUIDES = [
 
   {
     slug: "is-pakistan-safe-to-travel",
+    cardTitle: "Safety in Pakistan",
     title: "Is Pakistan Safe to Travel?",
     image: "tour-road-hunza.jpg",
     description: "An honest look at safety for visitors to Pakistan: which regions are calm, what the real risks are in the mountains, and how to prepare.",
@@ -103,6 +105,7 @@ export const GUIDES = [
 
   {
     slug: "pakistan-visa-guide",
+    cardTitle: "Pakistan Visa Guide",
     title: "Pakistan Visa Guide",
     image: "tour-air-hunza.jpg",
     description: "How to apply for a Pakistan tourist visa online, the documents you need, and when a trekking permit is required for routes such as K2 Base Camp.",
@@ -149,6 +152,7 @@ export const GUIDES = [
 
   {
     slug: "best-time-to-visit-pakistan",
+    cardTitle: "Best Time to Visit",
     title: "Best Time to Visit Pakistan",
     image: "tour-autumn.jpg",
     description: "When to visit Pakistan by region and season: trekking in the Karakoram, Hunza in blossom and autumn, Kalash festivals and the deserts in winter.",
@@ -197,6 +201,7 @@ export const GUIDES = [
 
   {
     slug: "trekking-trip-difficulty-grades",
+    cardTitle: "Trek Difficulty Grades",
     title: "Trekking &amp; Trip Difficulty Grades",
     image: "exp-k2.jpg",
     description: "How XPITUDE grades its treks and tours, from easy road journeys to strenuous glacier expeditions above 5,000 metres, and how to choose the right one.",
@@ -250,6 +255,7 @@ export const GUIDES = [
 
   {
     slug: "packing-equipment-checklist",
+    cardTitle: "Packing Checklist",
     title: "Essential Packing &amp; Equipment Checklist",
     image: "arc-4.jpg",
     description: "A complete packing and equipment checklist for trekking and touring in Pakistan: clothing layers, footwear, camp gear, documents and electronics.",
@@ -338,6 +344,7 @@ export const GUIDES = [
 
   {
     slug: "recommended-flights-airlines",
+    cardTitle: "Flights & Airlines",
     title: "Recommended Flights &amp; Airlines",
     image: "tour-air-skardu.jpg",
     description: "How to fly to Pakistan and on to Skardu and Gilgit: international gateways, airlines with one stop connections to Islamabad, and booking advice.",
@@ -377,6 +384,7 @@ export const GUIDES = [
 
   {
     slug: "flight-cancellations-travel-disruptions",
+    cardTitle: "Flight Disruptions",
     title: "Flight Cancellations &amp; Travel Disruptions",
     image: "tour-road-skardu.jpg",
     description: "Why flights to Skardu and Gilgit are often cancelled, what happens when they are, and how to plan buffer days and road alternatives into your trip.",
@@ -410,6 +418,7 @@ export const GUIDES = [
 
   {
     slug: "travel-insurance-guide",
+    cardTitle: "Travel Insurance",
     title: "Travel Insurance Guide",
     image: "exp-haramosh.jpg",
     description: "What your travel insurance needs to cover for trekking in Pakistan: altitude limits, helicopter evacuation, medical costs, cancellation and delay.",
@@ -449,6 +458,7 @@ export const GUIDES = [
 
   {
     slug: "recommended-medical-kit",
+    cardTitle: "Medical Kit",
     title: "Recommended Medical Kit",
     image: "exp-rush.jpg",
     description: "A recommended personal medical kit for trekking and travel in Pakistan, covering first aid, stomach, altitude, sun and prescription medication.",

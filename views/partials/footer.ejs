@@ -5,29 +5,38 @@
 <footer class="footer">
   <div class="wrap">
     <div class="footer__top">
-      <div>
+      <div class="fcol1">
+        <div class="frow1">
         <div class="brand">
           <img class="brand__logo" src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324" loading="lazy">
         </div>
         <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
+        </div>
+        <div class="frow2">
 <% if (fsoc.length) { %>        <div class="fsoc">
 <% fsoc.forEach(([key, label]) => { %>          <a class="ico" href="<%= site.social[key] %>" aria-label="<%= label %>" rel="noopener" target="_blank"><%- icon(key) %></a>
 <% }) %>        </div>
-<% } if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><span class="ffollow__label">Follow us</span><%- include("follow") %></div>
-<% } %>      </div>
-      <div class="fcol"><h4>Services</h4><ul>
+<% } if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
+<% } %>        </div>
+      </div>
+      <div class="fcol"><div class="frow1"><h4>Services</h4><ul>
         <li><a href="/trekking">Trekking Expeditions</a></li><li><a href="/tours">Tours and Sightseeing</a></li>
         <li><a href="/spiritual">Spiritual Trips and Yoga Retreats</a></li><li><a href="/corporate">Corporate Retreats</a></li></ul></div>
-      <div class="fcol"><h4>Company</h4><ul>
+        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></div></div>
+      <div class="fcol"><div class="frow1"><h4>Company</h4><ul>
         <li><a href="/about">About Us</a></li><li><a href="/blog">Our Blog</a></li>
-        <li><a href="/travel-guide">Travel Guide</a></li>
         <li><a href="/testimonials">Client Testimonials</a></li><li><a href="/contact">Contact Us</a></li></ul></div>
-      <div class="fcol"><h4>Contact</h4><ul>
-        <li><span><%= site.address.street %></span></li>
-        <li><span><%= site.address.city %>, <%= site.address.country %></span></li>
-<% if (site.email) { %>        <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
-<% } if (site.phone) { %>        <li><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></li>
+<% if (site.email) { %>        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">mail</span><a href="mailto:<%= site.email %>"><%= site.email %></a></div>
+<% } %>      </div>
+      <div class="fcol"><div class="frow1"><h4>Travel Guide</h4><ul>
+<% const tg = nav.guideMenu || []; tg.slice(0, 4).forEach(({ g, label }) => { %>        <li><a href="<%= g.url %>" title="<%= g.title %>"><%= label %></a></li>
+<% }); if (tg.length > 4) { %>        <li><button class="fmore" type="button" aria-expanded="false" aria-controls="fmoreList"><span class="fmore__t">More</span><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
+          <ul class="fmore__list" id="fmoreList" inert>
+<% tg.slice(4).forEach(({ g, label }) => { %>            <li><a href="<%= g.url %>" title="<%= g.title %>"><%= label %></a></li>
+<% }) %>          </ul></li>
 <% } %>      </ul></div>
+<% if (site.phone) { %>        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">call</span><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></div>
+<% } %>      </div>
     </div>
     <div class="footer__bottom">
       <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>

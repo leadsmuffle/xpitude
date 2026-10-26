@@ -1,22 +1,18 @@
 <%- include("partials/head") %>
 <%- include("partials/header") %>
 <main>
-<section class="ghero">
-<% if (guide.image) { %>  <div class="ghero__media"><img src="<%= guide.image %>" alt="<%= guide.imageAlt || guide.title %>" fetchpriority="high"></div>
-<% } %>  <div class="ghero__scrim"></div>
-  <div class="wrap ghero__in">
-    <p class="eyebrow">Travel Guide · <%= String(index + 1).padStart(2, "0") %> of <%= guides.length %></p>
-    <h1><%= guide.title %></h1>
-<% if (guide.summary) { %>    <p class="ghero__sub"><%= guide.summary %></p>
-<% } %>  </div>
-</section>
+<%- include("partials/blog-banner", {
+  photo: guide.image, photoHtml: guide.image ? blogHelpers.img(guide.image, guide.imageAlt || guide.title, { sizes: "(max-width: 767px) 100vw, 50vw", eager: true }) : "",
+  fit: blogHelpers.bannerFit(guide.image), name: "guide-" + guide.slug,
+  label: "Travel Guide · " + String(index + 1).padStart(2, "0") + " of " + guides.length, title: guide.title, bannerIntro: guide.summary,
+}) %>
 
 <section class="section gpage">
   <div class="wrap">
     <div class="guide">
       <article class="prose gprose">
 <% const answer = [guide.summary, guide.metaDescription].filter(Boolean).filter((s, i, a) => a.indexOf(s) === i).join(" "); if (answer) { %>        <div class="note"><b>In short.</b> <%= answer %></div>
-<% } %><%- guide.body %>
+<% } %><%- guideHtml %>
         <p class="prose__foot">General guidance for planning. Rules, schedules and conditions change, so confirm the details that matter with official sources and with your XPITUDE planner before you book.</p>
       </article>
       <aside class="gside" aria-label="Travel Guide pages">
@@ -40,5 +36,11 @@
     </div>
   </div>
 </section>
+<div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lbox__close" type="button" aria-label="Close">×</button>
+  <button class="lbox__nav lbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
+  <figure class="lbox__fig"><img alt=""><figcaption></figcaption></figure>
+  <button class="lbox__nav lbox__nav--next" type="button" aria-label="Next photo">›</button>
+</div>
 </main>
 <%- include("partials/footer") %>

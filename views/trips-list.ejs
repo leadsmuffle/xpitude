@@ -7,17 +7,11 @@
   const heroAlt = (page && page.imageAlt) || cat.imageAlt;
 %>
 <main>
-<section class="phero xhero">
-  <div class="phero__media"><img src="<%= heroImage %>" alt="<%= heroAlt %>" fetchpriority="high"></div>
-  <div class="phero__scrim"></div>
-  <div class="wrap">
-    <p class="eyebrow">Our Services</p>
-    <h1><%= pageTitle %></h1>
-<% if (page && page.tagline) { %>    <p class="xhero__tag"><%= page.tagline %></p>
-<% } %>    <p class="phero__sub"><%= (page && page.intro) || cat.sub %></p>
-    <div class="xhero__act"><a href="/contact" class="btn btn--sd">Plan your journey <span class="arw"></span></a></div>
-  </div>
-</section>
+<%- include("partials/blog-banner", {
+  photo: heroImage, photoHtml: photoImg(heroImage, heroAlt, { sizes: "(max-width: 767px) 100vw, 50vw", eager: true }),
+  fit: bannerFit(heroImage), name: "services-" + cat.key,
+  label: "Our Services", title: pageTitle, bannerIntro: [page && page.tagline, (page && page.intro) || cat.sub],
+}) %>
 
 <section class="section">
   <div class="wrap">
@@ -41,7 +35,7 @@
 <% } %>
 
 <% if (page && page.closingTitle) { %>
-<section class="section on-red cta">
+<section class="section on-red cta cta--services">
   <div class="wrap">
     <h2 class="d2"><%= page.closingTitle %></h2>
 <% if (page.closingText) { %>    <p class="xclose"><%= page.closingText %></p>

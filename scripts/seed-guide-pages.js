@@ -6,6 +6,7 @@
 const path = require("path");
 const { GuideArticle } = require("../models");
 const pages = require("./data/guide-pages");
+const photos = require("./data/guide-photos");
 
 async function importGuidePages(log = console.log) {
   let updated = 0;
@@ -13,6 +14,8 @@ async function importGuidePages(log = console.log) {
     const res = await GuideArticle.updateOne({ slug }, { $set: page }, { runValidators: true });
     updated += res.matchedCount;
   }
+  // the photos in each guide article
+  for (const [slug, articlePhotos] of Object.entries(photos)) await GuideArticle.updateOne({ slug }, { $set: { articlePhotos } });
   log(`Guide pages   ${updated} of ${Object.keys(pages).length} updated`);
 }
 

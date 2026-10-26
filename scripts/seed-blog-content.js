@@ -2,17 +2,18 @@
 //
 //   npm run seed:blog
 //
-// Sets each post's text, cover, gallery photos, listing summary and related trip.
+// Sets each post's text, cover, gallery photos, listing summary and related trip, and its card on /blog (scripts/data/blog-cards.js).
 // Updates existing posts by their address (slug) and never creates new ones. Running it again overwrites admin edits
 // to the same fields.
 const path = require("path");
 const { BlogPost } = require("../models");
 const content = require("./data/blog-content");
+const cards = require("./data/blog-cards");
 
 async function importBlogContent(log = console.log) {
   let updated = 0;
   for (const [slug, data] of Object.entries(content)) {
-    const res = await BlogPost.updateOne({ slug }, { $set: data }, { runValidators: true });
+    const res = await BlogPost.updateOne({ slug }, { $set: { ...data, ...cards[slug] } }, { runValidators: true });
     updated += res.matchedCount;
   }
   log(`Blog content  ${updated} of ${Object.keys(content).length} posts updated`);

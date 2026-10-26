@@ -43,6 +43,8 @@ module.exports = {
   "trips": [
     {
       "slug": "k2-base-camp-gondogoro-la",
+      "photos": [{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/12.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/12-600.webp","alt":"Trekking to K2 Base Camp: a trekker jumping in front of K2"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/06.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/06-600.webp","alt":"Trekking to K2 Base Camp: the group with the flag of Pakistan at Concordia"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/16.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/16-600.webp","alt":"Trekking to K2 Base Camp: the group standing below the Trango Towers"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/22.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/22-600.webp","alt":"Trekking to K2 Base Camp: a line of trekkers on the Baltoro Glacier"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/01.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/01-600.webp","alt":"Trekking to K2 Base Camp: tents beside a glacial pool below the Trango Towers"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/02.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/02-600.webp","alt":"Trekking to K2 Base Camp: a trekker leaping in the air with K2 behind"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/03.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/03-600.webp","alt":"Trekking to K2 Base Camp: a trekker resting on a boulder below granite peaks"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/04.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/04-600.webp","alt":"Trekking to K2 Base Camp: a porter resting beside orange duffel bags below a rock tower"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/05.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/05-600.webp","alt":"Trekking to K2 Base Camp: trekkers crossing the rubble of the Baltoro Glacier"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/07.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/07-600.webp","alt":"Trekking to K2 Base Camp: camp under trees beside a stone hut on the approach"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/08.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/08-600.webp","alt":"Trekking to K2 Base Camp: a trekker with one arm raised below granite towers"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/09.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/09-600.webp","alt":"Trekking to K2 Base Camp: tents pitched among boulders"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/10.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/10-600.webp","alt":"Trekking to K2 Base Camp: a trekker waving among huge boulders"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/11.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/11-600.webp","alt":"Trekking to K2 Base Camp: a trekker on a rock below a pointed snow peak"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/13.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/13-600.webp","alt":"Trekking to K2 Base Camp: a trekker mid-leap with K2 behind"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/14.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/14-600.webp","alt":"Trekking to K2 Base Camp: trekkers and crew walking along a mountain trail"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/15.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/15-600.webp","alt":"Trekking to K2 Base Camp: trekkers climbing a steep rocky trail"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/17.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/17-600.webp","alt":"Trekking to K2 Base Camp: a rock peak rising above the glacier"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/18.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/18-600.webp","alt":"Trekking to K2 Base Camp: trekkers crossing grey glacier ice"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/19.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/19-600.webp","alt":"Trekking to K2 Base Camp: trekkers on the glacier under heavy cloud"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/20.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/20-600.webp","alt":"Trekking to K2 Base Camp: dark rock towers above the glacier, with trekkers below"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/21.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/21-600.webp","alt":"Trekking to K2 Base Camp: a trekker in front of a wall of glacier ice"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/23.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/23-600.webp","alt":"Trekking to K2 Base Camp: trekkers on the moraine with peaks in cloud"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/24.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/24-600.webp","alt":"Trekking to K2 Base Camp: the trekking group and crew in front of Karakoram peaks"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/25.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/25-600.webp","alt":"Trekking to K2 Base Camp: trekkers walking across the moraine"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/26.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/26-600.webp","alt":"Trekking to K2 Base Camp: a pointed peak above camp"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/27.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/27-600.webp","alt":"Trekking to K2 Base Camp: a head torch beam on dark rocks under the night sky"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/28.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/28-600.webp","alt":"Trekking to K2 Base Camp: dinner inside the mess tent"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/29.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/29-600.webp","alt":"Trekking to K2 Base Camp: storm light breaking over the peaks near Urdukus"},{"src":"/assets/journal/k2-base-camp-gondogoro-la-trek/30.webp","thumb":"/assets/journal/k2-base-camp-gondogoro-la-trek/30-600.webp","alt":"Trekking to K2 Base Camp: a trekker sitting above a small lake at Urdukus"}],
+      "cardTitle": "K2 Base Camp & Gondogoro La",
       "imagePosition": "center top",
       "replaces": "k2-base-camp-concordia",
       "title": "K2 Base Camp & Gondogoro La Trek",
@@ -54,15 +56,15 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "21 Days, Islamabad to Islamabad"
+          "value": "21 Days"
         },
         {
           "label": "Grade",
-          "value": "Extreme, with a technical pass crossing"
+          "value": "Extreme"
         },
         {
           "label": "Max Altitude",
-          "value": "5,585 m at Gondogoro La"
+          "value": "5,585 m"
         },
         {
           "label": "Best Season",
@@ -70,11 +72,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels in Islamabad and Skardu, expedition camping on trek"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Islamabad, Lahore transfer on request"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -250,6 +252,8 @@ module.exports = {
     },
     {
       "slug": "fairy-meadows-nanga-parbat-base-camp",
+      "photos": [{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/07.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/07-600.webp","alt":"Fairy Meadows and Nanga Parbat: a photographer with a camera and tripod in the meadow"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/05.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/05-600.webp","alt":"Fairy Meadows and Nanga Parbat: the group in front of the tents"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/01.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/01-600.webp","alt":"Fairy Meadows and Nanga Parbat: looking up the valley toward Nanga Parbat"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/10.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/10-600.webp","alt":"Fairy Meadows and Nanga Parbat: a tray of steaming cups of tea"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/02.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/02-600.webp","alt":"Fairy Meadows and Nanga Parbat: a jeep on the narrow cliffside track"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/04.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/04-600.webp","alt":"Fairy Meadows and Nanga Parbat: photographers by the river at dusk"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/06.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/06-600.webp","alt":"Fairy Meadows and Nanga Parbat: the group beside a jeep on the cliff road"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/08.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/08-600.webp","alt":"Fairy Meadows and Nanga Parbat: the group beside a jeep on the mountain road"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/09.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/09-600.webp","alt":"Fairy Meadows and Nanga Parbat: the group posing on rocks below the forest"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/11.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/11-600.webp","alt":"Fairy Meadows and Nanga Parbat: a guide in a cap and sunglasses"},{"src":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/12.webp","thumb":"/assets/journal/fairy-meadows-nanga-parbat-base-camp/12-600.webp","alt":"Fairy Meadows and Nanga Parbat: a small group posing on the hillside"}],
+      "cardTitle": "Fairy Meadows & Nanga Parbat",
       "imagePosition": "center 40%",
       "replaces": "nanga-parbat-base-camp-fairy-meadows",
       "title": "Fairy Meadows & Nanga Parbat Base Camp",
@@ -261,7 +265,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "6 Days, Islamabad to Islamabad"
+          "value": "6 Days"
         },
         {
           "label": "Grade",
@@ -269,7 +273,7 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "About 3,967 m on foot at Nanga Parbat Base Camp. Babusar Top, 4,173 m, by road"
+          "value": "3,967 m"
         },
         {
           "label": "Best Season",
@@ -277,11 +281,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels and wooden huts"
+          "value": "Hotels & huts"
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -366,6 +370,7 @@ module.exports = {
     },
     {
       "slug": "rakaposhi-base-camp",
+      "cardTitle": "Rakaposhi Base Camp",
       "imagePosition": "center 30%",
       "replaces": "",
       "title": "Rakaposhi Base Camp",
@@ -377,7 +382,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "7 Days, Islamabad to Islamabad"
+          "value": "7 Days"
         },
         {
           "label": "Grade",
@@ -385,7 +390,7 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "About 3,500 m at Tagaphari"
+          "value": "3,500 m"
         },
         {
           "label": "Best Season",
@@ -393,11 +398,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels and camping"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -487,6 +492,7 @@ module.exports = {
     },
     {
       "slug": "haramosh-base-camp-kutwal-lake",
+      "cardTitle": "Haramosh & Kutwal Lake",
       "imagePosition": "center 30%",
       "replaces": "",
       "title": "Haramosh Base Camp & Kutwal Lake",
@@ -498,7 +504,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "8 Days, Islamabad to Islamabad"
+          "value": "8 Days"
         },
         {
           "label": "Grade",
@@ -506,7 +512,7 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "About 3,300 m at Kutwal Lake. Viewpoint hikes go higher"
+          "value": "3,300 m"
         },
         {
           "label": "Best Season",
@@ -514,11 +520,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels and camping"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -614,6 +620,7 @@ module.exports = {
     },
     {
       "slug": "rush-lake-rush-peak",
+      "cardTitle": "Rush Lake & Rush Peak",
       "imagePosition": "center 45%",
       "replaces": "rush-lake-rush-pari-peak",
       "title": "Rush Lake & Rush Peak",
@@ -625,7 +632,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "11 Days, Islamabad to Islamabad"
+          "value": "11 Days"
         },
         {
           "label": "Grade",
@@ -633,7 +640,7 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "5,098 m at Rush Peak. Lake camp about 4,694 m"
+          "value": "5,098 m"
         },
         {
           "label": "Best Season",
@@ -641,11 +648,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels and expedition camping"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -759,6 +766,7 @@ module.exports = {
     },
     {
       "slug": "shimshal-pass-minglik-sar",
+      "cardTitle": "Shimshal Pass & Minglik Sar",
       "imagePosition": "center top",
       "replaces": "",
       "title": "Shimshal Pass & Minglik Sar",
@@ -770,15 +778,15 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "19 Days, Islamabad to Islamabad"
+          "value": "19 Days"
         },
         {
           "label": "Grade",
-          "value": "Very Challenging. Basic mountaineering skills needed for the summit"
+          "value": "Very Challenging"
         },
         {
           "label": "Max Altitude",
-          "value": "6,050 m at Minglik Sar. Shimshal Pass 4,735 m"
+          "value": "6,050 m"
         },
         {
           "label": "Best Season",
@@ -786,11 +794,11 @@ module.exports = {
         },
         {
           "label": "Stay",
-          "value": "Hotels, a village guesthouse and expedition camping"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Islamabad, Lahore transfer on request"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -953,6 +961,7 @@ module.exports = {
     },
     {
       "slug": "hunza-valley-escape",
+      "cardTitle": "Hunza Valley Escape",
       "replaces": "hunza",
       "title": "Hunza Valley Escape",
       "category": "tours",
@@ -963,7 +972,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "7 Days, Islamabad to Islamabad"
+          "value": "7 Days"
         },
         {
           "label": "Grade",
@@ -971,11 +980,11 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "About 4,693 m at Khunjerab Pass, by road"
+          "value": "4,693 m"
         },
         {
           "label": "Best Season",
-          "value": "April to October. Blossom in early April, autumn color late October"
+          "value": "April to October"
         },
         {
           "label": "Stay",
@@ -983,7 +992,7 @@ module.exports = {
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect early on Day 1 or the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -1072,6 +1081,8 @@ module.exports = {
     },
     {
       "slug": "skardu-land-of-giants",
+      "photos": [{"src":"/assets/journal/skardu-travel-guide/03.webp","thumb":"/assets/journal/skardu-travel-guide/03-600.webp","alt":"Skardu: four travellers on the sand of the cold desert"},{"src":"/assets/journal/skardu-travel-guide/08.webp","thumb":"/assets/journal/skardu-travel-guide/08-600.webp","alt":"Skardu: silhouettes with raised arms on a ridge at dusk"},{"src":"/assets/journal/skardu-travel-guide/04.webp","thumb":"/assets/journal/skardu-travel-guide/04-600.webp","alt":"Skardu: a man photographing a turquoise lake"},{"src":"/assets/journal/skardu-travel-guide/02.webp","thumb":"/assets/journal/skardu-travel-guide/02-600.webp","alt":"Skardu: friends on a ridge above Sheosar Lake on the Deosai Plains"},{"src":"/assets/journal/skardu-travel-guide/07.webp","thumb":"/assets/journal/skardu-travel-guide/07-600.webp","alt":"Skardu: the group in front of an old stone wall"},{"src":"/assets/journal/skardu-travel-guide/05.webp","thumb":"/assets/journal/skardu-travel-guide/05-600.webp","alt":"Skardu: the Karakoram from the window of the Skardu flight"},{"src":"/assets/journal/skardu-travel-guide/06.webp","thumb":"/assets/journal/skardu-travel-guide/06-600.webp","alt":"Skardu: a snow peak seen through the aircraft window"},{"src":"/assets/journal/skardu-travel-guide/09.webp","thumb":"/assets/journal/skardu-travel-guide/09-600.webp","alt":"Skardu: the group seated on a ridge at dusk"}],
+      "cardTitle": "Skardu & the Land of Giants",
       "replaces": "skardu",
       "title": "Skardu & the Land of Giants",
       "category": "tours",
@@ -1082,7 +1093,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "7 Days, Islamabad to Islamabad"
+          "value": "7 Days"
         },
         {
           "label": "Grade",
@@ -1090,11 +1101,11 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "About 4,100 m on the Deosai Plains, by jeep"
+          "value": "4,100 m"
         },
         {
           "label": "Best Season",
-          "value": "May to October. Deosai roughly July to September"
+          "value": "May to October"
         },
         {
           "label": "Stay",
@@ -1102,7 +1113,7 @@ module.exports = {
         },
         {
           "label": "Departure",
-          "value": "Islamabad by air. Road packages on request"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -1192,6 +1203,7 @@ module.exports = {
     },
     {
       "slug": "cholistan-desert-safari-bahawalpur",
+      "cardTitle": "Cholistan Desert Safari",
       "replaces": "cholistan-desert-safari",
       "title": "Cholistan Desert Safari & Bahawalpur",
       "category": "tours",
@@ -1202,7 +1214,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "4 Days, Lahore to Lahore"
+          "value": "4 Days"
         },
         {
           "label": "Grade",
@@ -1210,15 +1222,15 @@ module.exports = {
         },
         {
           "label": "Best Season",
-          "value": "November to February. The Cholistan Jeep Rally is usually held in February"
+          "value": "November to February"
         },
         {
           "label": "Stay",
-          "value": "Hotels and desert camping"
+          "value": "Hotels & camping"
         },
         {
           "label": "Departure",
-          "value": "Lahore. Islamabad pickup on request"
+          "value": "Lahore"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -1289,6 +1301,8 @@ module.exports = {
     },
     {
       "slug": "kalash-valleys-chitral",
+      "photos": [{"src":"/assets/journal/chilam-joshi-festival-kalash/05.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/05-600.webp","alt":"Chilam Joshi in the Kalash valleys: travellers seated with hosts inside a wooden house"},{"src":"/assets/journal/chilam-joshi-festival-kalash/08.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/08-600.webp","alt":"Chilam Joshi in the Kalash valleys: travellers with local boys on a village path"},{"src":"/assets/journal/chilam-joshi-festival-kalash/02.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/02-600.webp","alt":"Chilam Joshi in the Kalash valleys: a line of Kalash women in festival dress"},{"src":"/assets/journal/chilam-joshi-festival-kalash/01.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/01-600.webp","alt":"Chilam Joshi in the Kalash valleys: Kalash women dancing in a circle"},{"src":"/assets/journal/chilam-joshi-festival-kalash/03.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/03-600.webp","alt":"Chilam Joshi in the Kalash valleys: two Kalash women in beaded headdresses"},{"src":"/assets/journal/chilam-joshi-festival-kalash/06.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/06-600.webp","alt":"Chilam Joshi in the Kalash valleys: two Kalash girls in embroidered dress"},{"src":"/assets/journal/chilam-joshi-festival-kalash/04.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/04-600.webp","alt":"Chilam Joshi in the Kalash valleys: a smiling Kalash girl in a beaded cap"},{"src":"/assets/journal/chilam-joshi-festival-kalash/07.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/07-600.webp","alt":"Chilam Joshi in the Kalash valleys: visitors outside a domed mosque in Chitral"},{"src":"/assets/journal/chilam-joshi-festival-kalash/09.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/09-600.webp","alt":"Chilam Joshi in the Kalash valleys: Kalash children in festival dress"},{"src":"/assets/journal/chilam-joshi-festival-kalash/11.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/11-600.webp","alt":"Chilam Joshi in the Kalash valleys: Kalash women embracing at the festival"},{"src":"/assets/journal/chilam-joshi-festival-kalash/12.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/12-600.webp","alt":"Chilam Joshi in the Kalash valleys: the group under an old timber pavilion"},{"src":"/assets/journal/chilam-joshi-festival-kalash/13.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/13-600.webp","alt":"Chilam Joshi in the Kalash valleys: two Kalash women on the hillside"},{"src":"/assets/journal/chilam-joshi-festival-kalash/14.webp","thumb":"/assets/journal/chilam-joshi-festival-kalash/14-600.webp","alt":"Chilam Joshi in the Kalash valleys: a Kalash woman standing on a rock"}],
+      "cardTitle": "Kalash Valleys & Chitral",
       "replaces": "chitral-kalash",
       "title": "Kalash Valleys & Chitral",
       "category": "tours",
@@ -1299,7 +1313,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "6 Days, Islamabad to Islamabad"
+          "value": "6 Days"
         },
         {
           "label": "Grade",
@@ -1307,15 +1321,15 @@ module.exports = {
         },
         {
           "label": "Best Season",
-          "value": "April to October. Chilam Joshi in May, Uchau in August"
+          "value": "April to October"
         },
         {
           "label": "Stay",
-          "value": "Hotels and guesthouses"
+          "value": "Hotels & guesthouses"
         },
         {
           "label": "Departure",
-          "value": "Islamabad. Lahore guests connect the evening before"
+          "value": "Islamabad"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -1399,6 +1413,8 @@ module.exports = {
     },
     {
       "slug": "naran-shogran-babusar-top",
+      "photos": [{"src":"/images/blog/shogran-makra-peak/03.webp","thumb":"/images/blog/shogran-makra-peak/03-600.webp","alt":"Siri Paye above Shogran: lit tents beside the water under a starry sky"},{"src":"/images/blog/shogran-makra-peak/02.webp","thumb":"/images/blog/shogran-makra-peak/02-600.webp","alt":"On the way to Makra Peak: walkers on an open hilltop under dramatic cloud"}],
+      "cardTitle": "Naran, Shogran & Babusar Top",
       "replaces": "",
       "title": "Naran, Shogran & Babusar Top",
       "category": "tours",
@@ -1409,7 +1425,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "5 Days, Islamabad to Islamabad"
+          "value": "5 Days"
         },
         {
           "label": "Grade",
@@ -1417,7 +1433,7 @@ module.exports = {
         },
         {
           "label": "Max Altitude",
-          "value": "4,173 m at Babusar Top, by road"
+          "value": "4,173 m"
         },
         {
           "label": "Best Season",
@@ -1429,7 +1445,7 @@ module.exports = {
         },
         {
           "label": "Departure",
-          "value": "Islamabad and Lahore"
+          "value": "Islamabad & Lahore"
         }
       ],
       "itineraryTitle": "Day by Day",
@@ -1505,6 +1521,7 @@ module.exports = {
     },
     {
       "slug": "sufi-trails-of-punjab",
+      "cardTitle": "Sufi Trails of Punjab",
       "replaces": "shrines-of-the-south",
       "title": "Sufi Trails of Punjab",
       "category": "spiritual",
@@ -1515,7 +1532,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "6 Days, Lahore to Lahore"
+          "value": "6 Days"
         },
         {
           "label": "Grade",
@@ -1615,6 +1632,7 @@ module.exports = {
     },
     {
       "slug": "sikh-heritage-pilgrimage",
+      "cardTitle": "Sikh Heritage Pilgrimage",
       "replaces": "",
       "title": "Sikh Heritage Pilgrimage: Nankana Sahib & Kartarpur",
       "category": "spiritual",
@@ -1625,7 +1643,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "3 Days, Lahore to Lahore"
+          "value": "3 Days"
         },
         {
           "label": "Grade",
@@ -1633,7 +1651,7 @@ module.exports = {
         },
         {
           "label": "Best Season",
-          "value": "Year round. Gurpurab dates are the busiest"
+          "value": "Year round"
         },
         {
           "label": "Stay",
@@ -1708,6 +1726,7 @@ module.exports = {
     },
     {
       "slug": "yoga-mindfulness-retreats",
+      "cardTitle": "Yoga & Mindfulness Retreats",
       "replaces": "stillness-at-altitude",
       "title": "Yoga & Mindfulness Retreats",
       "category": "spiritual",
@@ -1726,15 +1745,15 @@ module.exports = {
         },
         {
           "label": "Best Season",
-          "value": "May to October, depending on destination"
+          "value": "May to October"
         },
         {
           "label": "Stay",
-          "value": "Lodges, resorts and nature retreats"
+          "value": "Lodges & resorts"
         },
         {
           "label": "Destinations",
-          "value": "Kumrat Valley, Sharan Forest and Ayun, Chitral"
+          "value": "Kumrat, Sharan, Ayun"
         },
         {
           "label": "Departure",
@@ -1874,6 +1893,7 @@ module.exports = {
     },
     {
       "slug": "lahore-walled-city-heritage-walk",
+      "cardTitle": "Lahore Walled City Walk",
       "replaces": "",
       "title": "Lahore Walled City Heritage Walk",
       "category": "spiritual",
@@ -1884,7 +1904,7 @@ module.exports = {
       "facts": [
         {
           "label": "Duration",
-          "value": "1 Day, about 9 AM to evening"
+          "value": "1 Day"
         },
         {
           "label": "Grade",
@@ -1896,7 +1916,7 @@ module.exports = {
         },
         {
           "label": "Departure",
-          "value": "Delhi Gate, Lahore"
+          "value": "Delhi Gate"
         }
       ],
       "itineraryTitle": "The Day",
@@ -1989,6 +2009,7 @@ module.exports = {
     },
     {
       "slug": "local-food-trails",
+      "cardTitle": "Local Food Trails",
       "replaces": "",
       "title": "Local Food Trails",
       "category": "spiritual",
@@ -2007,7 +2028,7 @@ module.exports = {
         },
         {
           "label": "Best Season",
-          "value": "Year round. Winter is peak nihari season"
+          "value": "Year round"
         },
         {
           "label": "Departure",
@@ -2071,6 +2092,8 @@ module.exports = {
     },
     {
       "slug": "team-building-corporate-retreats",
+      "photos": [{"src":"/assets/journal/paragliding-khanpur-lake/03.webp","thumb":"/assets/journal/paragliding-khanpur-lake/03-600.webp","alt":"Paragliding at Khanpur: the group listening to an instructor in a helmet"},{"src":"/assets/journal/paragliding-khanpur-lake/08.webp","thumb":"/assets/journal/paragliding-khanpur-lake/08-600.webp","alt":"Paragliding at Khanpur: the whole group cheering for the camera"},{"src":"/assets/journal/paragliding-khanpur-lake/01.webp","thumb":"/assets/journal/paragliding-khanpur-lake/01-600.webp","alt":"Paragliding at Khanpur: the group beside a paraglider wing on the launch hill"},{"src":"/assets/journal/paragliding-khanpur-lake/04.webp","thumb":"/assets/journal/paragliding-khanpur-lake/04-600.webp","alt":"Paragliding at Khanpur: the group walking across the grassy hilltop"},{"src":"/assets/journal/paragliding-khanpur-lake/02.webp","thumb":"/assets/journal/paragliding-khanpur-lake/02-600.webp","alt":"Paragliding at Khanpur: a paraglider wing laid out on the hillside"},{"src":"/assets/journal/paragliding-khanpur-lake/06.webp","thumb":"/assets/journal/paragliding-khanpur-lake/06-600.webp","alt":"Paragliding at Khanpur: people on the hillside under a cloudy sky"},{"src":"/assets/journal/paragliding-khanpur-lake/07.webp","thumb":"/assets/journal/paragliding-khanpur-lake/07-600.webp","alt":"Paragliding at Khanpur: friends standing together on the launch site"}],
+      "cardTitle": "Team Building & Retreats",
       "replaces": "",
       "title": "Team Building & Corporate Retreats",
       "category": "corporate",
@@ -2081,19 +2104,19 @@ module.exports = {
       "facts": [
         {
           "label": "Format",
-          "value": "Day programs to 5 day retreats"
+          "value": "1 to 5 Days"
         },
         {
           "label": "Group Size",
-          "value": "15 to 150+ participants"
+          "value": "15 to 150+ people"
         },
         {
           "label": "Destinations",
-          "value": "Islamabad, Murree, Nathia Gali, Khanpur and Hunza"
+          "value": "Islamabad & Hunza"
         },
         {
           "label": "Built For",
-          "value": "HR, People and Leadership teams"
+          "value": "HR & Leadership"
         }
       ],
       "itineraryTitle": "Sample Program",
@@ -2148,6 +2171,7 @@ module.exports = {
     },
     {
       "slug": "destination-weddings-celebrations",
+      "cardTitle": "Destination Weddings",
       "replaces": "",
       "title": "Destination Weddings & Celebrations",
       "category": "corporate",
@@ -2158,15 +2182,15 @@ module.exports = {
       "facts": [
         {
           "label": "Format",
-          "value": "2 to 5 day celebrations"
+          "value": "2 to 5 Days"
         },
         {
           "label": "Style",
-          "value": "Intimate, luxury, heritage and adventure"
+          "value": "Intimate & luxury"
         },
         {
           "label": "Destinations",
-          "value": "Hunza, Skardu, Lahore and countryside resorts"
+          "value": "Hunza, Skardu, Lahore"
         }
       ],
       "itineraryTitle": "Sample Program",
@@ -2227,6 +2251,7 @@ module.exports = {
     },
     {
       "slug": "sales-conferences-leadership-offsites",
+      "cardTitle": "Sales Conferences & Offsites",
       "replaces": "",
       "title": "Sales Conferences & Leadership Offsites",
       "category": "corporate",
@@ -2237,15 +2262,15 @@ module.exports = {
       "facts": [
         {
           "label": "Format",
-          "value": "1 to 4 day conferences, workshops and executive retreats"
+          "value": "1 to 4 Days"
         },
         {
           "label": "Ideal For",
-          "value": "Sales teams, leadership groups and corporate gatherings"
+          "value": "Sales & leadership"
         },
         {
           "label": "Built For",
-          "value": "Sales leadership, marketing and admin teams"
+          "value": "Sales & marketing"
         }
       ],
       "itineraryTitle": "Sample Program",
@@ -2299,6 +2324,7 @@ module.exports = {
     },
     {
       "slug": "csr-campaigns-community-experiences",
+      "cardTitle": "CSR & Community Experiences",
       "replaces": "",
       "title": "CSR Campaigns & Community Experiences",
       "category": "corporate",
@@ -2309,15 +2335,15 @@ module.exports = {
       "facts": [
         {
           "label": "Format",
-          "value": "1 to 5 day customized programs"
+          "value": "1 to 5 Days"
         },
         {
           "label": "Focus",
-          "value": "Community development, environment and responsible tourism"
+          "value": "Community & environment"
         },
         {
           "label": "Built For",
-          "value": "CSR, sustainability and People teams"
+          "value": "CSR teams"
         }
       ],
       "itineraryTitle": "Sample Program",
@@ -2378,6 +2404,7 @@ module.exports = {
     },
     {
       "slug": "documentaries-destination-production",
+      "cardTitle": "Documentaries & Production",
       "replaces": "",
       "title": "Documentaries & Destination Production",
       "category": "corporate",
@@ -2392,11 +2419,11 @@ module.exports = {
         },
         {
           "label": "Services",
-          "value": "Production logistics, location scouting and local support"
+          "value": "Production logistics"
         },
         {
           "label": "Ideal For",
-          "value": "Filmmakers, agencies, brands and production houses"
+          "value": "Filmmakers & brands"
         }
       ],
       "itineraryTitle": "Sample Program",

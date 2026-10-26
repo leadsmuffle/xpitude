@@ -1,5 +1,7 @@
 const { Trip, Category, BookingInfo, GuideArticle, Testimonial, BlogPost, Destination } = require("../models");
 const { CATEGORIES } = require("../config/site");
+const { layoutPost, layoutGuide, img: blogImg, esc: blogEsc, bannerFit } = require("../lib/blog-layout");
+const BLOG_TAGS = require("../config/blog-tags");
 
 const wrap = (fn) => (req, res, next) => fn(req, res, next).catch(next);
 const publishedPosts = () => ({ publishedAt: { $ne: null, $lte: new Date() } });
@@ -48,6 +50,7 @@ exports.category = (key) => wrap(async (req, res) => {
     BookingInfo.find().sort({ order: 1 }),
   ]);
   res.render("trips-list", {
+    photoImg: blogImg, bannerFit,
     active: "services",
     canonical: cat.path,
     title: `${(page && page.title) || cat.label} in Pakistan | XPITUDE`,
@@ -87,6 +90,7 @@ exports.trip = wrap(async (req, res, next) => {
   const related = after < 0 ? siblings : [...siblings.slice(after), ...siblings.slice(0, after)];
 
   res.render("trip", {
+    photoImg: blogImg, photoEsc: blogEsc, bannerFit,
     active: "services",
     canonical: trip.url,
     title: longTitle.length <= 70 ? longTitle : `${trip.title} | XPITUDE`,
@@ -121,6 +125,7 @@ exports.guideIndex = wrap(async (req, res) => {
     description: "The XPITUDE travel guide to Pakistan: safety, visas, seasons, trek grades, packing, flights, insurance and medical preparation.",
     ogImage: "/assets/camp.jpg",
     guides,
+    blogHelpers: { img: blogImg, esc: blogEsc, bannerFit },
   });
 });
 
@@ -137,6 +142,9 @@ exports.guideArticle = wrap(async (req, res, next) => {
     ogImage: guide.image || "/assets/camp.jpg",
     ogType: "article",
     guide, guides, index: i, prev: guides[i - 1], next: guides[i + 1],
+    // the guide text with its photos in order (lib/blog-layout.js)
+    guideHtml: layoutGuide(guide),
+    blogHelpers: { img: blogImg, esc: blogEsc, bannerFit },
     jsonLd: {
       "@context": "https://schema.org", "@type": "Article",
       headline: guide.title, description: guide.metaDescription || guide.summary,
@@ -169,12 +177,10 @@ exports.blogPost = wrap(async (req, res, next) => {
   const post = await BlogPost.findOne({ slug: req.params.slug, ...publishedPosts() });
   if (!post) return next();
   const site = res.locals.site;
-  // Related reading: three other stories, newest first.
-  const more = await BlogPost.find({ ...publishedPosts(), _id: { $ne: post._id } }).sort({ publishedAt: -1 }).limit(3);
   // The trip card at the end of the post: the named trip, or its service page when the post names a category.
-  let related = null;
+  let related = null, trip = null;
   if (post.relatedTrip) {
-    const trip = await Trip.findOne({ slug: post.relatedTrip, published: true });
+    trip = await Trip.findOne({ slug: post.relatedTrip, published: true });
     if (trip) related = { url: trip.url, title: trip.title, tagline: trip.tagline, image: trip.image, imageAlt: trip.imageAlt, label: "Plan this trip" };
     // the same photo as the post's banner would show twice on the page: use the service page photo instead
     if (trip && trip.image === post.coverImage) { const page = await Category.findOne({ key: trip.category }); related.image = (page && page.image) || "/assets/" + CATEGORIES[trip.category].image; related.imageAlt = (page && page.imageAlt) || CATEGORIES[trip.category].imageAlt; }
@@ -184,8 +190,12 @@ exports.blogPost = wrap(async (req, res, next) => {
         image: (page && page.image) || "/assets/" + CATEGORIES[post.relatedTrip].image, imageAlt: page && page.imageAlt, label: "Explore our trips" };
     }
   }
+  // the banner photo, and the body laid out with the post's own photos (see lib/blog-layout.js)
+  const banner = post.bannerImage || post.coverImage;
+  const layout = layoutPost(post, { banner });
   res.render("blog-post", {
-    more, related,
+    related, trip, banner, layout, tag: BLOG_TAGS[post.slug] || "Journal",
+    blogHelpers: { img: blogImg, esc: blogEsc, bannerFit },
     active: "blog",
     canonical: post.url,
     title: `${post.title} | XPITUDE`,
@@ -200,7 +210,7 @@ exports.blogPost = wrap(async (req, res, next) => {
       description: post.excerpt,
       datePublished: post.publishedAt.toISOString(),
       dateModified: post.updatedAt.toISOString(),
-      ...(post.coverImage ? { image: abs(site, post.coverImage) } : {}),
+      ...(banner ? { image: abs(site, banner) } : {}),
       author: { "@type": "Organization", name: site.name },
       publisher: { "@type": "Organization", name: site.name },
       mainEntityOfPage: site.url + post.url,

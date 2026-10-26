@@ -2,6 +2,20 @@
 // Cached briefly in memory; the admin panel clears it after any change.
 const { Trip, GuideArticle } = require("../models");
 
+// The Travel Guide dropdown in the header and the Travel Guide column in the footer: the guides shown, in this order,
+// each with its Google icon name, short label and description.
+const GUIDE_MENU = [
+  ["pakistan-at-a-glance", "public", "Pakistan at a Glance", "Key facts for a first visit, from regions to local currency."],
+  ["is-pakistan-safe-to-travel", "verified_user", "Safety in Pakistan", "An honest answer on safety, region by region, before you go."],
+  ["pakistan-visa-guide", "id_card", "Pakistan Visa Guide", "How the online visa works and when trekking permits apply."],
+  ["best-time-to-visit-pakistan", "calendar_month", "Best Time to Visit", "Choose your region first, and the right month will follow."],
+  ["trekking-trip-difficulty-grades", "landscape", "Trek Difficulty Grades", "What each grade means and which trek suits your fitness."],
+  ["packing-equipment-checklist", "backpack", "Packing Checklist", "What to pack, and the gear that matters above the snow line."],
+  ["recommended-flights-airlines", "flight", "Flights & Airlines", "Reaching Islamabad, then onward flights to the mountains."],
+  ["flight-cancellations-travel-disruptions", "thunderstorm", "Flight Disruptions", "Plan for mountain weather so a delay never ruins the trip."],
+  ["travel-insurance-guide", "health_and_safety", "Travel Insurance", "What your policy must cover for treks in the Karakoram."],
+];
+
 let cache = null;
 let cachedAt = 0;
 const TTL = 60 * 1000;
@@ -12,7 +26,8 @@ async function build() {
     GuideArticle.find().sort({ order: 1, number: 1 }).select("slug title number"),
   ]);
   const by = (c) => trips.filter((t) => t.category === c);
-  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides };
+  const guideMenu = GUIDE_MENU.map(([slug, symbol, label, text]) => ({ g: guides.find((x) => x.slug === slug), symbol, label, text })).filter((i) => i.g);
+  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides, guideMenu };
 }
 
 async function load(req, res, next) {

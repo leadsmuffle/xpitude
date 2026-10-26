@@ -185,15 +185,60 @@
 })();
 
 
-/* blog post gallery: equal grid, and a lightbox with arrows, Esc, arrow keys and swipe */
+
+
+/* blog post page: reading progress, "In this story" highlight, a lightbox for every photo, and the copy link button */
 (function(){
-  var grid=document.getElementById("bgalGrid"), box=document.getElementById("lbox");
-  if(!grid||!box)return;
-  var items=[].slice.call(grid.querySelectorAll(".bgal__item")), img=box.querySelector("img"), cap=box.querySelector("figcaption"), i=0, last=null;
-  function show(n){i=(n+items.length)%items.length;var a=items[i];img.src=a.getAttribute("href");img.alt=a.getAttribute("data-alt");
-    cap.textContent=a.getAttribute("data-alt")+"  ·  "+(i+1)+" / "+items.length;}
-  function open(n){last=document.activeElement;show(n);box.hidden=false;document.body.style.overflow="hidden";box.querySelector(".lbox__close").focus();}
-  function close(){box.hidden=true;document.body.style.overflow="";if(last)last.focus();}
+  var bar=document.getElementById("bpBar"), bodies=[].slice.call(document.querySelectorAll(".bp-body")), body=bodies[0], end=bodies[bodies.length-1];
+  if(!bar||!body)return;
+  // reading progress: from the top of the article to its end
+  function progress(){var t=body.getBoundingClientRect().top,b=end.getBoundingClientRect().bottom,h=b-t-window.innerHeight*.6;var p=h>0?Math.min(1,Math.max(0,-t/h)):1;bar.style.width=(p*100).toFixed(1)+"%";}
+  window.addEventListener("scroll",progress,{passive:true});window.addEventListener("resize",progress);progress();
+  // "In this story": the section in view is shown in red
+  var heads=[].slice.call(document.querySelectorAll(".bp-body h2[id]")), links=[].slice.call(document.querySelectorAll(".bp-toc a"));
+  function mark(){var cur=null;heads.forEach(function(h){if(h.getBoundingClientRect().top<140)cur=h.id;});
+    links.forEach(function(a){a.classList.toggle("is-active",a.getAttribute("href")==="#"+cur);});}
+  if(heads.length){window.addEventListener("scroll",mark,{passive:true});mark();}
+  links.forEach(function(a){a.addEventListener("click",function(){var d=a.closest("details");if(d)d.open=false;});});
+  // lightbox: the photos in the text and the gallery, in page order, with arrows, Esc, arrow keys and swipe
+  var box=document.getElementById("lbox"), items=[].slice.call(document.querySelectorAll("[data-lb]"));
+  if(box&&items.length){
+    var img=box.querySelector("img"), cap=box.querySelector("figcaption"), i=0, last=null;
+    var show=function(n){i=(n+items.length)%items.length;var a=items[i];img.src=a.getAttribute("href");img.alt=a.getAttribute("data-alt")||"";
+      cap.textContent=(a.getAttribute("data-alt")||"")+"  ·  "+(i+1)+" / "+items.length;};
+    var open=function(n){last=document.activeElement;show(n);box.hidden=false;document.body.style.overflow="hidden";box.querySelector(".lbox__close").focus();};
+    var close=function(){box.hidden=true;document.body.style.overflow="";if(last)last.focus();};
+    items.forEach(function(a,n){a.addEventListener("click",function(e){e.preventDefault();open(n);});});
+    box.querySelector(".lbox__close").addEventListener("click",close);
+    box.querySelector(".lbox__nav--prev").addEventListener("click",function(){show(i-1);});
+    box.querySelector(".lbox__nav--next").addEventListener("click",function(){show(i+1);});
+    box.addEventListener("click",function(e){if(e.target===box)close();});
+    document.addEventListener("keydown",function(e){if(box.hidden)return;
+      if(e.key==="Escape")close();else if(e.key==="ArrowLeft")show(i-1);else if(e.key==="ArrowRight")show(i+1);});
+    var x0=null;
+    box.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;},{passive:true});
+    box.addEventListener("touchend",function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null;});
+  }
+  // copy the link to this story
+  var copy=document.querySelector(".bp-copy"), ok=document.querySelector(".bp-share__ok");
+  if(copy)copy.addEventListener("click",function(){var url=copy.getAttribute("data-url");
+    var done=function(){if(ok)ok.textContent="Link copied.";setTimeout(function(){if(ok)ok.textContent="";},2500);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(done,function(){if(ok)ok.textContent=url;});
+    else if(ok)ok.textContent=url;});
+})();
+
+
+/* travel guide articles: a lightbox for the photos in the text, with arrows, Esc, arrow keys and swipe */
+(function(){
+  var art=document.querySelector(".gprose"), box=document.getElementById("lbox");
+  if(!art||!box)return;
+  var items=[].slice.call(art.querySelectorAll("[data-lb]"));
+  if(!items.length)return;
+  var img=box.querySelector("img"), cap=box.querySelector("figcaption"), i=0, last=null;
+  var show=function(n){i=(n+items.length)%items.length;var a=items[i];img.src=a.getAttribute("href");img.alt=a.getAttribute("data-alt")||"";
+    cap.textContent=(a.getAttribute("data-alt")||"")+"  ·  "+(i+1)+" / "+items.length;};
+  var open=function(n){last=document.activeElement;show(n);box.hidden=false;document.body.style.overflow="hidden";box.querySelector(".lbox__close").focus();};
+  var close=function(){box.hidden=true;document.body.style.overflow="";if(last)last.focus();};
   items.forEach(function(a,n){a.addEventListener("click",function(e){e.preventDefault();open(n);});});
   box.querySelector(".lbox__close").addEventListener("click",close);
   box.querySelector(".lbox__nav--prev").addEventListener("click",function(){show(i-1);});
@@ -204,4 +249,84 @@
   var x0=null;
   box.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;},{passive:true});
   box.addEventListener("touchend",function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null;});
+})();
+
+
+/* our services detail pages: one lightbox for the photos in the text, the itinerary and the gallery */
+(function(){
+  var page=document.querySelector(".xdetail"), box=document.getElementById("lbox");
+  if(!page||!box)return;
+  var items=[].slice.call(page.querySelectorAll("[data-lb]"));
+  if(!items.length)return;
+  var img=box.querySelector("img"), cap=box.querySelector("figcaption"), i=0, last=null;
+  var show=function(n){i=(n+items.length)%items.length;var a=items[i];img.src=a.getAttribute("href");img.alt=a.getAttribute("data-alt")||"";
+    cap.textContent=(a.getAttribute("data-alt")||"")+"  ·  "+(i+1)+" / "+items.length;};
+  var open=function(n){last=document.activeElement;show(n);box.hidden=false;document.body.style.overflow="hidden";box.querySelector(".lbox__close").focus();};
+  var close=function(){box.hidden=true;document.body.style.overflow="";if(last)last.focus();};
+  items.forEach(function(a,n){a.addEventListener("click",function(e){e.preventDefault();open(n);});});
+  box.querySelector(".lbox__close").addEventListener("click",close);
+  box.querySelector(".lbox__nav--prev").addEventListener("click",function(){show(i-1);});
+  box.querySelector(".lbox__nav--next").addEventListener("click",function(){show(i+1);});
+  box.addEventListener("click",function(e){if(e.target===box)close();});
+  document.addEventListener("keydown",function(e){if(box.hidden)return;
+    if(e.key==="Escape")close();else if(e.key==="ArrowLeft")show(i-1);else if(e.key==="ArrowRight")show(i+1);});
+  var x0=null;
+  box.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;},{passive:true});
+  box.addEventListener("touchend",function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null;});
+})();
+
+/* blog post: the "From the trail" carousel. It moves one photo at a time with the arrows, a swipe or every 3.5 s, loops
+   without an end, pauses while the mouse is over it, and does not move by itself when the visitor prefers reduced motion. */
+(function(){
+  [].slice.call(document.querySelectorAll("[data-carousel]")).forEach(function(car){
+    var track=car.querySelector(".bp-car__track"), slides=[].slice.call(track.children), n=slides.length, k=3;
+    if(n<3)return;
+    // copies of the first and last photos at each end, so the row never runs out; a copy opens its photo in the lightbox
+    var copy=function(s){var c=s.cloneNode(true);c.removeAttribute("data-lb");c.setAttribute("aria-hidden","true");c.setAttribute("tabindex","-1");
+      c.addEventListener("click",function(e){e.preventDefault();s.click();});return c;};
+    for(var j=0;j<k;j++)track.appendChild(copy(slides[j]));
+    for(j=0;j<k;j++)track.insertBefore(copy(slides[n-1-j]),track.firstChild);
+    var i=k, step=0, busy=false, timer=null, hover=false;
+    var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var measure=function(){step=track.children[0].getBoundingClientRect().width+(parseFloat(getComputedStyle(track).columnGap)||0);};
+    var place=function(anim){if(!anim)track.style.transition="none";track.style.transform="translateX("+(-i*step)+"px)";if(!anim){void track.offsetWidth;track.style.transition="";}};
+    // after a move onto a copy, jump to the same photo in the real row without animation
+    var settle=function(){busy=false;if(i>=n+k){i-=n;place(false);}else if(i<k){i+=n;place(false);}};
+    var go=function(d){if(busy)return;busy=true;i+=d;place(true);
+      if(!parseFloat(getComputedStyle(track).transitionDuration))settle();else setTimeout(function(){if(busy)settle();},800);};
+    track.addEventListener("transitionend",function(e){if(e.target===track&&busy)settle();});
+    var stop=function(){clearInterval(timer);timer=null;};
+    var start=function(){stop();if(reduce||hover||document.hidden)return;timer=setInterval(function(){go(1);},3500);};
+    car.querySelector(".bp-car__btn--prev").addEventListener("click",function(){go(-1);});
+    car.querySelector(".bp-car__btn--next").addEventListener("click",function(){go(1);});
+    car.addEventListener("pointerenter",function(e){if(e.pointerType==="mouse"){hover=true;stop();}});
+    car.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse"){hover=false;start();}});
+    // swipe: a sideways swipe moves one photo and is not taken as a tap on the photo
+    var x0=null, swiped=0;
+    car.addEventListener("touchstart",function(e){x0=e.touches[0].clientX;stop();},{passive:true});
+    car.addEventListener("touchend",function(e){if(x0!==null){var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){go(dx<0?1:-1);swiped=Date.now();}}x0=null;start();});
+    car.addEventListener("click",function(e){if(Date.now()-swiped<500){e.preventDefault();e.stopPropagation();}},true);
+    document.addEventListener("visibilitychange",function(){if(document.hidden)stop();else start();});
+    window.addEventListener("resize",function(){measure();place(false);});
+    measure();place(false);start();
+  });
+})();
+
+/* footer: "More" in the Travel Guide column opens the rest of the guides below it, and "Less" closes them */
+(function(){
+  var btn=document.querySelector(".fmore");if(!btn)return;
+  var list=document.getElementById(btn.getAttribute("aria-controls")),label=btn.querySelector(".fmore__t");
+  btn.addEventListener("click",function(){
+    var open=btn.getAttribute("aria-expanded")!=="true";
+    btn.setAttribute("aria-expanded",open?"true":"false");label.textContent=open?"Less":"More";
+    list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
+  });
+})();
+
+/* Tables: any table not already inside a scroll box gets one, so a wide table scrolls sideways on its own instead of the page */
+(function(){
+  document.querySelectorAll("table").forEach(function(t){
+    if(t.closest(".tscroll"))return;
+    var w=document.createElement("div");w.className="tscroll";t.parentNode.insertBefore(w,t);w.appendChild(t);
+  });
 })();

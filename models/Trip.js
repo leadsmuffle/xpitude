@@ -11,6 +11,11 @@ const factSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const photoSchema = new mongoose.Schema(
+  { src: { type: String, trim: true }, thumb: { type: String, trim: true }, alt: { type: String, trim: true } },
+  { _id: false }
+);
+
 const tripSchema = new mongoose.Schema(
   {
     slug: { type: String, required: true, unique: true, lowercase: true, trim: true, match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/ },
@@ -25,6 +30,7 @@ const tripSchema = new mongoose.Schema(
     durationLabel: { type: String, trim: true, default: "" },   // e.g. "21 days", "5 to 8 days", "3 nights"
     priceFromUSD: { type: Number, min: 0 },
     shortDescription: { type: String, trim: true, default: "" },
+    cardTitle: { type: String, trim: true, default: "" },       // short title for the cards; the full title is used everywhere else
     tagline: { type: String, trim: true, default: "" },         // the line under the title
     overview: { type: String, trim: true, default: "" },        // further intro paragraphs, one per blank line
     factsTitle: { type: String, trim: true, default: "" },      // "Fast Facts" or "At a Glance"
@@ -43,6 +49,7 @@ const tripSchema = new mongoose.Schema(
     excludes: { type: [String], default: [] },
     images: { type: [String], default: [] },                    // paths under /assets or /uploads
     imageAlt: { type: String, trim: true, default: "" },
+    photos: { type: [photoSchema], default: [] },              // the trip page photos (in the text and the gallery), from its own folder
     imagePosition: { type: String, trim: true, default: "" },  // focus point of the card photo, e.g. "center top" or "center 30%"
     imageNote: { type: String, trim: true, default: "" },       // "Photograph needed" caption shown while there is no image
     featured: { type: Boolean, default: false },                // shown as a card on the homepage

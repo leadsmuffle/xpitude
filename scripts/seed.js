@@ -26,6 +26,7 @@ async function loadGuides() {
     number: i + 1,
     order: i + 1,
     title: decode(g.title),
+    cardTitle: g.cardTitle || "",
     summary: g.intro,
     metaDescription: g.description,
     image: "/assets/" + g.image,

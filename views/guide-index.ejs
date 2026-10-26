@@ -1,22 +1,19 @@
 <%- include("partials/head") %>
 <%- include("partials/header") %>
 <main>
-<section class="ghero">
-  <div class="ghero__media"><img src="/assets/guide-index-hero.webp" alt="Trekkers below the Trango Towers on the way to the Baltoro" fetchpriority="high"></div>
-  <div class="ghero__scrim"></div>
-  <div class="wrap ghero__in">
-    <p class="eyebrow">Travel Guide</p>
-    <h1>Pakistan Travel Guide</h1>
-    <p class="ghero__sub">Everything worth knowing before you go, from visas and seasons to what belongs in your duffel.</p>
-  </div>
-</section>
+<%- include("partials/blog-banner", {
+  photo: "/assets/guide-index-hero.webp", photoHtml: blogHelpers.img("/assets/guide-index-hero.webp", "Trekkers below the Trango Towers on the way to the Baltoro", { sizes: "(max-width: 767px) 100vw, 50vw", eager: true }),
+  fit: blogHelpers.bannerFit("/assets/guide-index-hero.webp"), name: "travel-guide",
+  label: "Travel Guide", title: "Pakistan Travel Guide",
+  bannerIntro: "Everything worth knowing before you go, from visas and seasons to what belongs in your duffel.",
+}) %>
 
-<section class="section">
+<section class="section gsec">
   <div class="wrap">
     <div class="gcards">
-<% guides.forEach((g) => { %>      <a class="gcard" href="<%= g.url %>">
+<% guides.forEach((g, i) => { %>      <a class="gcard<%= i < 2 ? " gcard--feat" : "" %>" href="<%= g.url %>">
         <span class="gcard__img"><% if (g.image) { %><img src="<%= g.image %>" alt="<%= g.imageAlt || g.title %>" loading="lazy" decoding="async"><% } %><span class="gcard__n"><%= String(g.number).padStart(2, "0") %></span></span>
-        <span class="gcard__body"><h2><%= g.title %></h2><p><%= g.summary %></p><span class="gcard__more">Read the guide <span class="arw"></span></span></span>
+        <span class="gcard__body"><h2 title="<%= g.title %>"><%= g.cardTitle || g.title %></h2><p><%= g.summary %></p><span class="gcard__more">Read the guide <span class="arw"></span></span></span>
       </a>
 <% }) %>    </div>
   </div>

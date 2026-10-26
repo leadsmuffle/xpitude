@@ -13,6 +13,12 @@ const blogSchema = new mongoose.Schema(
     body: { type: String, default: "" },                        // HTML
     coverImage: { type: String, trim: true, default: "" },
     coverAlt: { type: String, trim: true, default: "" },
+    bannerImage: { type: String, trim: true, default: "" },    // photo at the top of the post page (empty = the cover image)
+    bannerFocus: { type: String, trim: true, default: "center 40%" }, // focus point of that photo, which part stays in view when it is cropped
+    cardTitle: { type: String, trim: true, default: "" },      // short one-line title for the cards on /blog
+    cardImage: { type: String, trim: true, default: "" },      // photo for the cards on /blog (empty = the cover image)
+    cardImagePosition: { type: String, trim: true, default: "" }, // focus point of that photo, e.g. "center 40%"
+    articlePhotos: { type: [photoSchema], default: [] },        // photos in the article, in order: text width, large, small, small, full width
     gallery: { type: [photoSchema], default: [] },              // "From the trail" photos after the article
     relatedTrip: { type: String, trim: true, default: "" },     // a trip's slug, or trekking / tours / spiritual / corporate
     order: { type: Number, default: 0 },

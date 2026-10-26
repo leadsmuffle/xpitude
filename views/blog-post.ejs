@@ -1,58 +1,113 @@
 <%- include("partials/head") %>
 <%- include("partials/header") %>
 <%
+  // One template for every blog post. The body is laid out in lib/blog-layout.js with the post's own photos.
+  const { img, esc } = blogHelpers;
   const published = post.publishedAt.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   // A long title is shown as a main title and, after the colon, a subtitle line; both stay inside the one h1.
   const cut = post.title.indexOf(":");
   const mainTitle = cut > 0 ? post.title.slice(0, cut).trim() : post.title;
   const subTitle = cut > 0 ? post.title.slice(cut + 1).trim() : "";
+  const pageUrl = site.url + post.url;
+  const share = [
+    ["WhatsApp", "https://wa.me/?text=" + encodeURIComponent(post.title + " " + pageUrl), icon("whatsapp")],
+    ["Facebook", "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(pageUrl), '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>'],
+    ["LinkedIn", "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(pageUrl), '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'],
+    ["X", "https://twitter.com/intent/tweet?url=" + encodeURIComponent(pageUrl) + "&text=" + encodeURIComponent(post.title), '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>'],
+  ];
+  const waPlan = site.whatsappUrl ? site.whatsappUrl.split("?")[0] + "?text=" + encodeURIComponent("Hi XPITUDE, I read \"" + post.title + "\" and would like to plan a trip.") : "";
+  const glance = trip ? [["Duration", trip.duration], ["Altitude", trip.altitude], [trip.category === "spiritual" ? "Level" : "Grade", trip.grade], ["Best season", trip.season]].filter((r) => r[1]) : [];
+  const toc = layout.toc;
 %>
+<div class="bp-progress" aria-hidden="true"><span id="bpBar"></span></div>
 <main>
-<section class="phero phero--post">
-<% if (post.coverImage) { %>  <div class="phero__media"><img src="<%= post.coverImage %>" alt="<%= post.coverAlt || "" %>" fetchpriority="high"></div>
-  <div class="phero__scrim"></div>
-<% } %>  <div class="wrap">
-    <p class="eyebrow"><%= published %></p>
-    <h1><span class="phero__title"><%= mainTitle %><% if (subTitle) { %><span class="sr">:</span><% } %></span><% if (subTitle) { %> <span class="phero__subtitle"><%= subTitle %></span><% } %></h1>
-<% if (post.excerpt) { %>    <p class="phero__sub"><%= post.excerpt %></p>
-<% } %>  </div>
-</section>
+<%- include("partials/blog-banner", {
+  photo: banner, photoHtml: banner ? img(banner, post.coverAlt || post.title, { sizes: "(max-width: 767px) 100vw, 50vw", eager: true, pos: post.bannerFocus || "center 40%" }) : "", fit: "cover",
+  label: tag, title: mainTitle, subtitle: subTitle, name: post.slug,
+  meta: `<time datetime="${post.publishedAt.toISOString().slice(0, 10)}">${esc(published)}</time> · ${layout.minutes} min read`,
+}) %>
 
-<section class="section">
-  <div class="wrap">
-    <article class="prose bpost">
-      <p class="bpost__date"><time datetime="<%= post.publishedAt.toISOString().slice(0, 10) %>"><%= published %></time></p>
-<%- post.body %>
-<% if (related) { %>      <aside class="brel" aria-label="Plan this trip">
-        <a class="brel__card" href="<%= related.url %>">
-<% /* posts with their own photo folder show only those photos, so the card has no photo there */ if (related.image && !["/assets/journal/", "/images/blog/"].some((p) => String(post.coverImage).startsWith(p))) { %>          <span class="brel__img"><img src="<%= related.image %>" alt="<%= related.imageAlt || related.title %>" loading="lazy" decoding="async"></span>
-<% } %>          <span class="brel__txt"><span class="data"><%= related.label %></span><b><%= related.title %></b><% if (related.tagline) { %><span class="brel__tag"><%= related.tagline %></span><% } %></span>
-        </a>
-        <a href="/contact" class="btn btn--primary">Plan your journey <span class="arw"></span></a>
-      </aside>
-<% } %>    </article>
-<% if (post.gallery && post.gallery.length) { %>    <section class="bgal" aria-labelledby="bgal-title">
-      <h2 id="bgal-title" class="d3">From the trail</h2>
-      <div class="bgal__grid" id="bgalGrid">
-<% post.gallery.forEach((p, i) => { %>        <a class="bgal__item" href="<%= p.src %>" data-alt="<%= p.alt %>" aria-label="Open photo <%= i + 1 %> of <%= post.gallery.length %>: <%= p.alt %>"><img src="<%= p.thumb || p.src %>" alt="<%= p.alt %>" loading="lazy" decoding="async"></a>
+<section class="section bp-sec">
+  <div class="wrap bp-grid">
+    <article class="bp-article">
+<% if (toc.length > 1) { %>      <details class="bp-toc bp-toc--top">
+        <summary>In this story</summary>
+        <ol><% toc.forEach((h) => { %><li><a href="#<%= h.id %>"><%= h.text %></a></li><% }) %></ol>
+      </details>
+<% } %>      <div class="prose bp-body">
+<%- layout.parts[0] %>
+<%- layout.photos.text %>
+<%- layout.parts[1] %>
+<%- layout.photos.trio %>
+<%- layout.parts[2] %>
+<%- layout.photos.full %>
+      </div>
+    </article>
+
+    <aside class="bp-side" aria-label="About this story">
+      <div class="bp-side__in">
+<% if (toc.length > 1) { %>        <nav class="bp-box bp-toc bp-toc--side" aria-label="In this story">
+          <p class="bp-box__t">In this story</p>
+          <ol id="bpToc"><% toc.forEach((h) => { %><li><a href="#<%= h.id %>"><%= h.text %></a></li><% }) %></ol>
+        </nav>
+<% } if (trip && glance.length) { %>        <div class="bp-box bp-glance">
+          <p class="bp-box__t">Trip at a glance</p>
+          <p class="bp-glance__name"><%= trip.cardTitle || trip.title %></p>
+          <dl><% glance.forEach(([k, v]) => { %><div><dt><%= k %></dt><dd><%= v %></dd></div><% }) %></dl>
+          <a href="<%= trip.url %>#enquire" class="btn btn--primary">Enquire <span class="arw"></span></a>
+          <a href="<%= trip.url %>" class="tlink">View the trip <span class="arw"></span></a>
+        </div>
+<% } %>        <div class="bp-box bp-share">
+          <p class="bp-box__t">Share this story</p>
+          <div class="bp-share__row">
+<% share.forEach(([name, href, svg]) => { %>            <a href="<%= href %>" target="_blank" rel="noopener noreferrer" aria-label="Share on <%= name %>"><%- svg %></a>
+<% }) %>            <button type="button" class="bp-copy" data-url="<%= pageUrl %>" aria-label="Copy the link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.6 13.4a4 4 0 0 0 5.66 0l3.54-3.54a4 4 0 0 0-5.66-5.66l-1.06 1.06" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13.4 10.6a4 4 0 0 0-5.66 0L4.2 14.14a4 4 0 0 0 5.66 5.66l1.06-1.06" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          </div>
+          <p class="bp-share__ok" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </aside>
+  </div>
+<% /* after the article and sidebar: the rest of the text */ if (layout.parts[3]) { %>  <div class="wrap bp-grid bp-grid--tail<%= layout.photos.full ? " bp-grid--after-photo" : "" %>">
+    <div class="bp-article"><div class="prose bp-body">
+<%- layout.parts[3] %>
+    </div></div>
+  </div>
+<% } %>
+  <div class="wrap bp-after">
+<% if (layout.gallery.length) { const car = layout.gallery.length >= 3; /* 3 or more photos: a carousel (site.js), fewer: the grid */ %>    <section class="bp-gal" aria-labelledby="bpgal-title">
+      <h2 id="bpgal-title" class="d3">From the trail</h2>
+<% if (car) { %>      <div class="bp-car" data-carousel role="region" aria-roledescription="carousel" aria-labelledby="bpgal-title">
+        <button class="bp-car__btn bp-car__btn--prev" type="button" aria-label="Previous"><span class="material-symbols-outlined" aria-hidden="true">chevron_left</span></button>
+        <div class="bp-car__view">
+<% } %>      <div class="bp-gal__grid<%= car ? " bp-car__track" : "" %>">
+<% layout.gallery.forEach((p, i) => { %>        <a class="bp-gal__item" href="<%= p.src %>" data-lb data-alt="<%= p.caption || p.alt %>" aria-label="Open photo: <%= p.caption || p.alt %>"><%- img(p.src, p.alt, { sizes: car ? "(max-width: 767px) 87vw, (max-width: 1040px) 60vw, 480px" : "(max-width: 560px) 100vw, (max-width: 1040px) 50vw, 360px", pos: "center 45%" }) %></a>
 <% }) %>      </div>
+<% if (car) { %>        </div>
+        <button class="bp-car__btn bp-car__btn--next" type="button" aria-label="Next"><span class="material-symbols-outlined" aria-hidden="true">chevron_right</span></button>
+      </div>
+<% } %>    </section>
+<% } if (!trip && related) { %>    <section class="bp-trip" aria-label="Plan a trip">
+      <a class="brel__card" href="<%= related.url %>">
+        <span class="brel__txt"><span class="data"><%= related.label %></span><b><%= related.title %></b><% if (related.tagline) { %><span class="brel__tag"><%= related.tagline %></span><% } %></span>
+      </a>
     </section>
-    <div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
-      <button class="lbox__close" type="button" aria-label="Close">×</button>
-      <button class="lbox__nav lbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
-      <figure class="lbox__fig"><img alt=""><figcaption></figcaption></figure>
-      <button class="lbox__nav lbox__nav--next" type="button" aria-label="Next photo">›</button>
-    </div>
-<% } %><% if (more && more.length) { %>    <div class="prose" style="margin:clamp(40px,5vw,64px) auto 0">
-      <h2>More from the journal</h2>
-      <ul>
-<% more.forEach((p) => { %>        <li><a href="<%= p.url %>"><%= p.title %></a></li>
-<% }) %>        <li><a href="/travel-guide">The Pakistan Travel Guide: visas, seasons, packing and insurance</a></li>
-      </ul>
-    </div>
-<% } %>    <div class="center-cta"><a href="/blog" class="tlink">Back to the journal <span class="arw"></span></a></div>
+<% } %>    <section class="bp-cta">
+      <h2 class="d3">Tell us the month. We'll tell you what's possible.</h2>
+      <div class="bp-cta__btns">
+        <a href="/contact" class="btn btn--primary">Plan your journey <span class="arw"></span></a>
+<% if (waPlan) { %>        <a href="<%= waPlan %>" class="btn xbtn-wa" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %> WhatsApp</a>
+<% } %>      </div>
+    </section>
+    <p class="bp-back"><a href="/blog" class="tlink"><span class="arw arw--back"></span> Back to the journal</a></p>
   </div>
 </section>
-<%- include("partials/cta") %>
+
+<div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lbox__close" type="button" aria-label="Close">×</button>
+  <button class="lbox__nav lbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
+  <figure class="lbox__fig"><img alt=""><figcaption></figcaption></figure>
+  <button class="lbox__nav lbox__nav--next" type="button" aria-label="Next photo">›</button>
+</div>
 </main>
 <%- include("partials/footer") %>
