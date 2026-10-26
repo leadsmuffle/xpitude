@@ -341,7 +341,6 @@ p{margin:0 0 1.1em} p:last-child{margin-bottom:0}
 .footer__bottom{display:flex;justify-content:space-between;gap:calc(18 * var(--px));flex-wrap:wrap;align-items:center;
   padding-top:calc(20 * var(--px));border-top:1px solid var(--hair)}
 .footer__bottom .data{font-size:.61rem;font-variation-settings:"opsz" calc(.61rem / var(--px));color:var(--ash)}
-.fsoc{display:flex;gap:calc(10 * var(--px));margin-top:calc(18 * var(--px))}
 /* Social icons (LinkedIn, Facebook, Instagram, X) in the header and footer */
 .follow{display:flex;align-items:center;gap:calc(8 * var(--px))}
 .sico{width:calc(32 * var(--px));height:calc(32 * var(--px));border-radius:50%;display:grid;place-items:center;flex:none;color:var(--grey);
@@ -1482,7 +1481,7 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
 .footer__top > *{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:28px;align-items:center}
 .footer__top .frow1{align-self:start}
 .fcon{margin-top:0;padding-top:0}
-.frow2 .fsoc,.frow2 .ffollow{margin-top:0}
+.frow2 .ffollow{margin-top:0}
 @media (min-width:1241px){.footer__top{row-gap:28px}}
 
 /* Footer only: lines closer together. Links 6px apart at line-height 1.35, 12px under each heading, the description at 1.45

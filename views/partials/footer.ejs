@@ -1,6 +1,3 @@
-<%
-  const fsoc = [["instagram", "Instagram"], ["tiktok", "TikTok"], ["youtube", "YouTube"], ["facebook", "Facebook"]].filter((s) => site.social[s[0]]);
-%>
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
   <div class="wrap">
@@ -13,10 +10,7 @@
         <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
         </div>
         <div class="frow2">
-<% if (fsoc.length) { %>        <div class="fsoc">
-<% fsoc.forEach(([key, label]) => { %>          <a class="ico" href="<%= site.social[key] %>" aria-label="<%= label %>" rel="noopener" target="_blank"><%- icon(key) %></a>
-<% }) %>        </div>
-<% } if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
+<% if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
 <% } %>        </div>
       </div>
       <div class="fcol"><div class="frow1"><h4>Services</h4><ul>
