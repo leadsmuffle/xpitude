@@ -48,7 +48,7 @@
         <div class="dd dd--blog" id="blogMenu">
           <div class="wrap dd__in">
             <ul class="bmenu">
-<% blogMenu.forEach((p) => { %>              <li><a class="bmenu__i" href="<%= p.url %>" title="<%= p.title %>"><span class="bmenu__img"><img class="mcard__img" src="<%= p.img %>" alt="" width="112" height="112" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t mcard__t"><%= p.label %></span></a></li>
+<% blogMenu.forEach((p) => { %>              <li><a class="bmenu__i" href="<%= p.url %>"><span class="bmenu__img"><img src="<%= p.img %>" alt="" width="400" height="250" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t mcard__t"><%= p.label %></span></a></li>
 <% }) %>            </ul>
             <div class="bmenu__more"><a href="/blog">More blog posts →</a></div>
           </div>
@@ -87,7 +87,7 @@
   <details class="drawer__grp drawer__grp--blog">
     <summary>Our Blog</summary>
     <ul class="bmenu">
-<% blogMenu.forEach((p) => { %>      <li><a class="bmenu__i" href="<%= p.url %>" title="<%= p.title %>"><span class="bmenu__img"><img class="mcard__img" src="<%= p.img %>" alt="" width="112" height="112" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t mcard__t"><%= p.label %></span></a></li>
+<% blogMenu.forEach((p) => { %>      <li><a class="bmenu__i" href="<%= p.url %>"><span class="bmenu__img"><img src="<%= p.img %>" alt="" width="400" height="250" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t mcard__t"><%= p.label %></span></a></li>
 <% }) %>    </ul>
     <a class="bmenu__more" href="/blog">More blog posts →</a>
   </details>
