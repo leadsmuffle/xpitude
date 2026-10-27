@@ -2,6 +2,7 @@
   // Travel Guide dropdown: the guides shown, in this order, each with its Google icon name, short label and description
   // (middleware/nav.js, shared with the footer). The label is only what the dropdown shows; the link keeps the guide's full title.
   const guideMenu = nav.guideMenu || [];
+  const blogMenu = nav.blogMenu || []; // Our Blog dropdown and drawer: the 6 newest posts (middleware/nav.js)
   // Our Services dropdown: the four categories, each with its photo, tagline and a two line description.
   const serviceMenu = [
     ["/trekking", "/assets/cat-trek.jpg", "Trekking Expeditions", "Base camps and high passes", "Supported routes to K2 Base Camp, Nanga Parbat, Rush Lake and Nangma Valley."],
@@ -43,7 +44,16 @@
           </div>
         </div>
       </span>
-      <span><a<%- is("blog") %> href="/blog">Our Blog</a></span>
+      <span class="has-dd" id="blogTrigger"><a<%- is("blog") %> href="/blog" aria-haspopup="true" aria-expanded="false" aria-controls="blogMenu">Our Blog</a>
+        <div class="dd dd--blog" id="blogMenu">
+          <div class="wrap dd__in">
+            <ul class="bmenu">
+<% blogMenu.forEach((p) => { %>              <li><a class="bmenu__i" href="<%= p.url %>" title="<%= p.title %>"><span class="bmenu__img"><img src="<%= p.img %>" alt="" width="400" height="250" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t"><%= p.label %></span></a></li>
+<% }) %>            </ul>
+            <div class="bmenu__more"><a href="/blog">More blog posts →</a></div>
+          </div>
+        </div>
+      </span>
       <span><a<%- is("contact") %> href="/contact">Contact Us</a></span>
     </nav>
 
@@ -74,7 +84,14 @@
     <summary>Travel Guide</summary>
 <% nav.guides.filter((g) => g.slug !== "recommended-medical-kit").forEach((g) => { %>    <a href="<%= g.url %>"><%= g.title %></a>
 <% }) %>  </details>
-  <a href="/blog">Our Blog</a><a href="/contact">Contact Us</a><a href="/#contact">Plan your journey</a>
+  <details class="drawer__grp drawer__grp--blog">
+    <summary>Our Blog</summary>
+    <ul class="bmenu">
+<% blogMenu.forEach((p) => { %>      <li><a class="bmenu__i" href="<%= p.url %>" title="<%= p.title %>"><span class="bmenu__img"><img src="<%= p.img %>" alt="" width="400" height="250" loading="lazy" decoding="async"<% if (p.pos) { %> style="object-position:<%= p.pos %>"<% } %>></span><span class="bmenu__t"><%= p.label %></span></a></li>
+<% }) %>    </ul>
+    <a class="bmenu__more" href="/blog">More blog posts →</a>
+  </details>
+  <a href="/contact">Contact Us</a><a href="/#contact">Plan your journey</a>
   <div class="drawer__foot">
 <% if (site.phone) { %>    <a class="hphone" href="<%= site.phoneHref %>" aria-label="Call XPITUDE on <%= site.phone %>"><%- icon("phone") %><span><%= site.phone %></span></a>
 <% } if (socials.length) { %>    <div class="topbar__soc">
