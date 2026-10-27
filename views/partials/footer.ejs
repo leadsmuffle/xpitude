@@ -3,15 +3,16 @@
   <div class="wrap">
 <%
   /* Footer lists, read from the site data (middleware/nav.js): each column shows 9 links, the rest open under "More". */
+  const fn = nav.footerNames || {}; // short footer names (config/footer-names.js); the full title stays in the link title
   const svc = [];
   // the four service names as the footer has always shown them; the links and the trips come from the site data
   const svcName = { trekking: "Trekking Expeditions", tours: "Tours and Sightseeing", spiritual: "Spiritual Trips and Yoga Retreats", corporate: "Corporate Retreats" };
   Object.values(categories).forEach((c) => {
-    svc.push({ href: c.path, label: svcName[c.key] || c.label, cls: "flist__cat" });
-    (nav[c.key] || []).forEach((t) => svc.push({ href: t.url, label: t.title }));
+    svc.push({ href: c.path, label: fn[c.path] || svcName[c.key] || c.label, title: svcName[c.key] || c.label, cls: "flist__cat" });
+    (nav[c.key] || []).forEach((t) => svc.push({ href: t.url, label: fn[t.url] || t.title, title: t.title }));
   });
   const guides = (nav.guideMenu || []).map(({ g, label }) => ({ href: g.url, label, title: g.title }));
-  const posts = (nav.posts || []).map((p) => ({ href: p.url, label: p.title }));
+  const posts = (nav.posts || []).map((p) => ({ href: p.url, label: fn[p.url] || p.cardTitle || p.title, title: p.title }));
 %>
     <div class="ftop">
       <div class="fcol ftop__svc"><h4>Our Services</h4>

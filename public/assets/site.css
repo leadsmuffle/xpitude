@@ -1609,10 +1609,9 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
   .fbot__con a::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 22px);bottom:calc(50% - 22px)}
 }
 
-/* Footer columns: bold headings (1px bigger, 14px above the first link), smaller links (14px, 7px apart) */
-.ftop h4{font-size:calc(.62rem + 1px);font-variation-settings:"opsz" calc((.62rem + 1px) / var(--px));font-weight:700;color:#111}
-.footer .ftop h4{margin-bottom:14px}
+/* Footer columns: big bold headings (17px, 16px above the first link), smaller links (14px, 7px apart) */
+.ftop h4{font-size:17px;font-variation-settings:"opsz" calc(17px / var(--px));font-weight:700;letter-spacing:.06em;color:#111}
+.footer .ftop h4{margin-bottom:16px}
 .ftop .flist li{margin-bottom:7px;font-size:14px;line-height:1.4}
 .ftop .flist a,.ftop .fmore{font-size:14px;font-variation-settings:"opsz" calc(14px / var(--px));line-height:1.4}
 .ftop .fmore__list li:first-child{margin-top:7px}
-@media (max-width:767px){.ftop h4{font-size:13px;font-variation-settings:"opsz" calc(13px / var(--px))}}

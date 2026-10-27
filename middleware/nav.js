@@ -1,6 +1,7 @@
 // Loads what the header, mega menu, drawer and footer need on every page.
 // Cached briefly in memory; the admin panel clears it after any change.
 const { Trip, GuideArticle, BlogPost } = require("../models");
+const footerNames = require("../config/footer-names");
 
 // The Travel Guide dropdown in the header and the Travel Guide column in the footer: the guides shown, in this order,
 // each with its Google icon name, short label and description.
@@ -24,11 +25,11 @@ async function build() {
   const [trips, guides, posts] = await Promise.all([
     Trip.find({ published: true, inMenu: true }).sort({ order: 1, title: 1 }).select("slug title category"),
     GuideArticle.find().sort({ order: 1, number: 1 }).select("slug title number"),
-    BlogPost.find({ publishedAt: { $ne: null, $lte: new Date() } }).sort({ publishedAt: -1 }).select("slug title"), // footer: newest first
+    BlogPost.find({ publishedAt: { $ne: null, $lte: new Date() } }).sort({ publishedAt: -1 }).select("slug title cardTitle"), // footer: newest first
   ]);
   const by = (c) => trips.filter((t) => t.category === c);
   const guideMenu = GUIDE_MENU.map(([slug, symbol, label, text]) => ({ g: guides.find((x) => x.slug === slug), symbol, label, text })).filter((i) => i.g);
-  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides, guideMenu, posts };
+  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides, guideMenu, posts, footerNames };
 }
 
 async function load(req, res, next) {
