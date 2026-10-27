@@ -14,8 +14,11 @@
 <% } %>        </div>
       </div>
       <div class="fcol"><div class="frow1"><h4>Services</h4><ul>
-        <li><a href="/trekking">Trekking Expeditions</a></li><li><a href="/tours">Tours and Sightseeing</a></li>
-        <li><a href="/spiritual">Spiritual Trips and Yoga Retreats</a></li><li><a href="/corporate">Corporate Retreats</a></li></ul></div>
+<% [["trekking", "Trekking Expeditions"], ["tours", "Tours and Sightseeing"], ["spiritual", "Spiritual Trips and Yoga Retreats"], ["corporate", "Corporate Retreats"]].forEach(([key, label]) => { const list = nav[key] || []; %>        <li><a href="/<%= key %>"><%= label %></a><% if (list.length) { %><button class="fsv__btn" type="button" aria-expanded="false" aria-controls="fsv-<%= key %>" aria-label="Show the <%= label %> trips"><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
+          <ul class="fsv__list" id="fsv-<%= key %>" inert>
+<% list.forEach((t) => { %>            <li><a href="<%= t.url %>"><%= t.title %></a></li>
+<% }) %>          </ul><% } %></li>
+<% }) %>      </ul></div>
         <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></div></div>
       <div class="fcol"><div class="frow1"><h4>Company</h4><ul>
         <li><a href="/about">About Us</a></li><li><a href="/blog">Our Blog</a></li>

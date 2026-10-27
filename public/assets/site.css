@@ -1571,3 +1571,17 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
   .ck__btn--link{flex:0 0 auto}
   .ckp__btns .ck__btn{flex:1 1 100%}
 }
+
+/* Footer, Services column: the arrow after each service opens the list of its trips below it (site.js) */
+.fsv__btn{margin:0 0 0 4px;padding:0;border:0;background:none;color:var(--grey);line-height:0;vertical-align:middle;cursor:pointer;transition:color .3s var(--ease)}
+.fsv__btn:hover,.fsv__btn:focus-visible{color:var(--crimson)}
+.fsv__btn .material-symbols-outlined{font-size:18px;line-height:1;transition:transform .3s ease}
+.fsv__btn[aria-expanded="true"] .material-symbols-outlined{transform:rotate(180deg)}
+.fcol .fsv__list{box-sizing:border-box;width:0;min-width:100%;list-style:none;margin:0;padding:0 0 0 12px;border-left:1px solid var(--hair);max-height:0;overflow:hidden;transition:max-height .35s ease}
+.fsv__list li:first-child{margin-top:6px}
+.footer .fsv__list a{white-space:normal;color:var(--ash)}
+.footer .fsv__list a:hover{color:var(--crimson)}
+@media (max-width:767px){
+  .fsv__btn{position:relative}
+  .fsv__btn::after{content:"";position:absolute;left:-12px;right:-12px;top:calc(50% - 22px);bottom:calc(50% - 22px)}
+}

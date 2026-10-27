@@ -366,3 +366,16 @@
   document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
   var c=read();if(c)run(c);else banner.hidden=false;
 })();
+
+/* Footer, Services column: each arrow opens or closes the trips of that service */
+(function(){
+  document.querySelectorAll(".fsv__btn").forEach(function(btn){
+    var list=document.getElementById(btn.getAttribute("aria-controls"));if(!list)return;
+    var label=btn.getAttribute("aria-label");
+    btn.addEventListener("click",function(){
+      var open=btn.getAttribute("aria-expanded")!=="true";
+      btn.setAttribute("aria-expanded",open?"true":"false");btn.setAttribute("aria-label",open?label.replace("Show","Hide"):label);
+      list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
+    });
+  });
+})();
