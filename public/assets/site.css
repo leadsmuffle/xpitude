@@ -1653,3 +1653,11 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
 .drawer__grp .bmenu__t{color:rgba(255,255,255,.85)}
 .drawer__grp .bmenu__i:hover .bmenu__t{color:var(--crimson-lift)}
 .drawer__grp .bmenu__more{padding-top:calc(14 * var(--px));color:var(--crimson-lift)}
+
+/* Footer font sizes (desktop and mobile): main titles 14px, Our Services category titles 13px, all other text 12px.
+   The description keeps its width (35ch at 15px) and the space below it (1.1em at 15px), so the bottom row does not move. */
+.footer .ftop h4,.footer .fbot__contact h4{font-size:14px;font-variation-settings:"opsz" calc(14px / var(--px))}
+.footer .ftop .fsvc .fsvc__cat{font-size:13px;font-variation-settings:"opsz" calc(13px / var(--px))}
+.footer .ftop .flist li,.footer .ftop .flist a,.footer .ftop .fmore,.footer .fbot .footer__blurb,.footer .fbot__con li{font-size:12px;font-variation-settings:"opsz" calc(12px / var(--px))}
+.footer .fbot .footer__blurb{width:272px;max-width:100%;margin-bottom:16.5px}
+@media (max-width:767px){.footer .fbot .footer__blurb{width:276.7px}} /* 35ch at 15px with the mobile font scale */
