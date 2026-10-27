@@ -1572,16 +1572,39 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
   .ckp__btns .ck__btn{flex:1 1 100%}
 }
 
-/* Footer, Services column: the arrow after each service opens the list of its trips below it (site.js) */
-.fsv__btn{margin:0 0 0 4px;padding:0;border:0;background:none;color:var(--grey);line-height:0;vertical-align:middle;cursor:pointer;transition:color .3s var(--ease)}
-.fsv__btn:hover,.fsv__btn:focus-visible{color:var(--crimson)}
-.fsv__btn .material-symbols-outlined{font-size:18px;line-height:1;transition:transform .3s ease}
-.fsv__btn[aria-expanded="true"] .material-symbols-outlined{transform:rotate(180deg)}
-.fcol .fsv__list{box-sizing:border-box;width:0;min-width:100%;list-style:none;margin:0;padding:0 0 0 12px;border-left:1px solid var(--hair);max-height:0;overflow:hidden;transition:max-height .35s ease}
-.fsv__list li:first-child{margin-top:6px}
-.footer .fsv__list a{white-space:normal;color:var(--ash)}
-.footer .fsv__list a:hover{color:var(--crimson)}
+/* ====== Footer layout: 4 link columns on top (Our Services over two columns, Travel Guide, Our Blog), then a row with the
+   logo, description and social icons on the left and the contact lines on the right. Each list shows 9 links + "More". ====== */
+.ftop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:clamp(calc(22 * var(--px)),3vw,calc(48 * var(--px)));row-gap:28px;align-items:start;padding-bottom:28px}
+.ftop .fcol{min-width:0}
+.ftop__svc{grid-column:span 2;display:grid;grid-template-columns:subgrid;row-gap:0;align-content:start}
+.ftop__svc h4{grid-column:1/-1}
+.flist{list-style:none;margin:0;padding:0;min-width:0}
+.ftop .flist li{margin:0 0 8px;font-size:15px;line-height:1.4}
+.ftop .flist li:last-child{margin-bottom:0}
+.ftop .flist a{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:15px;font-variation-settings:"opsz" calc(15px / var(--px));line-height:1.4;color:var(--grey)}
+.ftop .flist a:hover{color:var(--crimson)}
+.ftop .flist .flist__cat{font-weight:600;color:var(--ink)}
+.ftop .flist .flist__cat:hover{color:var(--crimson)}
+.ftop .flist .flist__all{color:var(--crimson)}
+.ftop .flist .flist__all:hover{color:var(--crimson-lift)}
+.ftop .fmore{line-height:1.4}
+.ftop .fmore__list li:first-child{margin-top:8px}
+.fbot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 48px;padding:28px 0 calc(24 * var(--px));border-top:1px solid var(--hair)}
+.fbot__brand{flex:0 1 auto;min-width:0}
+.fbot .ffollow{margin-top:16px}
+.fbot__con{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.fbot__con li{display:flex;align-items:center;gap:8px;font-size:15px;font-variation-settings:"opsz" calc(15px / var(--px));line-height:1.4;color:var(--grey);white-space:nowrap}
+.fbot__con svg{flex:none;width:16px;height:16px;fill:#B31217}
+.fbot__con a{color:var(--grey);transition:color .3s var(--ease)}
+.fbot__con a:hover{color:var(--crimson)}
+@media (max-width:1199px){
+  .ftop{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width:767px){
-  .fsv__btn{position:relative}
-  .fsv__btn::after{content:"";position:absolute;left:-12px;right:-12px;top:calc(50% - 22px);bottom:calc(50% - 22px)}
+  .ftop{grid-template-columns:minmax(0,1fr)}
+  .ftop__svc{grid-column:auto}
+  .ftop__svc .flist + .flist{margin-top:8px}
+  .fbot{flex-direction:column;align-items:flex-start}
+  .fbot__con a{position:relative}
+  .fbot__con a::after{content:"";position:absolute;left:0;right:0;top:calc(50% - 22px);bottom:calc(50% - 22px)}
 }

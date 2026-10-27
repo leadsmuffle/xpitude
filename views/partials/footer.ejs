@@ -1,39 +1,43 @@
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
   <div class="wrap">
-    <div class="footer__top">
-      <div class="fcol1">
-        <div class="frow1">
+<%
+  /* Footer lists, read from the site data (middleware/nav.js): each column shows 9 links, the rest open under "More". */
+  const svc = [];
+  // the four service names as the footer has always shown them; the links and the trips come from the site data
+  const svcName = { trekking: "Trekking Expeditions", tours: "Tours and Sightseeing", spiritual: "Spiritual Trips and Yoga Retreats", corporate: "Corporate Retreats" };
+  Object.values(categories).forEach((c) => {
+    svc.push({ href: c.path, label: svcName[c.key] || c.label, cls: "flist__cat" });
+    (nav[c.key] || []).forEach((t) => svc.push({ href: t.url, label: t.title }));
+  });
+  const guides = (nav.guideMenu || []).map(({ g, label }) => ({ href: g.url, label, title: g.title }));
+  const posts = (nav.posts || []).map((p) => ({ href: p.url, label: p.title }));
+%>
+    <div class="ftop">
+      <div class="fcol ftop__svc"><h4>Our Services</h4>
+        <%- include("footer-links", { items: svc.slice(0, 9), rest: [], id: "fmoreSvc1" }) %>
+        <%- include("footer-links", { items: svc.slice(9, 18), rest: svc.slice(18), id: "fmoreSvc" }) %>
+      </div>
+      <div class="fcol"><h4>Travel Guide</h4>
+        <%- include("footer-links", { items: guides.slice(0, 9), rest: guides.slice(9), id: "fmoreGuide" }) %>
+      </div>
+      <div class="fcol"><h4>Our Blog</h4>
+        <%- include("footer-links", { items: posts.slice(0, 9), rest: posts.slice(9), id: "fmoreBlog", after: { href: "/blog", label: "View all →" } }) %>
+      </div>
+    </div>
+    <div class="fbot">
+      <div class="fbot__brand">
         <div class="brand">
           <img class="brand__logo" src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324" loading="lazy">
         </div>
         <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
-        </div>
-        <div class="frow2">
 <% if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
-<% } %>        </div>
-      </div>
-      <div class="fcol"><div class="frow1"><h4>Services</h4><ul>
-<% [["trekking", "Trekking Expeditions"], ["tours", "Tours and Sightseeing"], ["spiritual", "Spiritual Trips and Yoga Retreats"], ["corporate", "Corporate Retreats"]].forEach(([key, label]) => { const list = nav[key] || []; %>        <li><a href="/<%= key %>"><%= label %></a><% if (list.length) { %><button class="fsv__btn" type="button" aria-expanded="false" aria-controls="fsv-<%= key %>" aria-label="Show the <%= label %> trips"><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
-          <ul class="fsv__list" id="fsv-<%= key %>" inert>
-<% list.forEach((t) => { %>            <li><a href="<%= t.url %>"><%= t.title %></a></li>
-<% }) %>          </ul><% } %></li>
-<% }) %>      </ul></div>
-        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">location_on</span><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></div></div>
-      <div class="fcol"><div class="frow1"><h4>Company</h4><ul>
-        <li><a href="/about">About Us</a></li><li><a href="/blog">Our Blog</a></li>
-        <li><a href="/testimonials">Client Testimonials</a></li><li><a href="/contact">Contact Us</a></li></ul></div>
-<% if (site.email) { %>        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">mail</span><a href="mailto:<%= site.email %>"><%= site.email %></a></div>
 <% } %>      </div>
-      <div class="fcol"><div class="frow1"><h4>Travel Guide</h4><ul>
-<% const tg = nav.guideMenu || []; tg.slice(0, 4).forEach(({ g, label }) => { %>        <li><a href="<%= g.url %>" title="<%= g.title %>"><%= label %></a></li>
-<% }); if (tg.length > 4) { %>        <li><button class="fmore" type="button" aria-expanded="false" aria-controls="fmoreList"><span class="fmore__t">More</span><span class="material-symbols-outlined" aria-hidden="true">expand_more</span></button>
-          <ul class="fmore__list" id="fmoreList" inert>
-<% tg.slice(4).forEach(({ g, label }) => { %>            <li><a href="<%= g.url %>" title="<%= g.title %>"><%= label %></a></li>
-<% }) %>          </ul></li>
-<% } %>      </ul></div>
-<% if (site.phone) { %>        <div class="fcon"><span class="material-symbols-outlined" aria-hidden="true">call</span><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></div>
-<% } %>      </div>
+      <ul class="fbot__con">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></li>
+<% if (site.email) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+<% } if (site.phone) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></li>
+<% } %>      </ul>
     </div>
     <div class="footer__bottom">
       <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>

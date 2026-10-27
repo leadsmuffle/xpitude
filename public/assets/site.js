@@ -312,14 +312,15 @@
   });
 })();
 
-/* footer: "More" in the Travel Guide column opens the rest of the guides below it, and "Less" closes them */
+/* footer: every "More" button opens the rest of its list below it, and "Less" closes it */
 (function(){
-  var btn=document.querySelector(".fmore");if(!btn)return;
-  var list=document.getElementById(btn.getAttribute("aria-controls")),label=btn.querySelector(".fmore__t");
-  btn.addEventListener("click",function(){
-    var open=btn.getAttribute("aria-expanded")!=="true";
-    btn.setAttribute("aria-expanded",open?"true":"false");label.textContent=open?"Less":"More";
-    list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
+  document.querySelectorAll(".fmore").forEach(function(btn){
+    var list=document.getElementById(btn.getAttribute("aria-controls")),label=btn.querySelector(".fmore__t");if(!list)return;
+    btn.addEventListener("click",function(){
+      var open=btn.getAttribute("aria-expanded")!=="true";
+      btn.setAttribute("aria-expanded",open?"true":"false");label.textContent=open?"Less":"More";
+      list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
+    });
   });
 })();
 
@@ -365,17 +366,4 @@
   panel.addEventListener("click",function(e){if(e.target===panel)close()});
   document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
   var c=read();if(c)run(c);else banner.hidden=false;
-})();
-
-/* Footer, Services column: each arrow opens or closes the trips of that service */
-(function(){
-  document.querySelectorAll(".fsv__btn").forEach(function(btn){
-    var list=document.getElementById(btn.getAttribute("aria-controls"));if(!list)return;
-    var label=btn.getAttribute("aria-label");
-    btn.addEventListener("click",function(){
-      var open=btn.getAttribute("aria-expanded")!=="true";
-      btn.setAttribute("aria-expanded",open?"true":"false");btn.setAttribute("aria-label",open?label.replace("Show","Hide"):label);
-      list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
-    });
-  });
 })();
