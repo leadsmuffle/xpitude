@@ -2,9 +2,6 @@
 // link carries the full title in its title attribute. A page not listed here uses its own short title (a blog post's
 // cardTitle, a guide's menu label) or its full title.
 module.exports = {
-  // service categories
-  "/spiritual": "Spiritual & Yoga",
-
   // trekking
   "/trekking/k2-base-camp-gondogoro-la": "K2 & Gondogoro La",
   "/trekking/fairy-meadows-nanga-parbat-base-camp": "Fairy Meadows",

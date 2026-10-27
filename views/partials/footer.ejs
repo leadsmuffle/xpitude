@@ -4,13 +4,8 @@
 <%
   /* Footer lists, read from the site data (middleware/nav.js): each column shows 9 links, the rest open under "More". */
   const fn = nav.footerNames || {}; // short footer names (config/footer-names.js); the full title stays in the link title
-  const svc = [];
-  // the four service names as the footer has always shown them; the links and the trips come from the site data
-  const svcName = { trekking: "Trekking Expeditions", tours: "Tours and Sightseeing", spiritual: "Spiritual Trips and Yoga Retreats", corporate: "Corporate Retreats" };
-  Object.values(categories).forEach((c) => {
-    svc.push({ href: c.path, label: fn[c.path] || svcName[c.key] || c.label, title: svcName[c.key] || c.label, cls: "flist__cat" });
-    (nav[c.key] || []).forEach((t) => svc.push({ href: t.url, label: fn[t.url] || t.title, title: t.title }));
-  });
+  // Our Services: only the cards shown on the four category pages, in the same order
+  const svc = (nav.cards || []).map((t) => ({ href: t.url, label: fn[t.url] || t.title, title: t.title }));
   const guides = (nav.guideMenu || []).map(({ g, label }) => ({ href: g.url, label, title: g.title }));
   const posts = (nav.posts || []).map((p) => ({ href: p.url, label: fn[p.url] || p.cardTitle || p.title, title: p.title }));
 %>
@@ -34,11 +29,13 @@
         <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
 <% if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
 <% } %>      </div>
+      <div class="fbot__contact"><h4>Contact</h4>
       <ul class="fbot__con">
         <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></li>
 <% if (site.email) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
 <% } if (site.phone) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></li>
 <% } %>      </ul>
+      </div>
     </div>
     <div class="footer__bottom">
       <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>

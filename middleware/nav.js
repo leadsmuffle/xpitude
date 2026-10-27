@@ -22,14 +22,17 @@ let cachedAt = 0;
 const TTL = 60 * 1000;
 
 async function build() {
-  const [trips, guides, posts] = await Promise.all([
+  const [trips, guides, posts, cards] = await Promise.all([
     Trip.find({ published: true, inMenu: true }).sort({ order: 1, title: 1 }).select("slug title category"),
     GuideArticle.find().sort({ order: 1, number: 1 }).select("slug title number"),
     BlogPost.find({ publishedAt: { $ne: null, $lte: new Date() } }).sort({ publishedAt: -1 }).select("slug title cardTitle"), // footer: newest first
+    // footer Our Services: exactly the cards each category page shows (the same query as pages.category)
+    Trip.find({ published: true, onCategoryPage: { $ne: false } }).sort({ order: 1, title: 1 }).select("slug title category"),
   ]);
   const by = (c) => trips.filter((t) => t.category === c);
   const guideMenu = GUIDE_MENU.map(([slug, symbol, label, text]) => ({ g: guides.find((x) => x.slug === slug), symbol, label, text })).filter((i) => i.g);
-  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides, guideMenu, posts, footerNames };
+  return { trekking: by("trekking"), tours: by("tours"), spiritual: by("spiritual"), corporate: by("corporate"), guides, guideMenu, posts, footerNames,
+    cards: ["trekking", "tours", "spiritual", "corporate"].flatMap((c) => cards.filter((t) => t.category === c)) };
 }
 
 async function load(req, res, next) {
