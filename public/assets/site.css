@@ -1628,15 +1628,15 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
 /* ====== Header Our Blog dropdown (and its accordion in the mobile menu): the 6 newest posts, photo on top, title below.
    The panel itself is the shared .dd panel of Our Services and Travel Guide. ====== */
 .dd--blog .dd__in{padding-block:calc(24 * var(--px))}
-.dd--blog .bmenu{list-style:none;max-width:calc(800 * var(--px));margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.dd--blog .bmenu{list-style:none;max-width:calc(800 * var(--px));margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:calc(16 * var(--px));row-gap:calc(12 * var(--px));align-items:start}
 .dd--blog .bmenu li{display:block;min-width:0}
 .nav .dd--blog .bmenu__i{display:block;padding:0;font-family:var(--display);letter-spacing:0;text-transform:none;color:var(--ink)}
 .nav .dd--blog a::after{content:none}
-.bmenu__img{display:block;aspect-ratio:16/10;overflow:hidden;border-radius:10px;background:var(--mist)}
-.bmenu__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+/* the photo and title use the Our Services classes (.mcard__img 112x96, .mcard__t), so both menus stay identical */
+.bmenu__img{display:block;width:max-content;overflow:hidden;border-radius:calc(12 * var(--px))}
+.bmenu__img img{transition:transform .6s var(--ease)}
 .bmenu__i:hover .bmenu__img img{transform:scale(1.05)}
-.bmenu__t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:8px;font-family:var(--display);font-size:15px;font-variation-settings:"opsz" calc(15px / var(--px));
-  font-weight:500;line-height:1.35;text-align:left;color:var(--ink);transition:color .25s var(--ease)}
+.bmenu__t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:calc(16 * var(--px));font-family:var(--display);text-align:left;color:var(--ink)}
 .bmenu__i:hover .bmenu__t{color:var(--crimson)}
 .dd--blog .bmenu__more{max-width:calc(800 * var(--px));margin:18px auto 0;text-align:center}
 .nav .dd--blog .bmenu__more a{display:inline-block;padding:0;font-family:var(--display);font-size:.875rem;font-variation-settings:"opsz" calc(.875rem / var(--px));font-weight:600;letter-spacing:.02em;text-transform:none;color:var(--crimson)}
@@ -1646,6 +1646,6 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
 .drawer__grp .bmenu{list-style:none;max-width:560px;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .drawer__grp .bmenu li{min-width:0}
 .drawer__grp .bmenu .bmenu__i{display:block;padding:0}
-.drawer__grp .bmenu__t{margin-top:6px;font-size:14px;font-variation-settings:"opsz" calc(14px / var(--px));color:rgba(255,255,255,.85)}
+.drawer__grp .bmenu__t{color:rgba(255,255,255,.85)}
 .drawer__grp .bmenu__i:hover .bmenu__t{color:var(--crimson-lift)}
 .drawer__grp .bmenu__more{padding-top:calc(14 * var(--px));color:var(--crimson-lift)}
