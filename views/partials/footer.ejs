@@ -2,17 +2,24 @@
 <footer class="footer">
   <div class="wrap">
 <%
-  /* Footer lists, read from the site data (middleware/nav.js): each column shows 9 links, the rest open under "More". */
+  /* Footer lists, read from the site data (middleware/nav.js). Travel Guide and Our Blog show 9 links, the rest open under "More". */
   const fn = nav.footerNames || {}; // short footer names (config/footer-names.js); the full title stays in the link title
-  // Our Services: only the cards shown on the four category pages, in the same order
-  const svc = (nav.cards || []).map((t) => ({ href: t.url, label: fn[t.url] || t.title, title: t.title }));
+  // Our Services: each category title, then exactly the cards its category page shows, in the same order.
+  // Column 1: trekking and tours; column 2: spiritual and corporate.
+  const svcName = { trekking: "Trekking Expeditions", tours: "Tours and Sightseeing", spiritual: "Spiritual Trips and Yoga Retreats", corporate: "Corporate Retreats" };
+  const svcGroup = (key) => ({ href: categories[key].path, name: svcName[key],
+    items: (nav.cards || []).filter((t) => t.category === key).map((t) => ({ href: t.url, label: fn[t.url] || t.title, title: t.title })) });
+  const svcCols = [[svcGroup("trekking"), svcGroup("tours")], [svcGroup("spiritual"), svcGroup("corporate")]];
   const guides = (nav.guideMenu || []).map(({ g, label }) => ({ href: g.url, label, title: g.title }));
   const posts = (nav.posts || []).map((p) => ({ href: p.url, label: fn[p.url] || p.cardTitle || p.title, title: p.title }));
 %>
     <div class="ftop">
       <div class="fcol ftop__svc"><h4>Our Services</h4>
-        <%- include("footer-links", { items: svc.slice(0, 9), rest: [], id: "fmoreSvc1" }) %>
-        <%- include("footer-links", { items: svc.slice(9, 18), rest: svc.slice(18), id: "fmoreSvc" }) %>
+<% svcCols.forEach((col) => { %>        <div class="fsvc">
+<% col.forEach((g) => { %>          <div class="fsvc__grp"><a class="fsvc__cat" href="<%= g.href %>" title="<%= g.name %>"><%= g.name %></a>
+          <%- include("footer-links", { items: g.items, rest: [], id: "" }) %></div>
+<% }) %>        </div>
+<% }) %>
       </div>
       <div class="fcol"><h4>Travel Guide</h4>
         <%- include("footer-links", { items: guides.slice(0, 9), rest: guides.slice(9), id: "fmoreGuide" }) %>
