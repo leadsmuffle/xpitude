@@ -1661,3 +1661,22 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
 .footer .ftop .flist li,.footer .ftop .flist a,.footer .ftop .fmore,.footer .fbot .footer__blurb,.footer .fbot__con li{font-size:12px;font-variation-settings:"opsz" calc(12px / var(--px))}
 .footer .fbot .footer__blurb{width:272px;max-width:100%;margin-bottom:16.5px}
 @media (max-width:767px){.footer .fbot .footer__blurb{width:276.7px}} /* 35ch at 15px with the mobile font scale */
+
+/* ====== Header: logo, menu and icons inside the content width (the white bar and its line stay full width), a bigger logo,
+   and the desktop menu from 1024px up (smaller gaps and type from 1024 to 1199px); the mobile menu below 1024px ====== */
+:root{--head-h:calc(84 * var(--px))}
+@media (max-width:1199px){:root{--head-h:calc(76 * var(--px))}}
+@media (max-width:767px){:root{--head-h:calc(72 * var(--px))}}
+.header .header__in{max-width:calc(var(--content-max) + 2 * var(--side));margin-inline:auto}
+.header .brand__logo{height:calc(68 * var(--px))}
+@media (max-width:1199px){.header .brand__logo{height:calc(64 * var(--px))}}
+@media (max-width:767px){.header .brand__logo{height:calc(48 * var(--px))}}
+@media (min-width:1024px) and (max-width:1199px){
+  .nav{gap:calc(16 * var(--px))}
+  .nav a{font-size:.72rem;font-variation-settings:"opsz" calc(.72rem / var(--px));letter-spacing:.08em}
+}
+@media (min-width:1024px) and (max-width:1180px){
+  .header .nav{display:flex}
+  .header .burger{display:none}
+  .mega,.dd{display:block}
+}
