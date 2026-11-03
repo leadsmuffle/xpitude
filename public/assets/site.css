@@ -1605,3 +1605,28 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
   #services .cat .cat__c h3{font-size:22px;font-variation-settings:"opsz" calc(22px / var(--px))}
   #services .cat .cat__c p{font-size:14px;font-variation-settings:"opsz" calc(14px / var(--px))}
 }
+
+/* ====== About: Founder's Note (under "Who we are"). Photo on the left, the label, heading and a grey card on the right. ====== */
+.founder{background:#fff}
+.founder__in{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.founder__img{display:block;width:100%;height:auto;aspect-ratio:6/5;object-fit:cover;object-position:center 30%;border-radius:16px}
+.founder__txt{min-width:0}
+.founder__label{display:flex;align-items:center;gap:14px;margin:0;font-family:var(--display);font-size:12px;font-variation-settings:"opsz" calc(12px / var(--px));font-weight:600;letter-spacing:.18em;
+  line-height:1.3;text-transform:uppercase;color:#777}
+.founder__label::before{content:"";flex:none;width:28px;height:2px;background:#B31217}
+.founder__h{margin:18px 0 0;font-family:var(--display);font-size:44px;font-variation-settings:"opsz" calc(44px / var(--px));font-weight:700;letter-spacing:-.01em;line-height:1.12;color:#111}
+.founder__card{margin-top:28px;padding:40px 38px;border-radius:16px;background:#F5F5F5}
+.founder__p{margin:0;font-family:var(--display);font-size:16px;font-variation-settings:"opsz" calc(16px / var(--px));line-height:1.7;color:#555}
+.founder__sign{display:flex;align-items:center;gap:14px;margin:36px 0 0;font-family:var(--display);font-size:17px;font-variation-settings:"opsz" calc(17px / var(--px));font-weight:700;line-height:1.3;color:#111}
+.founder__sign::before{content:"";flex:none;width:28px;height:2px;background:#B31217}
+.founder__role{margin:8px 0 0 42px;font-family:var(--display);font-size:12px;font-variation-settings:"opsz" calc(12px / var(--px));font-weight:500;letter-spacing:.14em;line-height:1.3;
+  text-transform:uppercase;color:#777}
+@media (max-width:1199px){
+  .founder__in{gap:36px}
+  .founder__h{font-size:36px;font-variation-settings:"opsz" calc(36px / var(--px))}
+}
+@media (max-width:767px){
+  .founder__in{grid-template-columns:minmax(0,1fr);gap:28px}
+  .founder__h{font-size:30px;font-variation-settings:"opsz" calc(30px / var(--px))}
+  .founder__card{padding:26px}
+}
