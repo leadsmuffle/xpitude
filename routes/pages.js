@@ -27,6 +27,7 @@ router.get("/testimonials", pages.testimonials);
 router.get("/contact", pages.contact);
 router.get("/privacy-policy", pages.legal("privacy"));
 router.get("/terms-of-service", pages.legal("terms"));
+router.get("/environmental-policy", pages.legal("environmental"));
 // The old addresses of the two pages
 router.get("/privacy", (req, res) => res.redirect(301, "/privacy-policy"));
 router.get("/terms", (req, res) => res.redirect(301, "/terms-of-service"));

@@ -317,18 +317,6 @@
   });
 })();
 
-/* footer: every "More" button opens the rest of its list below it, and "Less" closes it */
-(function(){
-  document.querySelectorAll(".fmore").forEach(function(btn){
-    var list=document.getElementById(btn.getAttribute("aria-controls")),label=btn.querySelector(".fmore__t");if(!list)return;
-    btn.addEventListener("click",function(){
-      var open=btn.getAttribute("aria-expanded")!=="true";
-      btn.setAttribute("aria-expanded",open?"true":"false");label.textContent=open?"Less":"More";
-      list.inert=!open;list.style.maxHeight=open?list.scrollHeight+"px":"0px";
-    });
-  });
-})();
-
 /* Tables: any table not already inside a scroll box gets one, so a wide table scrolls sideways on its own instead of the page */
 (function(){
   document.querySelectorAll("table").forEach(function(t){

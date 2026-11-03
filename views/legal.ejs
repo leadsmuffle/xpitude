@@ -2,8 +2,8 @@
 <%- include("partials/header") %>
 <main>
 <%- include("partials/phero", {
-  crumbs: [["Home", "/"], [which === "privacy" ? "Privacy Policy" : "Terms of Service"]],
-  h1: which === "privacy" ? "Privacy Policy" : "Terms of Service",
+  crumbs: [["Home", "/"], [{ privacy: "Privacy Policy", terms: "Terms of Service", environmental: "Environmental Policy" }[which]]],
+  h1: { privacy: "Privacy Policy", terms: "Terms of Service", environmental: "Environmental Policy" }[which],
 }) %>
 <%
   const updated = "26 October 2026";
@@ -53,6 +53,31 @@
 
       <h2>Contact</h2>
       <p>Questions about this policy can be sent to <%- mail %><% if (site.phone) { %>, or call <%= site.phone %><% } %>.</p>
+<% } else if (which === "environmental") { %>
+      <p class="legal__updated">Last updated: 3 November 2026</p>
+
+      <p>The mountains, valleys and villages we travel through are the reason our guests come to Pakistan. This policy sets out how XPITUDE, a licensed tour operator in Gilgit-Baltistan, keeps its trips as light on the land and as fair to local people as we can.</p>
+
+      <h2>Leave no trace</h2>
+      <p>On every trek and tour we follow leave-no-trace principles. We stay on established trails, camp on durable ground and at existing campsites, leave rocks, plants and cultural objects where we find them, and keep campfires to places where they are allowed and safe. Our guides brief each group on these rules before the first day on the trail.</p>
+
+      <h2>Waste carried out</h2>
+      <p>Everything we carry in, we carry out. Our crews collect all rubbish from camps and trails, including packaging and food waste, and bring it down to a place where it can be disposed of properly. We use toilet tents or existing facilities, keep washing water away from streams and lakes, and avoid single-use plastic wherever we can.</p>
+
+      <h2>Local hiring</h2>
+      <p>Our guides, porters, cooks and drivers come from the regions we travel through. We hire locally, pay fairly and on time, and make sure loads, clothing and equipment are suitable for the conditions, so the people who make each trip possible share in what it brings.</p>
+
+      <h2>Respect for communities</h2>
+      <p>We travel as guests. We ask our travellers to dress modestly, to ask before photographing people and homes, and to follow local customs at shrines, villages and festivals. We buy from local shops, guesthouses and producers where we can, and we listen to the communities we visit about how and when to come.</p>
+
+      <h2>Respect for wildlife</h2>
+      <p>We keep a respectful distance from wild animals and livestock, never feed or disturb them, and keep noise down in quiet places. We follow the rules of national parks and protected areas, including the routes, permits and camping places they set.</p>
+
+      <h2>Small groups</h2>
+      <p>We keep our groups small, because smaller groups leave less of a mark on trails and campsites and fit more easily into village life. The maximum group size for each trip is set in its itinerary and confirmed in your proposal.</p>
+
+      <h2>Contact</h2>
+      <p>Ideas on how we can travel more lightly are always welcome. Write to <%- mail %>.</p>
 <% } else { %>
       <p class="legal__updated">Last updated: <%= updated %></p>
 

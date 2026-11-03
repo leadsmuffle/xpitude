@@ -1,58 +1,71 @@
+<%
+  // Footer contact details (the email is the site's own setting)
+  const fc = {
+    phone: "+92 300 3687232", tel: "tel:+923003687232", wa: "https://wa.me/923003687232",
+    office: "336, G3 Main Blvd, Block G3, Phase 2, Johar Town, Lahore, 54782",
+    hours: "Mon to Sat, 9:00 AM to 6:00 PM",
+  };
+  const fServices = [["Trekking Expeditions", "/trekking"], ["Tours & Sightseeing", "/tours"], ["Spiritual Trips & Retreats", "/spiritual"], ["Corporate Retreats", "/corporate"], ["Custom Experiences", "/contact"]];
+  const fTrips = [["K2 Base Camp", "/trekking/k2-base-camp-gondogoro-la"], ["Fairy Meadows & Nanga Parbat", "/trekking/fairy-meadows-nanga-parbat-base-camp"], ["Hunza Valley", "/tours/hunza-valley-escape"],
+    ["Skardu", "/tours/skardu-land-of-giants"], ["Haramosh Valley", "/trekking/haramosh-base-camp-kutwal-lake"], ["Kalash & Chitral", "/tours/kalash-valleys-chitral"]];
+  const fQuick = [["Our Blog", "/blog"], ["About Us", "/about"], ["Contact Us", "/contact"], ["Travel Guide", "/travel-guide"]];
+  const svg = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="${d}"/></svg>`;
+  const ICON = {
+    chat: "M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2zm0 2v11.17L7.17 16H20V6H4z",
+    phone: "M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z",
+    mail: "M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z",
+    pin: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z",
+    clock: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z",
+  };
+%>
 <!-- ====== FOOTER ====== -->
 <footer class="footer">
   <div class="wrap">
-<%
-  /* Footer lists, read from the site data (middleware/nav.js). Travel Guide and Our Blog show 9 links, the rest open under "More". */
-  const fn = nav.footerNames || {}; // short footer names (config/footer-names.js); the full title stays in the link title
-  // Our Services: each category title, then exactly the cards its category page shows, in the same order.
-  // Column 1: trekking and tours; column 2: spiritual and corporate.
-  const svcName = { trekking: "Trekking Expeditions", tours: "Tours and Sightseeing", spiritual: "Spiritual Trips and Yoga Retreats", corporate: "Corporate Retreats" };
-  const svcGroup = (key) => ({ href: categories[key].path, name: svcName[key],
-    items: (nav.cards || []).filter((t) => t.category === key).map((t) => ({ href: t.url, label: fn[t.url] || t.title, title: t.title })) });
-  const svcCols = [[svcGroup("trekking"), svcGroup("tours")], [svcGroup("spiritual"), svcGroup("corporate")]];
-  const guides = (nav.guideMenu || []).map(({ g, label }) => ({ href: g.url, label, title: g.title }));
-  const posts = (nav.posts || []).map((p) => ({ href: p.url, label: fn[p.url] || p.cardTitle || p.title, title: p.title }));
-%>
-    <div class="ftop">
-      <div class="fcol ftop__svc"><h4>Our Services</h4>
-<% svcCols.forEach((col) => { %>        <div class="fsvc">
-<% col.forEach((g) => { %>          <div class="fsvc__grp"><a class="fsvc__cat" href="<%= g.href %>" title="<%= g.name %>"><%= g.name %></a>
-          <%- include("footer-links", { items: g.items, rest: [], id: "" }) %></div>
-<% }) %>        </div>
-<% }) %>
-      </div>
-      <div class="fcol"><h4>Travel Guide</h4>
-        <%- include("footer-links", { items: guides.slice(0, 9), rest: guides.slice(9), id: "fmoreGuide" }) %>
-      </div>
-      <div class="fcol"><h4>Our Blog</h4>
-        <%- include("footer-links", { items: posts.slice(0, 9), rest: posts.slice(9), id: "fmoreBlog", after: { href: "/blog", label: "View all →" } }) %>
-      </div>
-    </div>
-    <div class="fbot">
-      <div class="fbot__brand">
-        <div class="brand">
-          <img class="brand__logo" src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324" loading="lazy">
-        </div>
-        <p class="footer__blurb">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
-<% if (Object.values(site.follow || {}).some(Boolean)) { %>        <div class="ffollow"><%- include("follow") %></div>
+    <div class="fmain">
+      <div class="fcol fcol--brand">
+        <a class="flogo" href="/" aria-label="XPITUDE home"><img src="/assets/xpitude-logo.png" alt="XPITUDE, experience altitude" width="406" height="324" loading="lazy"></a>
+        <p class="fdesc">Trekking expeditions, guided tours and spiritual journeys across Pakistan, planned and led end to end.</p>
+        <a class="fcta" href="/contact"><%- svg(ICON.chat) %><span>Plan Your Trip</span></a>
+<% if (Object.values(site.follow || {}).some(Boolean)) { %>        <%- include("follow", { cls: "follow--foot" }) %>
 <% } %>      </div>
-      <div class="fbot__contact"><h4>Contact</h4>
-      <ul class="fbot__con">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg><span><%= site.address.street.split(",")[0] %>, <%= site.address.city %></span></li>
-<% if (site.email) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
-<% } if (site.phone) { %>        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg><a href="<%= site.whatsappChat || site.phoneHref %>"<% if (site.whatsappChat) { %> target="_blank" rel="noopener noreferrer" aria-label="Chat with XPITUDE on WhatsApp, <%= site.phone %>"<% } %>><%= site.phone %></a></li>
-<% } %>      </ul>
+      <nav class="fcol" aria-label="Our services"><h2 class="fhead">Our Services</h2>
+        <ul class="flinks">
+<% fServices.forEach(([label, href]) => { %>          <li><a href="<%= href %>"><%= label %></a></li>
+<% }) %>        </ul>
+      </nav>
+      <nav class="fcol" aria-label="Famous trips"><h2 class="fhead">Famous Trips</h2>
+        <ul class="flinks">
+<% fTrips.forEach(([label, href]) => { %>          <li><a href="<%= href %>"><%= label %></a></li>
+<% }) %>        </ul>
+      </nav>
+      <nav class="fcol" aria-label="Quick links"><h2 class="fhead">Quick Links</h2>
+        <ul class="flinks">
+<% fQuick.forEach(([label, href]) => { %>          <li><a href="<%= href %>"><%= label %></a></li>
+<% }) %>        </ul>
+      </nav>
+      <div class="fcol fcol--contact"><h2 class="fhead">Contact Us</h2>
+        <ul class="fcontact">
+          <li><span class="fbadge"><%- svg(ICON.phone) %></span><span class="fcontact__t"><span class="fcontact__l">Direct Line</span><a class="fcontact__v" href="<%= fc.tel %>"><%= fc.phone %></a></span></li>
+<% if (site.email) { %>          <li><span class="fbadge"><%- svg(ICON.mail) %></span><span class="fcontact__t"><span class="fcontact__l">Email Us</span><a class="fcontact__v" href="mailto:<%= site.email %>"><%= site.email %></a></span></li>
+<% } %>          <li><span class="fbadge"><%- svg(ICON.pin) %></span><span class="fcontact__t"><span class="fcontact__l">Head Office</span><span class="fcontact__v"><%= fc.office %></span></span></li>
+          <li><span class="fbadge"><%- svg(ICON.clock) %></span><span class="fcontact__t"><span class="fcontact__l">Working Hours</span><span class="fcontact__v"><%= fc.hours %></span></span></li>
+        </ul>
       </div>
     </div>
-    <div class="footer__bottom">
-      <span class="data">© <%= year %> XPITUDE · Licensed tour operator, Gilgit-Baltistan</span>
-      <span class="data fbl"><a href="/privacy-policy">Privacy Policy</a><span class="fbl__sep" aria-hidden="true"> · </span><a href="/terms-of-service">Terms of Service</a><span class="fbl__sep" aria-hidden="true"> · </span><button class="fbl__ck" type="button" data-cookie-settings>Cookie Settings</button></span>
+    <div class="fbar">
+      <p class="fbar__copy">© <%= year %> Xpitude. All rights reserved.</p>
+      <ul class="fbar__links">
+        <li><a href="/environmental-policy">Environmental Policy</a></li>
+        <li><a href="/terms-of-service">Terms &amp; Conditions</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><button class="fbar__ck" type="button" data-cookie-settings>Cookie Settings</button></li>
+      </ul>
     </div>
   </div>
 </footer>
 <%- include("cookie-consent") %>
 
-<% if (site.whatsappChat) { %><a class="wafloat" id="waFloat" href="<%= site.whatsappChat %>" aria-label="Chat with XPITUDE on WhatsApp" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %><span class="wafloat__tip" aria-hidden="true">Chat with us</span></a>
-<% } %><script src="/assets/site.js?v=<%= v %>"></script>
+<a class="wafloat" id="waFloat" href="<%= fc.wa %>" aria-label="Chat with XPITUDE on WhatsApp, <%= fc.phone %>" target="_blank" rel="noopener noreferrer"><%- icon("whatsapp") %><span class="wafloat__tip" aria-hidden="true">Chat with us</span></a>
+<script src="/assets/site.js?v=<%= v %>"></script>
 </body>
 </html>
