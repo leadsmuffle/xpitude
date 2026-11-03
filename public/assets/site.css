@@ -1685,12 +1685,12 @@ main .section .wrap > :last-child,main .section .wrap > :last-child > :last-chil
    gradient only behind it, so the top half of the photo is not darkened. The cards keep their size (aspect-ratio 16/11). ====== */
 #services .cat img{object-position:center 35%}
 #services .cat::after{background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.45) 26%,rgba(0,0,0,0) 48%)}
-#services .cat .cat__c{position:absolute;inset:auto 0 0 0;padding:0 24px 16px}
+#services .cat .cat__c{position:absolute;inset:auto 0 0 0;padding:0 24px 8px}
 #services .cat .cat__n{margin:0;font-size:11px;font-variation-settings:"opsz" calc(11px / var(--px));letter-spacing:.2em;line-height:1.3;color:rgba(255,255,255,.8)}
 #services .cat .cat__c h3{display:block;max-width:100%;margin:2px 0 0;padding:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:25px;font-variation-settings:"opsz" calc(25px / var(--px));
   font-weight:700;line-height:1.15;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.45)}
 #services .cat .cat__c h3::after{bottom:-2px}
-#services .cat .cat__c p{display:block;max-width:100%;margin:3px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-webkit-line-clamp:none;font-size:14.5px;font-variation-settings:"opsz" calc(14.5px / var(--px));
+#services .cat .cat__c p{display:block;max-width:100%;min-height:0;margin:3px 0 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-webkit-line-clamp:none;font-size:14.5px;font-variation-settings:"opsz" calc(14.5px / var(--px));
   line-height:1.35;color:rgba(255,255,255,.88)}
 @media (max-width:767px){
   #services .cat .cat__c h3{font-size:22px;font-variation-settings:"opsz" calc(22px / var(--px))}
